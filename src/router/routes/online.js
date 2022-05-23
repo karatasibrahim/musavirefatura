@@ -1,15 +1,15 @@
 export default [
   //Mükellef İşlemleri Menüsü
-  {
-    path: "/mükellef/mükellef-listesi",
-    name: "online-mükellef-listesi",
-    component: () => import("@/views/online/mükellef/mükellef-listesi"),
-  },
-  {
-    path: "/mükellef/mükellef-ekle",
-    name: "online-maliye-mükellef-ekle",
-    component: () => import("@/views/online/mükellef/mükellef-ekle"),
-  },
+  // {
+  //   path: "/mükellef/mükellef-listesi",
+  //   name: "online-mükellef-listesi",
+  //   component: () => import("@/views/online/mükellef/mükellef-listesi"),
+  // },
+  // {
+  //   path: "/mükellef/mükellef-ekle",
+  //   name: "online-maliye-mükellef-ekle",
+  //   component: () => import("@/views/online/mükellef/mükellef-ekle"),
+  // },
   // {
   //   path: "/mükellef/mükellef-özeti",
   //   name: "online-mükellef-özeti",

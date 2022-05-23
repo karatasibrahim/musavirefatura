@@ -24,7 +24,7 @@
           pill
           variant="light-primary"
         >
-          6 Yeni
+          3 Yeni
         </b-badge>
       </div>
     </li>
@@ -60,7 +60,7 @@
       </b-link>
 
       <!-- System Notification Toggler -->
-      <div class="media d-flex align-items-center">
+      <!-- <div class="media d-flex align-items-center">
         <h6 class="font-weight-bolder mr-auto mb-0">
          Sistem Bildirimleri
         </h6>
@@ -68,10 +68,10 @@
           :checked="true"
           switch
         />
-      </div>
+      </div> -->
 
       <!-- System Notifications -->
-      <b-link
+      <!-- <b-link
         v-for="notification in systemNotifications"
         :key="notification.subtitle"
       >
@@ -91,7 +91,7 @@
           </p>
           <small class="notification-text">{{ notification.subtitle }}</small>
         </b-media>
-      </b-link>
+      </b-link> -->
     </vue-perfect-scrollbar>
 
     <!-- Cart Footer -->

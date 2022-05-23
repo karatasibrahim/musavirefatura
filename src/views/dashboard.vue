@@ -1,57 +1,5 @@
 <template>
-  <div style="width: 100%">
-    <stats />
-    <div class="respon">
-    <home-table1
-      :inquireClick="queryClick"
-      :pk="'id'"
-      :items="items"
-      :totalRows="16"
-      :title="'Beyanname'"
-      :columns="columns"
-    />
-
-    <!-- Sorgula Popup -->
-    <b-modal
-      ref="queryPopup"
-      title="Tarih Seç"
-      ok-title="Sorgula"
-      cancel-title="İptal"
-      cancel-variant="outline-secondary"
-      @ok="inquireClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            label="Tarih Seç"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="inquireRequest.startDate"
-              :max="inquireMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-modal>
-
-    <home-table2
-      :inquireClick="queryClick"
-      :pk="'id'"
-      :items="items"
-      :totalRows="16"
-      :title="'Bildirge'"
-      :columns="columns2"
-    />
-    </div>
-
-    <home-chart> </home-chart>
-  </div>
+ 
 </template>
 
 <script>

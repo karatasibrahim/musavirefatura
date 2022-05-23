@@ -8,13 +8,21 @@ export default [
     icon: 'UsersIcon',
     children: [
       {
-        title: 'Mükellef Ekle',
-        route: 'online-maliye-mükellef-ekle',
+        title: 'Gelen E-Arşiv Fatura',
+        route: 'online-mükellef-gelen-earşiv-fatura',
       },
       {
-        title: 'Mükellef Listesi',
-        route: { name: 'online-mükellef-listesi', params: { id: 4987 } },
+        title: 'Giden E-Arşiv Fatura',
+        route: 'online-mükellef-giden-earşiv-fatura',
       },
+      // {
+      //   title: 'Mükellef Ekle',
+      //   route: 'online-maliye-mükellef-ekle',
+      // },
+      // {
+      //   title: 'Mükellef Listesi',
+      //   route: { name: 'online-mükellef-listesi', params: { id: 4987 } },
+      // },
       // {
       //   title: 'Mükellef Özeti',
       //   route: { name: 'online-mükellef-özeti', params: { id: 4987 } },
@@ -34,14 +42,7 @@ export default [
           //   title: 'Geçmiş Araçlarım',
           //   route: 'online-mükellef-geçmiş-araçlarım',
           // },
-          {
-            title: 'Gelen E-Arşiv Fatura',
-            route: 'online-mükellef-gelen-earşiv-fatura',
-          },
-          {
-            title: 'Giden E-Arşiv Fatura',
-            route: 'online-mükellef-giden-earşiv-fatura',
-          },
+          
           // {
           //   title: 'Kesintiler (Stopaj)',
           //   route: 'online-mükellef-stopaj',

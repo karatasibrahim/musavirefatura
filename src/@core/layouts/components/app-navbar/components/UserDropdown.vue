@@ -60,9 +60,9 @@
       <span>Chat</span>
     </b-dropdown-item> -->
 
-    <b-dropdown-divider />
+     
 
-    <b-dropdown-item
+    <!-- <b-dropdown-item
       :to="{ name: 'pages-account-setting' }"
       link-class="d-flex align-items-center"
     >
@@ -82,11 +82,12 @@
     >
       <feather-icon size="16" icon="HelpCircleIcon" class="mr-50" />
       <span>Yardım/Destek</span>
-    </b-dropdown-item>
+    </b-dropdown-item> -->
     <b-dropdown-item link-class="d-flex align-items-center" @click="logout">
       <feather-icon size="16" icon="LogOutIcon" class="mr-50" />
       <span>Çıkış</span>
-    </b-dropdown-item></b-nav-item-dropdown
+    </b-dropdown-item>
+    </b-nav-item-dropdown
   >
 </template>
 

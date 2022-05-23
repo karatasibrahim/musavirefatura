@@ -1,6 +1,6 @@
 <template>
   <b-navbar-nav class="nav">
-    <b-nav-item
+    <!-- <b-nav-item
       v-for="(bookmark, index) in bookmarks"
       :id="`bookmark-${index}`"
       :key="index"
@@ -16,7 +16,7 @@
         :title="bookmark.title"
         :delay="{ show: 1000, hide: 50 }"
       />
-    </b-nav-item>
+    </b-nav-item> -->
     <!-- <b-nav-item-dropdown
       link-classes="bookmark-star"
       lazy
