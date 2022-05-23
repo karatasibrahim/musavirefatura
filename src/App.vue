@@ -118,14 +118,14 @@ export default {
   },
   methods: {
   
-  
+
   },
   created() {
     loadMessages(trMessages);
     locale("tr"); 
   },
   mounted() {
-   console.log("çaliştim ");
+   console.log("çaliştim")
   },
 };
 </script>

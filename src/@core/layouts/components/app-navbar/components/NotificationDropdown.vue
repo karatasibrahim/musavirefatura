@@ -6,14 +6,13 @@
   >
     <template #button-content>
       <feather-icon
-        badge="6"
+        :badge="items.length"
         badge-classes="bg-danger"
         class="text-body"
         icon="BellIcon"
         size="21"
       />
     </template>
-
     <!-- Header -->
     <li class="dropdown-menu-header">
       <div class="dropdown-header d-flex">
@@ -28,34 +27,26 @@
         </b-badge>
       </div>
     </li>
-
     <!-- Notifications -->
     <vue-perfect-scrollbar
-      v-once
+
       :settings="perfectScrollbarSettings"
       class="scrollable-container media-list scroll-area"
       tagname="li"
     >
       <!-- Account Notification -->
+
       <b-link
-        v-for="notification in notifications"
+        v-for="notification in items"
         :key="notification.subtitle"
       >
         <b-media>
-          <template #aside>
-            <b-avatar
-              size="32"
-              :src="notification.avatar"
-              :text="notification.avatar"
-              :variant="notification.type"
-            />
-          </template>
           <p class="media-heading">
             <span class="font-weight-bolder">
-              {{ notification.title }}
+              {{ notification.Mesaj }}
             </span>
           </p>
-          <small class="notification-text">{{ notification.subtitle }}</small>
+          <small class="notification-text">{{ notification.Tarih }}</small>
         </b-media>
       </b-link>
 
@@ -110,7 +101,7 @@ import {
 } from 'bootstrap-vue'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import Ripple from 'vue-ripple-directive'
-
+import {mapGetters,mapActions} from 'vuex'
 export default {
   components: {
     BNavItemDropdown,
@@ -124,6 +115,28 @@ export default {
   },
   directives: {
     Ripple,
+  },
+  data(){
+    return{
+      items:[]
+    }
+  },
+  computed:{
+...mapGetters(['renotification']),
+getNot(){
+    return this.renotification
+}
+  },
+  methods:{
+  ...mapActions(['fetchMesaj']),
+    fetchNot(){
+this.fetchMesaj()
+setTimeout(()=>{
+  this.items=this.getNot
+  console.log( this.items);
+  console.log("çaliştim");
+},1000)
+  },
   },
   setup() {
     /* eslint-disable global-require */
@@ -181,6 +194,12 @@ export default {
       perfectScrollbarSettings,
     }
   },
+  created(){
+     this.fetchNot() 
+  },
+mounted(){
+  console.log("not");
+}
 }
 </script>
 

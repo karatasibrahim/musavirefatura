@@ -195,7 +195,7 @@ export default {
         ArrowRightCircleIcon,
     },
     methods:{
-          ...mapActions(["fetchBeyanname","fetch", "fetchMukellef",]),
+          ...mapActions(["fetchBeyanname","fetch", "fetchMukellef","fetchMesaj"]),
     FecthPersonData() {
       console.log("app çaliştim");
       this.fetch().then((res) => {
@@ -218,6 +218,7 @@ arr.push(element.MukellefId)
 this.fetchBeyanname(arr)
   console.log(this.beyannameData);
     },
+
     },
     
   computed:{

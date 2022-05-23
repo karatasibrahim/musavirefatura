@@ -69,7 +69,8 @@ export default new Vuex.Store({
     ilce: [],
     Sifre: {},
     calisan: [],
-    sgkVizite: []
+    sgkVizite: [],
+    notification:[]
   },
   getters: {
     rePerson(state) {
@@ -137,6 +138,9 @@ export default new Vuex.Store({
     },
     reSgkVizite(state) {
       return state.sgkVizite
+    },
+    renotification(state){
+      return state.notification
     }
   },
   mutations: {
@@ -260,6 +264,10 @@ export default new Vuex.Store({
         console.log(el.data());
         state.sgkVizite.push(el.data()) 
       })
+    },
+    setMesaj(state,payload){
+      console.log(payload);
+  state.notification.push(payload)
     }
   },
   actions: {
@@ -559,6 +567,20 @@ export default new Vuex.Store({
         İtemName: "CalisanId",
         payload: payload,
         MutName: "SetSgkVizite"
+      })
+    },
+    async fetchMesaj(context,payload){
+      console.log(payload);
+      console.log("çaliştim");
+      this.state.mesaj = []   
+          let q =query(
+        collection(db,"MukellefBildirim"),
+        where("Gonderilenler", "array-contains",115),
+      )
+      const dat=await getDocs(q)
+      dat.forEach(el=>{
+        console.log(el.data());
+        context.commit('setMesaj',el.data())
       })
     },
     async actionArr(context, data) {

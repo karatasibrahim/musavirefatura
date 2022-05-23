@@ -12,7 +12,6 @@ import HomeChart from "@/@core/components/charts/HomeChart.vue";
 import { BRow, BCol, BFormGroup, BFormDatepicker } from "bootstrap-vue";
 import mockData from "./../services/online/finance/service";
 import lng from "./utils/strings";
-
 export default {
     components: {
         stats,
@@ -128,6 +127,7 @@ export default {
     listRunClick() {
       console.log(this.listRequest.type);
     },
+    
   },
 }
 </script>
