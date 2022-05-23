@@ -22,11 +22,9 @@
       <b-col lg="4" class="d-flex align-items-center auth-bg px-2 p-lg-5">
         <b-col sm="8" md="6" lg="12" class="px-xl-2 mx-auto">
           <b-card-title class="mb-1 font-weight-bold" title-tag="h2">
-            Portal Giriş Paneli!
+            Mükellef Giriş Paneli!
           </b-card-title>
-          <b-card-text class="mb-2">
-            Lütfen hesabınız ile giriş yapınız
-          </b-card-text>
+           
 
           <b-alert variant="primary" show>
             <!-- <div class="alert-body font-small-2">
@@ -50,7 +48,7 @@
           <validation-observer ref="loginForm" #default="{ invalid }">
             <b-form class="auth-login-form mt-2" @submit.prevent="login">
               <!-- email -->
-              <b-form-group label="Kullanıcı Kodu" label-for="login-email">
+              <b-form-group label="Mükellef Kodu" label-for="login-email">
                 <validation-provider
                   #default="{ errors }"
                   name="Email"
@@ -72,9 +70,7 @@
               <b-form-group>
                 <div class="d-flex justify-content-between">
                   <label for="login-password">Şifre</label>
-                  <b-link :to="{ name: 'auth-forgot-password' }">
-                    <small>Şifremi unuttum?</small>
-                  </b-link>
+                 
                 </div>
                 <validation-provider
                   #default="{ errors }"
@@ -108,15 +104,7 @@
               </b-form-group>
 
               <!-- checkbox -->
-              <b-form-group>
-                <b-form-checkbox
-                  id="remember-me"
-                  v-model="status"
-                  name="checkbox-1"
-                >
-                  Beni Hatırla
-                </b-form-checkbox>
-              </b-form-group>
+            
 
               <!-- submit buttons -->
               <b-button
@@ -130,13 +118,7 @@
             </b-form>
           </validation-observer>
 
-          <b-card-text class="text-center mt-2">
-            <span>Hesabınız yok mu? </span>
-            <b-link :to="{ name: 'auth-register' }">
-               
-              <span>&nbsp;Hesap Oluştur</span>
-            </b-link>
-          </b-card-text>
+         
 
           <!-- divider -->
           <div class="divider my-2">
@@ -144,20 +126,7 @@
           </div>
 
           <!-- social buttons -->
-          <div class="auth-footer-btn d-flex justify-content-center">
-            <b-button variant="facebook" href="javascript:void(0)">
-              <feather-icon icon="FacebookIcon" />
-            </b-button>
-            <b-button variant="twitter" href="javascript:void(0)">
-              <feather-icon icon="TwitterIcon" />
-            </b-button>
-            <b-button variant="google" href="javascript:void(0)">
-              <feather-icon icon="MailIcon" />
-            </b-button>            
-             <b-button variant="instagram" href="javascript:void(0)">
-              <feather-icon icon="InstagramIcon" />
-            </b-button>
-          </div>
+       
         </b-col>
       </b-col>
       <!-- /Login-->
