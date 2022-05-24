@@ -26,7 +26,6 @@ const LayoutVertical = () => import("@/layouts/vertical/LayoutVertical.vue");
 const LayoutHorizontal = () =>
   import("@/layouts/horizontal/LayoutHorizontal.vue");
 const LayoutFull = () => import("@/layouts/full/LayoutFull.vue");
-import { mapActions } from "vuex";
 export default {
   components: {
     // Layouts
@@ -120,6 +119,7 @@ export default {
   
 
   },
+
   created() {
     loadMessages(trMessages);
     locale("tr"); 

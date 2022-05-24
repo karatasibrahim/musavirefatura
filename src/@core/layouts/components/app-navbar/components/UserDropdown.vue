@@ -126,7 +126,7 @@ export default {
         .then(() => {
           localStorage.removeItem(useJwt.jwtConfig.storageTokenKeyName);
           localStorage.removeItem(useJwt.jwtConfig.storageRefreshTokenKeyName);
-          localStorage.removeItem("userData");
+          localStorage.removeItem("dataMuk");
 
           // Reset ability
           this.$ability.update(initialAbility);

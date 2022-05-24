@@ -13,10 +13,7 @@ import {
   limit,
   query,
   where,
-  doc,
-  updateDoc,
-  setDoc,
-  deleteDoc
+  doc
 } from "firebase/firestore";
 var firebase = require("firebase/app")
 import {
@@ -293,13 +290,30 @@ export default new Vuex.Store({
       });
       return userdata
     },
-
+     fetchMukellefaaa(context, payload) {
+      return new Promise((resolve, reject) => {
+      console.log(payload);
+     let arr=[]
+      const q = query(collection(db, "Mukellef"),
+        where("PanelKodu", "==", payload.Kod),
+        where("PanelSifre", "==", payload.Sifre)
+        );
+      const mukellefdata =  getDocs(q);
+      mukellefdata.then(snapshot=>{
+        snapshot.forEach(el=>{
+          console.log("Route",el.data());
+        resolve(el.data())
+        })
+      })
+})
+    },
 
     async fetchMukellef(context, payload) {
+      const getEmail = JSON.parse(localStorage.getItem("dataMuk"));
       console.log(this.state.mukellef);
       this.state.mukellef = []
       const q = query(collection(db, "Mukellef"),
-        where("MukellefId", "==", payload),limit(2));
+        where("MukellefId", "==", getEmail.MukellefId),limit(2));
       const mukellefdata = await getDocs(q);
       let arr = []
       mukellefdata.forEach((doc) => {

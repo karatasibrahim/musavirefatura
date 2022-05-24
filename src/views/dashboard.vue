@@ -1,6 +1,4 @@
-<template>
- 
-</template>
+<template></template>
 
 <script>
 import stats from "./stats.vue";
@@ -8,21 +6,46 @@ import HomeTable1 from "@core/components/app-table/HomeTable1.vue";
 import HomeTable2 from "@core/components/app-table/HomeTable2.vue";
 
 import HomeChart from "@/@core/components/charts/HomeChart.vue";
-
 import { BRow, BCol, BFormGroup, BFormDatepicker } from "bootstrap-vue";
 import mockData from "./../services/online/finance/service";
 import lng from "./utils/strings";
+
+import {
+  collection,
+  getDocs,
+  getDoc,
+  limit,
+  query,
+  where,
+  doc,
+} from "firebase/firestore";
+var firebase = require("firebase/app");
+import { getFirestore } from "firebase/firestore";
+const firebaseConfig = {
+  apiKey: "AIzaSyDn3x_-3uQT3e_u4EFIMqXKy40iKgvUf8c",
+  authDomain: "emusavirim-3c193.firebaseapp.com",
+  databaseURL: "https://emusavirim-3c193-default-rtdb.firebaseio.com",
+  projectId: "emusavirim-3c193",
+  storageBucket: "emusavirim-3c193.appspot.com",
+  messagingSenderId: "112360446427",
+  appId: "1:112360446427:web:af06b497a6a34ed47aaffe",
+};
+
+// Add the Firebase services that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+const db = getFirestore(firebase.initializeApp(firebaseConfig));
 export default {
-    components: {
-        stats,
-        HomeTable1,
-        HomeTable2,
-        HomeChart,
-        BRow,
-        BCol,
-        BFormGroup,
-        BFormDatepicker,
-    },
+  components: {
+    stats,
+    HomeTable1,
+    HomeTable2,
+    HomeChart,
+    BRow,
+    BCol,
+    BFormGroup,
+    BFormDatepicker,
+  },
   data() {
     return {
       //#region Sorgulama Popup
@@ -127,15 +150,46 @@ export default {
     listRunClick() {
       console.log(this.listRequest.type);
     },
-    
   },
-}
+  beforeRouteEnter(to, from, next) {
+    console.log(to.fullPath == "/dashboard");
+
+    const q = query(
+      collection(db, "Mukellef"),
+      where("MukellefId", "==", Number(to.query.asd))
+    );
+    const mukellefdata = getDocs(q);
+    mukellefdata.then((snapshot) => {
+      snapshot.forEach((el) => {
+        if (to.fullPath == "/dashboard") {
+          console.log("if");
+         next({ path: "/error-404" });
+        }
+        if (
+          el.data().PanelKodu == to.query.cid &&
+          el.data().PanelSifre == to.query.pwd
+        ) {
+          next();
+          const data = {
+            MukellefId: Number(to.query.asd),
+            PanelKodu: to.query.cid,
+            PanelSifre: to.query.pwd,
+          };
+          localStorage.setItem("dataMuk", JSON.stringify(data));
+        } else {
+          console.log("else");
+          this.$router.push({ path: "/error-404" });
+        }
+      });
+    });
+  },
+};
 </script>
 
 <style>
 .respon {
   width: 100%;
-  display: flex; 
+  display: flex;
   gap: 15px;
 }
 @media (max-width: 1280px) {

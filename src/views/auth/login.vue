@@ -49,21 +49,16 @@
             <b-form class="auth-login-form mt-2" @submit.prevent="login">
               <!-- email -->
               <b-form-group label="Mükellef Kodu" label-for="login-email">
-                <validation-provider
-                  #default="{ errors }"
-                  name="Email"
-                  vid="email"
-                  rules="required|email"
-                >
+              
                   <b-form-input
                     id="login-email"
                     v-model="userEmail"
-                    :state="errors.length > 0 ? false : null"
+                    
                     name="login-email"
                     placeholder="12345678"
-                  />
-                  <small class="text-danger">{{ errors[0] }}</small>
-                </validation-provider>
+                />
+             
+                
               </b-form-group>
 
               <!-- forgot password -->
@@ -163,6 +158,7 @@ import { getHomeRouteForLoggedInUser } from "@/auth/utils";
 
 import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { mapActions } from 'vuex';
 
 export default {
   directives: {
@@ -211,50 +207,51 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['fetchMukellefaaa']),
     login() {
+      let mukdata={}
       this.$refs.loginForm.validate().then((success) => {
-        if (success) {
-          const auth = getAuth();
-          signInWithEmailAndPassword(auth, this.userEmail, this.password)
-            .then((userCredential) => {
+             if (success) {
+          const data = {
+            Kod: this.userEmail,
+            Sifre: this.password,
+          };
+          this.fetchMukellefaaa(data).then((el) => {
+            console.log(Object.keys(el).length > 0);
+
+            mukdata = el;
+            console.log(mukdata);
+            if (Object.keys(el).length > 0) {
               const userData = {
-                displayName: userCredential._tokenResponse.displayName,
-                email: userCredential._tokenResponse.email,
-                userId: userCredential._tokenResponse.localId,
-                role: "client",
-                ability: [
-                  {
-                    action: "manage",
-                    subject: "all",
-                  },
-                ],
+                MukellefId: mukdata.MukellefId,
+                PanelKodu: mukdata.PanelKodu,
+                PanelSifre: mukdata.PanelSifre,
               };
 
-              localStorage.setItem("userData", JSON.stringify(userData));
-              useJwt.setToken(userCredential._tokenResponse.idToken);
-              useJwt.setRefreshToken(
-                userCredential._tokenResponse.refreshToken
-              );
+          localStorage.setItem("dataMuk", JSON.stringify(userData));
 
-              this.$ability.update(userData.ability);
-
-              this.$router.replace("/").then(() => {
-                this.$toast({
-                  component: ToastificationContent,
-                  position: "top-right",
-                  props: {
-                    title: `Hoş Geldin ${
-                      userData.displayName || userData.email
-                    }`,
-                    icon: "CoffeeIcon",
-                    variant: "success",
-                    text: `Giriş başarılı.`,
+              this.$router
+                .replace({
+                  path: "/",
+                  query: {
+                    cid: mukdata.PanelKodu,
+                    pwd: mukdata.PanelSifre,
+                    asd: mukdata.MukellefId,
                   },
+                })
+                .then(() => {
+                  this.$toast({
+                    component: ToastificationContent,
+                    position: "top-right",
+                    props: {
+                      title: `Hoş Geldin ${mukdata.Unvan}`,
+                      icon: "CoffeeIcon",
+                      variant: "success",
+                      text: `Giriş başarılı.`,
+                    },
+                  });
                 });
-              });
-            })
-            .catch((error) => {
-              console.log(error);
+            } else {
               this.$toast({
                 component: ToastificationContent,
                 position: "top-right",
@@ -265,7 +262,8 @@ export default {
                   text: "Email veya parola hatalı",
                 },
               });
-            });
+            }
+          });
         }
       });
     },
