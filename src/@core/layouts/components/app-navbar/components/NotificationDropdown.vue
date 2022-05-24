@@ -128,12 +128,16 @@ getNot(){
 }
   },
   methods:{
-  ...mapActions(['fetchMesaj']),
+  ...mapActions(['fetchMesaj','fetchMukellef']),
+    FecthPersonData() {
+      console.log("app çaliştim");
+
+          this.fetchMukellef(115)
+    },
     fetchNot(){
 this.fetchMesaj()
 setTimeout(()=>{
   this.items=this.getNot
-  console.log( this.items);
   console.log("çaliştim");
 },1000)
   },
@@ -196,6 +200,7 @@ setTimeout(()=>{
   },
   created(){
      this.fetchNot() 
+     this.FecthPersonData()
   },
 mounted(){
   console.log("not");

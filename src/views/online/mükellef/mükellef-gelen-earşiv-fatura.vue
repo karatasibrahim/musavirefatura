@@ -15,79 +15,6 @@
     />
 
     <!-- Sorgula Popup -->
-    <b-modal
-      ref="queryPopup"
-      title="Gelen E-Arşiv Sorgula"
-      ok-title="Sorgula"
-      cancel-title="İptal"
-      cancel-variant="outline-secondary"
-      @ok="inquireClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            label="Mükellef Seçimi"
-            label-for="h-type"
-            label-cols-md="4"
-          >
-            <v-select
-              v-model="listRequest.title"
-              :options="mukelellefler"
-              placeholder="Mükellef Seçiniz"
-              label="MükellefSeçimi"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Ay Seçimi"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="inquireRequest.startDate"
-              :max="inquireMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Başlangıç Tarihi"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="inquireRequest.startDate"
-              :max="inquireMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Bitiş Tarihi"
-            label-for="h-end-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-end-date"
-              v-model="inquireRequest.endDate"
-              :min="inquireMinDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-modal>
 
     <b-modal
       ref="pdfPopup"
@@ -107,80 +34,7 @@
       </iframe>
     </b-modal>
 
-    <b-modal
-      ref="listPopup"
-      title="Gelen E-Arşiv Listele"
-      ok-title="Listele"
-      cancel-title="İptal"
-      cancel-variant="outline-secondary"
-      @ok="listRunClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            label="Mükellef Seçimi"
-            label-for="h-type"
-            label-cols-md="4"
-          >
-            <v-select
-              v-model="listRequest.title"
-              :options="mukelellefler"
-              multiple
-              placeholder="Mükellef Seçiniz"
-              label="MükellefSeçimi"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Ay Seçimi"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="listRequest.startDate"
-              :max="inquireMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Başlangıç Tarihi"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="inquireRequest.startDate"
-              :max="inquireMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Bitiş Tarihi"
-            label-for="h-end-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-end-date"
-              v-model="inquireRequest.endDate"
-              :min="inquireMinDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-modal>
+
   </div>
 </template>
 
@@ -288,49 +142,16 @@ export default {
       this.$refs.listPopup.show();
     },
      listRunClick() {
-      let now=new Date(this.listRequest.startDate)
-     let time2=new Date(this.listRequest.startDate)
-const fil=this.GelenearsivDataGet.filter(el=>{
-      const time=new Date(el.Tarih.slice(0,10).split(".").reverse().join("/"))
-    console.log(this.listRequest.title);
- if(this.listRequest.title.length>0){
-   console.log("1.if");
-   return this.listRequest.title.includes(el.Unvan)
- }
-
-//   if(  time2.getTime()<=now.getTime()){
-//     console.log("3.if",this.listRequest.startDate!=this.listRequest.endDate, this.listRequest.startDate,this.listRequest.endDate);
-//       return time2.getTime()<time.getTime()
-//  }
- else{
-   console.log("else");
-   return el
- }
-})
-this.items=fil
-
 
     },
     ...mapActions(["fecthGelenEarsivFat"]),
     fecthGelenFat(){
        this.items=[]
-  let arr=[]
-  this.Mukellefdataget.forEach(element => {
-this.mukelellefler.push(element.Unvan)
-arr.push(element.MukellefId)
-  
-  });  
-
-  this.fecthGelenEarsivFat(arr)
+  this.fecthGelenEarsivFat([this.Mukellefdataget.MukellefId])
 this.setList()
     },
     setList(){
-   let arr=[]
    this.items=this.GelenearsivDataGet
-   this.GelenearsivDataGet.forEach(el=>{
-   arr.push(el.Unvan)
- })
- this.mukelellefler=[...new Set(arr)]
     }
   }, 
   computed: {

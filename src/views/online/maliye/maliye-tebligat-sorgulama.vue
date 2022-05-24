@@ -63,60 +63,6 @@
       v-if="Vergi"
     />
     <!-- Sorgula Popup -->
-    <b-modal
-      ref="queryPopup"
-      title="GİB'den Sorgula"
-      ok-title="Sorgula"
-      cancel-title="İptal"
-      cancel-variant="outline-secondary"
-      @ok="inquireClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group label="Ünvan" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.title"
-              :options="unvanlar"
-              placeholder="Ünvan Seçiniz"
-              label="Unvan"
-            />
-          </b-form-group>
-        </b-col>
-
-        <b-col cols="12">
-          <b-form-group
-            label="Tebliğ Başlangıç"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="inquireRequest.startDate"
-              :max="inquireMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Tebliğ Bitiş"
-            label-for="h-end-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-end-date"
-              v-model="inquireRequest.endDate"
-              :min="inquireMinDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-modal>
 
     <b-modal
       ref="pdfPopup"
@@ -390,9 +336,9 @@ export default {
     ...mapActions(["fecthGibTebligat","gibtebligatEk","fecthTibTebligat","fetchTibTebligatEk","fetchVergiTebligat"]),
     fecthtebligat() {
   
-      this.GetmukellefData.forEach((el) => {
-        this.mukellefData.push(el.MukellefId);
-      });   
+  
+        this.mukellefData=[this.GetmukellefData.MukellefId]
+
   
       this.fecthGibTebligat( this.mukellefData);
      setTimeout(()=>{

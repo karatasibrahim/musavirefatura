@@ -49,8 +49,6 @@
       <DxFilterRow :visible="true" />
       <DxToolbar>
         <DxItem location="before" template="headerTemplate" />
-        <DxItem location="before" template="inquireTemplate" />
-        <DxItem location="before" template="listTemplate" />
         <DxItem location="before" template="printTemplate" />
         <DxItem location="before" template="sendTemplate" />
         <DxItem name="columnChooserButton" />
@@ -87,24 +85,7 @@
         />
       </template>
 
-      <template #listTemplate>
-        <DxButton
-          type="normal"
-          text="Listele"
-          icon="detailslayout"
-          @click="listClick"
-        />
-      </template>
-
-      <template #inquireTemplate>
-        <DxButton
-          type="normal"
-          text="Sorgula"
-          icon="search"
-        
-          @click="inquireClick('http://89.43.29.189:1880/test1')"
-        />
-      </template>
+ 
 
       <template #headerTemplate>
         <div class="text-center" style="margin-right: 20px">

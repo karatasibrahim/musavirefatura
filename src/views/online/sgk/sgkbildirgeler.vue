@@ -15,87 +15,6 @@
       :columns="columns"
     />
 
-    <!-- Sorgula Popup -->
-    <b-modal
-      ref="queryPopup"
-      title="Bildirge Sorgula"
-      ok-title="Sorgula"
-      no-close-on-backdrop
-      cancel-title="Kapat"
-      cancel-variant="outline-secondary"
-      @ok="inquireClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group label="Ünvan" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="inquireRequest.title"
-              :options="unvanlar"
-              placeholder="Ünvan Seçiniz"
-              label="Unvan"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            style="
-              margin-bottom: 0rem !important;
-              margin-top: 0.5rem !important;
-            "
-            label="İlk Dönem"
-            label-for="h-type"
-            label-cols-md="4"
-          ></b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="6">
-          <v-select
-            v-model="inquireRequest.startDate.month"
-            :options="months"
-            placeholder="Ay Seçiniz"
-          />
-        </b-col>
-        <b-col cols="6">
-          <v-select
-            v-model="inquireRequest.startDate.year"
-            :options="years"
-            placeholder="Yıl Seçiniz"
-          />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            style="
-              margin-bottom: 0rem !important;
-              margin-top: 0.5rem !important;
-            "
-            label="Son Dönem"
-            label-for="h-type"
-            label-cols-md="4"
-          ></b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="6">
-          <v-select
-            v-model="inquireRequest.endDate.month"
-            :options="months"
-            placeholder="Ay Seçiniz"
-          />
-        </b-col>
-        <b-col cols="6">
-          <v-select
-            v-model="inquireRequest.endDate.year"
-            :options="years"
-            placeholder="Yıl Seçiniz"
-          />
-        </b-col>
-      </b-row>
-    </b-modal>
 
     <!-- Pdf Görüntüle Popup -->
     <b-modal
@@ -116,108 +35,7 @@
       </iframe>
     </b-modal>
 
-    <!-- Listele Popup -->
-    <b-modal
-      ref="listPopup"
-      title="Listele"
-      no-close-on-backdrop
-      ok-title="Listele"
-      cancel-title="Kapat"
-      cancel-variant="outline-secondary"
-      @ok="listRunClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group label="Ünvan" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.title"
-              :options="unvanlar"
-              multiple
-              placeholder="Ünvan Seçiniz"
-              label="Unvan"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            style="
-              margin-bottom: 0rem !important;
-              margin-top: 0.5rem !important;
-            "
-            label="İlk Dönem"
-            label-for="h-type"
-            label-cols-md="4"
-          ></b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="6">
-          <b-form-select
-            v-model="listRequest.startDate.month"
-            :options="months"
-            placeholder="Ay Seçiniz"
-          />
-        </b-col>
-        <b-col cols="6">
-          <b-form-select
-            v-model="listRequest.startDate.year"
-            :options="years"
-            placeholder="Yıl Seçiniz"
-          />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="12">
-          <b-form-group
-            style="
-              margin-bottom: 0rem !important;
-              margin-top: 0.5rem !important;
-            "
-            label="Son Dönem"
-            label-for="h-type"
-            label-cols-md="4"
-          ></b-form-group>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="6">
-          <v-select
-            v-model="listRequest.endDate.month"
-            :options="months"
-            placeholder="Ay Seçiniz"
-          />
-        </b-col>
-        <b-col cols="6">
-          <v-select
-            v-model="listRequest.endDate.year"
-            :options="years"
-            placeholder="Yıl Seçiniz"
-          />
-        </b-col>
-      </b-row>
-      <br />
-      <b-form-checkbox-group
-        id="checkbox-group-2"
-        v-model="listRequest.selected"
-        name="flavour-2"
-        class="demo-inline-spacing"
-      >
-        <b-row>
-          <b-col cols="4">
-            <b-form-checkbox value="Asıl">Asıl</b-form-checkbox>
-          </b-col>
-          <b-col cols="4">
-            <b-form-checkbox value="Ek">Ek</b-form-checkbox>
-          </b-col>
-          <b-col cols="4">
-            <b-form-checkbox value="İptal">İptal</b-form-checkbox>
-          </b-col>
-        </b-row>
-      </b-form-checkbox-group>
-      {{ listRequest.selected }}
-    </b-modal>
+ 
   </div>
 </template>
 
@@ -392,36 +210,7 @@ export default {
       this.$refs.listPopup.show();
     },
     listRunClick() {
-      this.items = [];
-      console.log(this.listRequest.startDate);
-      const datanDonem =
-        this.listRequest.startDate.month +
-        " " +
-        "/" +
-        " " +
-        this.listRequest.startDate.year;
-console.log(datanDonem);
-      const filters = this.getSgkBildirgeData.filter((el) => {
-        if (this.listRequest.title.length > 0) {
-          console.log("1.if");
-          return this.listRequest.title.includes(el.Unvan);
-        }
-        if (this.listRequest.selected.length > 0) {
-          console.log("2.if");
-          return this.listRequest.selected.includes(el.Durum);
-        }
-        if(this.listRequest.startDate.month != "" && this.listRequest.startDate.year != "") {
-          console.log("3.if");
-          console.log(el.Donem == datanDonem, el.Donem, datanDonem);
-          return el.Donem.match(datanDonem);
-        } else {
-          console.log("else");
-          return el
-        }
-      });
-
-      console.log(filters);
-      this.items = filters;
+     
     },
     //#endregion
 
@@ -457,21 +246,19 @@ console.log(datanDonem);
     setUnvan(arr, arrsubeid) {
       let dataunvan = [];
       let maindata = [];
-      for (let i = 0; i < this.getMukellefdata.length; i++) {
-        const element = this.getMukellefdata[i];
-dataunvan.push(element.Unvan)
+
+dataunvan.push(this.getMukellefdata.Unvan)
         arr.forEach((id) => {
           console.log(id);
 
-          if (id.mukID == element.MukellefId) {
+          if (id.mukID == this.getMukellefdata.MukellefId) {
             maindata.push({
               sube: id.sube,
-              unvan: element.Unvan,
+              unvan: this.getMukellefdata.Unvan,
               sicilno: id.sicil,
             });
           }
         });
-      }
       console.log(maindata);
       for (let index = 0; index < this.getSgkBildirgeData.length; index++) {
         const fin = this.getSgkBildirgeData[index];

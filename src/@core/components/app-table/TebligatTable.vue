@@ -48,7 +48,6 @@
       <DxFilterRow :visible="true" />
       <DxToolbar>
         <DxItem location="before" template="headerTemplate" />
-        <DxItem location="before" template="inquireTemplate" />
         <DxItem location="before" template="downloadTemplate" />
         <DxItem location="before" template="printTemplate" />
         <DxItem location="before" template="sendTemplate" />
@@ -104,15 +103,6 @@
         />
       </template>
 
-      <template #listTemplate>
-        <DxButton
-          type="normal"
-          text="Listele"
-          icon="detailslayout"
-          @click="listClick"
-        />
-      </template>
-
       <template #downloadTemplate>
         <DxDropDownButton
           width="150"
@@ -127,14 +117,6 @@
         />
       </template>
 
-      <template #inquireTemplate>
-        <DxButton
-          type="normal"
-          text="Sorgula"
-          icon="search"
-          @click="inquireClick"
-        />
-      </template>
 
       <template #headerTemplate>
         <div class="text-center" style="margin-right: 20px">

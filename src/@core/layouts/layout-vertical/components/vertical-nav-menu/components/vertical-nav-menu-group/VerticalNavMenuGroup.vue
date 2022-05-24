@@ -108,13 +108,8 @@ getFirma(){
       let arr=[];   
    
     if (e=="SGK İşlemleri") {
-      console.log(e,this.getmukellefdata)
-      for (let index = 0; index < this.getmukellefdata.length; index++) {
-        const element = this.getmukellefdata[index];
-        arr.push(element.MukellefId);
-      }
      if (  this.getFirma.length==0) {
-       this.fetchSgkFirmaalar(arr)
+       this.fetchSgkFirmaalar( [this.getmukellefdata.MukellefId])
       this.updateGroupOpen(!this.isOpen) 
      } 
    else{console.log("data var"); this.updateGroupOpen(!this.isOpen)} 

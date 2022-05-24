@@ -232,25 +232,27 @@ export default {
     fetchdata(){
       let arr =[]
     this.getfirma.forEach(element => {
-    arr.push(element.SubeId) 
+      arr.push(element.SubeId) 
       });
+      console.log(arr);
       this.fetchCalisan(arr);
       setTimeout(()=>{
-     let caalisanİd=[]
+        let caalisanİd=[]
+        console.log(this.getCalisan);
      this.getCalisan.forEach(data=>{
        caalisanİd.push(data.CalisanID) 
      })
      console.log(caalisanİd);
      this.fetchSgkVizite(caalisanİd)
-      },800)
+    },800)
       setTimeout(()=>{
         console.log("Vizite",this.getCalisan);
 let unvan=[]
-var expected = this.getfirma.map(a => Object.assign(a,this.getMükellef.find(b => b.MukellefId == a.MukellefId)));
+var expected = this.getfirma.map(a => Object.assign(a,this.getMükellef));
 var expected2 = this.getCalisan.map(a => Object.assign(a,expected.find(b => b.SubeId == a.SubeId)));
 var expected3 = this.getVizite.map(a => Object.assign(a,expected2.find(b => b.CalisanID == a.CalisanId)));
 expected3.forEach(a=>{ this.items.push({Munvan:a.Unvan,Unvan:a.CalisanUnvan, TC:a.TC, TakipNo:a.TakipNo, SiraNo:a.SiraNo,Vaka:a.Vaka,KontrolTarihi:a.KontrolTarihi,OnayDurumu:a.OnayDurumu})})
-console.log(this.items,expected3);
+ console.log(expected);
 this.mükelellefler=[...new Set(unvan)]
       },2000)
     }

@@ -49,7 +49,7 @@ export default new Vuex.Store({
   },
   state: {
     person: "",
-    mukellef: [],
+    mukellef: {},
     beyanname: [],
     posSorgu: [],
     GelenFatura: [],
@@ -148,7 +148,7 @@ export default new Vuex.Store({
       return state.person = payload
     },
     setMukkellef(state, payload) {
-      return state.mukellef.push(payload)
+      return state.mukellef=payload
     },
     setBeyanname(state, payload) {
       payload.forEach(el => {
@@ -256,6 +256,7 @@ export default new Vuex.Store({
     },
     setCalisan(state, payload) {
       payload.forEach(el => {
+        console.log(el.data());
         state.calisan.push(el.data())
       })
     },
@@ -266,7 +267,6 @@ export default new Vuex.Store({
       })
     },
     setMesaj(state,payload){
-      console.log(payload);
   state.notification.push(payload)
     }
   },
@@ -299,10 +299,11 @@ export default new Vuex.Store({
       console.log(this.state.mukellef);
       this.state.mukellef = []
       const q = query(collection(db, "Mukellef"),
-        where("KullaniciId", "==", payload),limit(2));
+        where("MukellefId", "==", payload),limit(2));
       const mukellefdata = await getDocs(q);
       let arr = []
       mukellefdata.forEach((doc) => {
+        console.log(doc.data());
         context.commit("setMukkellef", doc.data())
 
       });
@@ -327,7 +328,7 @@ export default new Vuex.Store({
       console.log(payload);
       context.dispatch("actionArr", {
         dbName: "Beyanname",
-        İtemName: "KullaniciId",
+        İtemName: "unvan",
         payload: payload,
         MutName: "setBeyanname"
       })
@@ -350,7 +351,7 @@ export default new Vuex.Store({
 
     async fecthGelenEarsivFat(context, payload) {
       this.state.GelenFatura = []
-
+console.log(payload);
       context.dispatch("actionArr", {
         dbName: "GelenFaturalar",
         İtemName: "MukellefId",
@@ -372,18 +373,6 @@ export default new Vuex.Store({
         MutName: "setGidenFatura"
       })
 
-
-      // console.log("giden vuex",payload);
-      // const q = query(
-      //   collection(db, "GidenFaturalar"),
-
-      //   limit(10)
-      // );
-      // const Gelendata = await getDocs(q);
-      // Gelendata.forEach(doc=>{
-
-      //   context.commit("setGidenFatura",doc.data())
-      // })
     },
 
     async fecthGibTebligat(context, payload) {
@@ -571,7 +560,6 @@ export default new Vuex.Store({
     },
     async fetchMesaj(context,payload){
       this.state.notification=[]
-      console.log(payload);
       console.log("çaliştim");
       this.state.mesaj = []   
           let q =query(
@@ -580,7 +568,6 @@ export default new Vuex.Store({
       )
       const dat=await getDocs(q)
       dat.forEach(el=>{
-        console.log(el.data());
         context.commit('setMesaj',el.data())
       })
     },
@@ -615,77 +602,6 @@ export default new Vuex.Store({
       return id
     },
 
-
-    //!  UPTADE 
-    async updateProfileDate(context, paylod) {
-      console.log(paylod);
-      const profile = doc(db, "Kullanici", documentıd)
-      const gProfile = await updateDoc(profile, paylod);
-    },
-
-    async updatePersonData(context, payload) {
-
-      console.log(documentıd);
-      const q = doc(db, "Sifreler", payload.SifreId.toString())
-
-      const Gelendata = await updateDoc(q, payload);
-      console.log(Gelendata);
-    },
-
-    async uptadeSgkFirma(context, payload) {
-      console.log(`${payload.SubeId}`);
-      const q = doc(db, "Firma", `${payload.SubeId}`)
-
-      const Gelendata = await updateDoc(q, {
-        BirimMaliyet: payload.BirimMaliyet,
-        Durum: payload.Durum,
-        MetreKare: payload.MetreKare,
-        MukellefId: payload.MukellefId,
-        SicilNo: payload.SicilNo,
-        SistemSifresi: payload.SistemSifresi,
-        SubeAcilis: payload.SubeAcilis,
-        SubeAdi: payload.SubeAdi,
-        SubeId: payload.SubeId,
-        SubeKapanis: payload.SubeKapanis,
-        SubeKodu: payload.SubeKodu,
-        SubeKullanicAdi: payload.SubeKullanicAdi,
-        SubeKullaniciKodu: payload.SubeKullaniciKodu,
-        SubeNot: payload.SubeNot,
-        İsyeriSifresi: payload.İsyeriSifresi
-      });
-      console.log(Gelendata);
-      context.commit('SetSgkBildirge', Gelendata)
-    },
-    async AddNewMükellef(context, payload) {
-      console.log(documentıd);
-      const q = doc(db, "Mukellef", payload.MukellefId.toString())
-      const Gelendata = await updateDoc(q, payload);
-      console.log(Gelendata);
-    },
-    //! ADD DATA
-    async AddNewSgkData(context, payload) {
-      // await setDoc(doc(db, "Firma", payload.SubeId ), payload);
-      console.log(payload.SubeId.toString());
-      const res = await setDoc(doc(db, "Firma", payload.SubeId.toString()), payload)
-      console.log(res);
-    },
-    async AddNewBeyanTakip(contex, payload) {
-      console.log(payload.KalanId.toString());
-      const res = await setDoc(doc(db, "KalanBeyanname", payload.KalanId.toString()), payload)
-      console.log(res);
-    },
-    async AddNewsssMükellef(context, payload) {
-      console.log(documentıd);
-      const q = doc(db, "Mukellef", payload.MukellefId.toString())
-      const Gelendata = await setDoc(q, payload);
-      console.log(Gelendata);
-    },
-    //! DELETE DATA
-    async DeleteSgkData(context, payload) {
-      console.log(payload);
-      await deleteDoc(doc(db, "Firma", payload.toString()))
-
-    }
   },
   strict: process.env.DEV,
 });

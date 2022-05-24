@@ -15,63 +15,6 @@
     />
 
     <!-- Sorgula Popup -->
-    <b-modal
-      ref="queryPopup"
-      title="Beyanname Sorgula"
-      ok-title="Sorgula"
-      cancel-title="İptal"
-      cancel-variant="outline-secondary"
-      @ok="inquireClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group label="Mükellef Seçimi" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.title"
-             :options="mukelellefler"
-              placeholder="Mükellef Seçiniz"
-              label="MükellefSeçimi"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group label="Pos Bilgisi" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.type"
-             :options="poslar"
-              placeholder="Pos Bilgisi Seçiniz"
-              label="PosBilgisi"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Tarih Seçiniz"
-            label-for="h-start-date"
-            label-cols-md="4"
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="listRequest.startDate"
-              :max="listMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group label="Detay" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.type"
-               :options="detaylar"
-              placeholder="Detay Seçiniz"
-              label="DetayBilgisi"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-modal>
 
     <b-modal
       ref="pdfPopup"
@@ -91,65 +34,6 @@
       </iframe>
     </b-modal>
 
-    <b-modal
-      ref="listPopup"
-      title="Listele"
-      ok-title="Listele"
-      cancel-title="İptal"
-      cancel-variant="outline-secondary"
-      @ok="listRunClick"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-form-group label="Mükellef Seçimi" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.title"
-              :options="mukelellefler"
-              placeholder="Mükellef Seçiniz"
-              multiple
-              label="MükellefSeçimi"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group label="Pos Bilgisi" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.type"
-            :options="poslar"
-              placeholder="Pos Bilgisi Seçiniz"
-              label="PosBilgisi"
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group
-            label="Tarih Seçiniz"
-            label-for="h-start-date"
-            label-cols-md="4" 
-          >
-            <b-form-datepicker
-              id="h-start-date"
-              v-model="listRequest.startDate"
-              :max="listMaxDate"
-              v-bind="dateTimeLanguage.labels[dateTimeLanguage.locale]"
-              :locale="dateTimeLanguage.locale"
-              class="mb-1"
-             
-            />
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group label="Detay" label-for="h-type" label-cols-md="4">
-            <v-select
-              v-model="listRequest.type"
-             :options="detaylar"
-              placeholder="Detay Seçiniz"
-              label="DetayBilgisi"
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-modal>
   </div>
 </template>
 
@@ -259,40 +143,10 @@ this.focusdate=true
       this.$refs.listPopup.show();
     },
     listRunClick() {
-      console.log(this.focusdate);
-      let copytime=this.listRequest.startDate
-      console.log(this.listRequest.startDate);
-     let time2=new Date(this.listRequest.startDate)
-const fil=this.PosSorguDataGet.filter(el=>{
-    const time=new Date(el.SorguTarihi)
-    console.log(time);
- if(this.listRequest.title.length>0){
-   return this.listRequest.title.includes(el.BankaAdi)
- }
- else if(this.listRequest.type !="Pos Tutarı olanlar" ){
-      return el.Tutar==""
- }
- else if(this.focusdate){
-   console.log(time2.getTime()<time.getTime());
-return time2.getTime()<time.getTime()
- }
-  else{
-   console.log("else");
-   return el
- }
-})
-this.items=fil
     },
 ...mapActions(["fetchPosSorgu"]),
 postDataGet(){  
-  let arr=[]
-  this.Mukellefdataget.forEach(element => {
-    console.log("pos",element.MukellefId);
-arr.push(element.MukellefId)
-  
-  });  
-
-  this.fetchPosSorgu(arr)
+  this.fetchPosSorgu([this.Mukellefdataget.MukellefId])
   this.setOption()
 },
 setOption(){

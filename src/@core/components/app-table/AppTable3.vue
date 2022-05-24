@@ -46,7 +46,7 @@
       <DxFilterRow :visible="true" />
       <DxToolbar>
         <DxItem location="before" template="headerTemplate" />
-        <DxItem location="before" template="inquireTemplate" />
+
         <DxItem location="before" template="printTemplate" />
         <DxItem location="before" template="trash" />
         <DxItem name="columnChooserButton" />
@@ -78,15 +78,6 @@
           key-expr="id"
           text="Yazdır"
           icon="print"
-        />
-      </template>
-
-      <template #inquireTemplate>
-        <DxButton
-          type="normal"
-          text="Sorgula"
-          icon="search"
-          @click="inquireClick"
         />
       </template>
 
