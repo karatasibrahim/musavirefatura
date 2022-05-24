@@ -570,6 +570,7 @@ export default new Vuex.Store({
       })
     },
     async fetchMesaj(context,payload){
+      this.state.notification=[]
       console.log(payload);
       console.log("çaliştim");
       this.state.mesaj = []   
