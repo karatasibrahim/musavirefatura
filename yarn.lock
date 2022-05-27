@@ -3735,6 +3735,11 @@
     "browserslist" "^4.19.1"
     "semver" "7.0.0"
 
+"core-js@^2.6.5":
+  "integrity" "sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz"
+  "version" "2.6.12"
+
 "core-js@^3.19.1", "core-js@^3.4.4", "core-js@^3.6.0", "core-js@^3.6.5", "core-js@^3.8.1", "core-js@^3.8.3":
   "integrity" "sha512-l6CwCLq7XgITOQGhv1dIUmwCFoqFjyQ6zQHUCQlS0xKmb9d6OHIg8jDiEoswhaettT21BSF5qKr6kbvE+aKwxw=="
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.22.1.tgz"
@@ -10621,6 +10626,14 @@
   dependencies:
     "object-assign" "^4.1.1"
     "quill" "^1.3.4"
+
+"vue-repeater@^1.1.2":
+  "integrity" "sha512-dPp1S7gdiSRBfzIOkvim7mg78J6hhwe/G/d6SWMObn6Nhdc6yUkz24YLVyvaXpoAQEhoqHSjctzCYTZz6J379w=="
+  "resolved" "https://registry.npmjs.org/vue-repeater/-/vue-repeater-1.1.2.tgz"
+  "version" "1.1.2"
+  dependencies:
+    "core-js" "^2.6.5"
+    "vue" "^2.6.10"
 
 "vue-ripple-directive@2.0.1":
   "integrity" "sha512-jXZEX6uZpo89wxmdcw02uFpsMBpm1pxjQ60uqghNLQ8H8ju9eon2vE0+vvSWJ1WGCOTEfxGDR4InabJJu5f1GA=="

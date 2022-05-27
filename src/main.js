@@ -7,10 +7,13 @@ import router from "./router";
 import store from "./store";
 import App from "./App.vue";
 import { initializeApp } from "firebase/app";
+import Address from './@core/repeater/adress.vue'
+import İrsaliye from './@core/repeater/irsaliye.vue'
 
 // Global Components
 import "./global-components";
-
+Vue.component('test-address', Address)
+Vue.component('İrsaliye',İrsaliye)
 // 3rd party plugins
 import "@axios";
 import "@/libs/acl";

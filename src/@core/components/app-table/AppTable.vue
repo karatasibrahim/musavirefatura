@@ -49,6 +49,8 @@
       <DxFilterRow :visible="true" />
       <DxToolbar>
         <DxItem location="before" template="headerTemplate" />
+        <DxItem location="before" template="inquireTemplate" />
+        <DxItem location="before" template="listTemplate" />
         <DxItem location="before" template="printTemplate" />
         <DxItem location="before" template="sendTemplate" />
         <DxItem name="columnChooserButton" />
@@ -85,7 +87,24 @@
         />
       </template>
 
- 
+      <template #listTemplate>
+        <DxButton
+          type="normal"
+          text="Listele"
+          icon="detailslayout"
+          @click="listClick"
+        />
+      </template>
+
+      <template #inquireTemplate>
+        <DxButton
+          type="normal"
+          text="Sorgula"
+          icon="search"
+        
+          @click="inquireClick('http://89.43.29.189:1880/test1')"
+        />
+      </template>
 
       <template #headerTemplate>
         <div class="text-center" style="margin-right: 20px">
@@ -169,7 +188,6 @@ import {
   BCardTitle,
   BCardText,
 } from "bootstrap-vue";
-
 import {
   DxDataGrid,
   DxScrolling,
@@ -200,7 +218,6 @@ import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
-
 export default {
   name: "AppTable",
   components: {
@@ -234,7 +251,6 @@ export default {
   directives: {
     Ripple,
   },
-
   props: {
     pk: {
       type: String,
@@ -293,7 +309,6 @@ export default {
     },
   },
   methods: {
-
     onSelectionChanged({ selectedRowKeys, selectedRowsData }) {
       console.log(selectedRowsData);
       this.selectedRowKeys = selectedRowKeys;
@@ -331,7 +346,6 @@ export default {
     onExporting(e) {
       const workbook = new Workbook();
       const worksheet = workbook.addWorksheet(this.title);
-
       exportDataGrid({
         component: e.component,
         worksheet,
@@ -358,5 +372,4 @@ export default {
     width: 27px;
   height: 19px;
 }
-
 </style>

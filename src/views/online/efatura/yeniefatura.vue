@@ -1,151 +1,219 @@
 <template>
   <div>
     <b-row class="match-height">
-      <b-col lg="7" md="6">
-        <b-card
-          ref="taxPayerPopup"
-          title="Müşteri Bilgileri"
-          size="lg"
-          centered
-          no-close-on-backdrop
-        >
-          <b-input-group style="margin-bottom: 11px">
-            <b-input-group-prepend is-text>
-              <feather-icon icon="SearchIcon" />
-            </b-input-group-prepend>
-            <b-form-input placeholder="Search" />
-            <b-button
-              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-              variant="primary"
-            >
-              Temizle
-            </b-button>
-          </b-input-group>
-          <b-card-text>
-            <div class="m-flex-row">
-              <div class="m-input">
-                <div class="m-input-c">
-                  <label>VKN/TCKN</label>
-                  <input type="text" />
-                </div>
-                <div class="m-input-c">
-                  <label>Vergi D.</label>
-                  <input type="text" />
-                </div>
-                <div class="m-input-c">
-                  <label>e-Posta</label>
-                  <input type="text" />
-                </div>
-                <div class="m-input-c">
-                  <label>Faks</label>
-                  <input type="text" />
-                </div>
-              </div>
-              <div class="m-input">
-                <div class="m-input-c">
-                  <label>Unvan</label>
-                  <input type="text" />
-                </div>
-                <div class="m-input-c">
-                  <label>Adres</label>
-                  <input type="text" />
-                </div>
-                <div class="m-input-c">
-                  <label>Telefon</label>
-                  <input type="text" />
-                </div>
-                <div class="m-input-c">
-                  <label>Web Sitesi</label>
-                  <input type="text" />
-                </div>
-              </div>
-            </div>
-          </b-card-text>
-          <b-button type="submit" v-b-modal.modal-1 variant="success">
-            <span class="align-middle">Yeni Alıcı Oluştur</span>
-            <feather-icon icon="ArrowRightIcon" class="ml-50" />
-          </b-button>
-        </b-card>
-      </b-col>
+      <b-tabs>
+        <b-tab title="Temel Bilgiler">
+          <b-row>
+            <b-col lg="8" md="6" :style="[BillTypeValue=='Satış'?{'display':'none'}:{'display':'inline-block'}]">
+              <b-card
+                ref="taxPayerPopup"
+                title="Müşteri Bilgileri"
+                size="lg"
+                centered
+                no-close-on-backdrop
+              >
+                <b-input-group style="margin-bottom: 11px">
+                  <b-input-group-prepend is-text>
+                    <feather-icon icon="SearchIcon" />
+                  </b-input-group-prepend>
+                  <b-form-input placeholder="Search" />
+                  <b-button
+                    v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                    variant="primary"
+                  >
+                    Temizle
+                  </b-button>
+                </b-input-group>
+                <b-card-text>
+                  <div class="m-flex-row">
+                    <div class="m-input">
+                      <div class="m-input-c">
+                        <label>VKN/TCKN</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Vergi D.</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>e-Posta</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Faks</label>
+                        <input type="text" />
+                      </div>
+                    </div>
+                    <div class="m-input">
+                      <div class="m-input-c">
+                        <label>Unvan</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Adres</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Telefon</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Web Sitesi</label>
+                        <input type="text" />
+                      </div>
+                    </div>
+                  </div>
+                </b-card-text>
+                <b-button type="submit" v-b-modal.modal-1 variant="success">
+                  <span class="align-middle">Yeni Alıcı Oluştur</span>
+                  <feather-icon icon="ArrowRightIcon" class="ml-50" />
+                </b-button>
+              </b-card>
+            </b-col>
+<b-col lg="8" md="6"  :style="[BillTypeValue=='Satış'?{'display':'inline-block'}:{'display':'none'}]">
+                  <b-card
+                                  ref="taxPayerPopup"
+                title="Müşteri Bilgileri"
+                size="lg"
+                centered
+                no-close-on-backdrop
+                  >
+                  <div class="m-flex-row">
+                    <div class="m-input">
+                      <div class="m-input-c">
+                        <label>VKN/TCKN</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>İl</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Unvan</label>
+                        <input type="text" />
+                      </div>
+                    </div>
+                    <div class="m-input">
+                      <div class="m-input-c">
+                        <label>Ülke</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>İlçe</label>
+                        <input type="text" />
+                      </div>
+                      <div class="m-input-c">
+                        <label>Vergi Dairesi*</label>
+                        <input type="text" />
+                      </div>
+                    </div>
+                  </div>
+              
+                                <b-button class="mt-2" type="submit" v-b-modal.modal-diger variant="success">
+                  <span class="align-middle">Diger Bilgiler</span>
+                  <feather-icon icon="ArrowRightIcon" class="ml-50" />
+                </b-button> 
+                 </b-card>
+</b-col>
+            <b-col lg="4" md="6">
+              <b-card
+                ref="taxPayerPopup"
+                title="Fatura Bilgileri"
+                size="lg"
+                centered
+                no-close-on-backdrop
+              >
+                <b-card-text>
+                  <div class="m-flex-row">
+                    <div class="m-input">
+                      <div class="m-input-c">
+                        <label class="w-50">Fatura Türü *</label>
+                        <b-form-select
+                          v-model="BillTypeValue"
+                          :options="BillType"
+                          size="sm"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                        <label class="w-50">Gönderim Şekli*</label>
+                        <b-form-select
+                          v-model="ShippingMethodValue"
+                          :options="ShippingMethod"
+                          size="sm"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                        <label class="w-50">Düzenlenme Tarihi *</label>
+                        <flat-pickr
+                          v-model="dateDefault"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                        <label class="w-50">Düzenlenme Saati*</label>
+                        <flat-pickr
+                          v-model="timePicker"
+                          class="form-control"
+                          :config="{
+                            enableTime: true,
+                            noCalendar: true,
+                            dateFormat: 'H:i',
+                          }"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                        <label class="w-50">Para Birimi*</label>
+                        <b-form-select
+                          v-model="moneyValue"
+                          :options="money"
+                          size="sm"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                        <label class="w-50">XSLT Dosyası:*</label>
+                        <b-form-select
+                          v-model="XSLTFileValue"
+                          :options="XSLTFile"
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </b-card-text>
+                <b-form-checkbox v-model="irsaliye" value="true">
+                  İrsaliye yerine geçer.
+                </b-form-checkbox>
+              </b-card>
+            </b-col>
+          </b-row>
+        </b-tab>
+        <b-tab title="Diger Bilgiler">
+          <b-tabs>
+            <b-tab title="İrsaliye Bilgileri">
 
-      <b-col lg="5" md="6">
-        <b-card
-          ref="taxPayerPopup"
-          title="Fatura Bilgileri"
-          size="lg"
-          centered
-          no-close-on-backdrop
-        >
-          <b-card-text>
-            <div class="m-flex-row">
-              <div class="m-input">
-                <div class="m-input-c">
-                  <label class="w-50">Fatura Türü *</label>
-                  <b-form-select
-                    v-model="BillTypeValue"
-                    :options="BillType"
-                    size="sm"
-                  />
-                </div>
-                <div class="m-input-c">
-                  <label class="w-50">Gönderim Şekli*</label>
-                  <b-form-select
-                    v-model="ShippingMethodValue"
-                    :options="ShippingMethod"
-                    size="sm"
-                  />
-                </div>
-                <div class="m-input-c">
-                  <label class="w-50">Düzenlenme Tarihi *</label>
-                  <flat-pickr v-model="dateDefault" class="form-control" />
-                </div>
-                <div class="m-input-c">
-                  <label class="w-50">Düzenlenme Saati*</label>
-                  <flat-pickr
-                    v-model="timePicker"
-                    class="form-control"
-                    :config="{
-                      enableTime: true,
-                      noCalendar: true,
-                      dateFormat: 'H:i',
-                    }"
-                  />
-                </div>
-                <div class="m-input-c">
-                  <label class="w-50">Para Birimi*</label>
-                  <b-form-select
-                    v-model="moneyValue"
-                    :options="money"
-                    size="sm"
-                  />
-                </div>
-                <div class="m-input-c">
-                  <label class="w-50">XSLT Dosyası:*</label>
-                  <b-form-select
-                    v-model="XSLTFileValue"
-                    :options="XSLTFile"
-                    size="sm"
-                  />
-                </div>
-              </div>
-            </div>
-          </b-card-text>
-          <b-form-checkbox v-model="irsaliye" value="true">
-            İrsaliye yerine geçer.
-          </b-form-checkbox>
-        </b-card>
-      </b-col>
+                <b-card>
+                  <repeater v-model="İrsaliye"></repeater>
+                </b-card>
+            </b-tab>
+            <b-tab title="İade Bilgileri">
+              <b-card>
+                  <b-table responsive="sm" :items="iade"/>
+              </b-card>
+               </b-tab>
+          </b-tabs>
+        </b-tab>
+      </b-tabs>
 
       <b-col lg="12">
         <b-card>
           <b-container>
-            <b-row align-v="center" class="mb-2">
+            <b-row align-v="center" align-h="between" class="mb-2">
               <b-col lg="5">
                 <h4>Ürün Hizmet Bilgileri</h4>
               </b-col>
-              <b-col lg="7">
+              <b-col lg="6">
                 <b-row align-content="end">
-                  <b-col lg="3">
+                  <b-col md="4" lg="4">
                     <b-dropdown
                       id="dropdown-1"
                       v-ripple.400="'rgba(255, 255, 255, 0.15)'"
@@ -158,7 +226,7 @@
                     </b-dropdown>
                   </b-col>
 
-                  <b-col lg="5">
+                  <b-col  cols="8" lg="4">
                     <b-button
                       v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                       variant="info"
@@ -168,103 +236,11 @@
                       <feather-icon icon="EditIcon" class="mr-50" />
                     </b-button>
                   </b-col>
-
-                  <b-col lg="4">
-                    <b-button
-                      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-                      variant="success"
-                      @click="AddLine"
-                    >
-                      Satır Ekle
-                      <feather-icon icon="PlusIcon" class="mr-50" />
-                    </b-button>
-                  </b-col>
                 </b-row>
               </b-col>
             </b-row>
             <b-container>
-              <b-table
-                responsive
-                :items="items"
-                tbody-tr-class="tbody-tr"
-                thead-tr-class="thead-tr"
-                :fields="fields"
-                class="mb-0"
-              >
-                <template #cell(id)="data">
-                  <span class="text-nowrap">
-                    {{ data.id }}
-                  </span>
-                </template>
-
-                <!-- Optional default data cell scoped slot -->
-                <template #cell(Ürün-Hizmet)="data">
-                  <span class="">{{ data.item.name }}</span>
-                  <input type="text" v-model="ProductCalc.name" />
-                </template>
-
-                <template #cell(Miktar)="data">
-                  <span class="">{{ data.item.quantity }}</span>
-                  <input
-                    type="number"
-                    @keyup="calculation($event.target.value)"
-                    v-model="ProductCalc.quantity"
-                  />
-                </template>
-
-                <template #cell(Birim)="data">
-                  <span class="">{{ data.item.unit }}</span>
-                  <b-form-select
-                    v-model="ProductCalc.unit"
-                    :options="Unit"
-                    size="sm"
-                  />
-                </template>
-                <template #cell(BirimFiyati)="data">
-                  <span class="">{{ data.item.unitPrice }}</span>
-                  <input
-                    type="number"
-                    @keyup="calculation(ProductCalc.unitPrice)"
-                    v-model="ProductCalc.unitPrice"
-                  />
-                </template>
-                <template #cell(İskonto-yüzde)="data">
-                  <span class="">{{ data.item.discounty }}</span>
-                  <input
-                    type="number"
-                    @keyup="calculation(ProductCalc.discounty)"
-                    placeholder="0%"
-                    v-model="ProductCalc.discounty"
-                  />
-                </template>
-
-                <template #cell(İskonto)="data">
-                  <span class="">{{ data.item.discountt }}</span>
-                  <input
-                    type="number"
-                    @keyup="calculation(ProductCalc.discountt)"
-                    placeholder="0₺"
-                    v-model="ProductCalc.discountt"
-                  />
-                </template>
-                <template #cell(KDV)="data">
-                  <span class="">{{ data.item.KDV }}</span>
-                  <input
-                    type="number"
-                    @keyup="calculation(ProductCalc.KDV)"
-                    placeholder="0%"
-                    v-model="ProductCalc.KDV"
-                  />
-                </template>
-                <template #cell(ToplamFiyat)="data">
-                  <span class="">{{ data.item.total }}</span>
-                  <input type="text" v-model="ProductCalc.total" />
-                </template>
-
-                <template #cell(İşlemler)>
-                  <feather-icon icon="EditIcon" v-b-modal.modaledt />
-                </template>
-              </b-table>
+              <repeater v-model="items"></repeater>
             </b-container>
           </b-container>
         </b-card>
@@ -441,10 +417,9 @@
         </b-tab>
       </b-tabs>
     </b-modal>
-
-    <b-modal
-      id="modaledt"
-      title="Satır Bilgileri"
+  <b-modal
+      id="modal-diger"
+      title="Perakende Müşteri Bilgileri"
       ok-only
       size="lg"
       ok-title="Accept"
@@ -453,433 +428,74 @@
         <div class="m-flex-row">
           <div class="m-input">
             <div class="m-input-c">
-              <label>Ürün Adı</label>
+              <label>Orta Adı</label>
               <input type="text" />
             </div>
             <div class="m-input-c">
-              <label>Miktar</label>
+              <label>Faks</label>
               <input type="text" />
             </div>
             <div class="m-input-c">
-              <label>Birim Fiyat</label>
+              <label>Bina No</label>
+              <input type="text" />
+            </div>
+            <div class="m-input-c">
+              <label>Cadde/Mahalle</label>
+              <input type="text" />
+            </div>
+            <div class="m-input-c">
+              <label>E-posta</label>
+              <input type="text" />
+            </div>
+             <div class="m-input-c">
+              <label>Vergi Dairesi</label>
+              <input type="text" />
+            </div>
+             <div class="m-input-c">
+              <label>Mersis No</label>
               <input type="text" />
             </div>
           </div>
           <div class="m-input">
             <div class="m-input-c">
-              <label>Birim</label>
-              <b-form-select :options="Unit" size="sm" />
-            </div>
-            <div class="m-input-c">
-              <label>Ürün/Hizmet Tutarı</label>
+              <label>Telefon</label>
               <input type="text" />
             </div>
             <div class="m-input-c">
-              <label>Satır Açıklaması</label>
+              <label>Bina No</label>
+              <input type="text" />
+            </div>
+            <div class="m-input-c">
+              <label>Kapı No</label>
+              <input type="text" />
+            </div>
+            <div class="m-input-c">
+              <label>Posta Kodu</label>
+              <input type="text" />
+            </div>
+            <div class="m-input-c">
+              <label>Web Sitesi</label>
+              <input type="text" />
+            </div>
+                        <div class="m-input-c">
+              <label>Ticaret Odası</label>
+              <input type="text" />
+            </div>
+                        <div class="m-input-c">
+              <label>Ticaret Sicil No</label>
               <input type="text" />
             </div>
           </div>
-        </div>
-        <hr />
-        <div class="m-flex-row">
-          <b-form-select :options="PaxList" v-model="AddedPax" size="sm" />
-          <b-form-select :options="Unit" size="sm" />
-        </div>
-        <div class="m-flex-row mt-2">
-          <label  >İSKONTO</label>
-          <div class="m-input">
-            <label> Oran (%) veya Birim Fiyatı (₺)</label>
-            <input type="text" />
-          </div>
-          <div class="m-input">
-            <label> Tutar (₺)</label>
-            <input type="text" />
-          </div>
-          <div class="m-input">
-            <label> İskonto / Artırım Sebebi</label>
-            <input type="text" />
-          </div>
-        </div>
-        <div class="m-flex-row">
-          
-          <label  >KDV GERCEK</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <input type="text" />
-        </div>
-
-         <div class="m-flex-row d-non"  id="BMV"  >
-          
-          <label  >BMV</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <input type="text" />
-        </div>
-
-  <div class="m-flex-row d-non" id="İSKONTO-3">
-          
-          <label  >İSKONTO 3</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-             <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-          <div class="m-flex-row d-non" id="GV-STOPAJI" >
-          
-          <label  >GV STOPAJI</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-          <div class="m-flex-row d-non" id="KV-STOPAJI" >
-          
-          <label  >KV STOPAJI</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-  <div class="m-flex-row d-non" id="MERA-FONU" >
-          
-          <label  >MERA FONU</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-          <div class="m-flex-row d-non" id="1.LİSTE" >
-          
-          <label  >ÖTV 1.LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-          <div class="m-flex-row d-non" id="3.LİSTE"  >
-          
-          <label  >ÖTV 3.LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-<div class="m-flex-row d-non" id="4.LİSTE"  >
-          
-          <label  >ÖTV 4.LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-        <div class="m-flex-row d-non" id="3A-LİSTE" >
-          
-          <label  >ÖTV 3A LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-        <div class="m-flex-row d-non" id="3B-LİSTE"  >
-          
-          <label  >ÖTV 3B LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-        <div class="m-flex-row d-non" id="3C-LİSTE"  >
-          
-          <label  >ÖTV 3C LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-        <div class="m-flex-row d-non" id="DAMGA-V"  >
-          
-          <label  >DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-          <div class="m-flex-row d-non" id="5035SKDAMGAV"  >
-          
-          <label  >5035SKDAMGAV</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-          <div class="m-flex-row d-non" id="ÖZEL-İLETİŞİM-VERGİSİ"  >
-          
-          <label  >ÖZEL İLETİŞİM VERGİSİ</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-          <div class="m-flex-row d-non" id="2.LİSTE"  >
-          
-          <label  >ÖTV 2.LİSTE</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-          <div class="m-flex-row d-non" id="TES.ÜC"  >
-          
-          <label  >BORSA TES.ÜC</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-          <div class="m-flex-row d-non" id=""  :style="[AddedPax=='DAMGA V'?{'display':'flex!important'}:{'':''}]">
-          
-          <label  >DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-          <div class="m-flex-row d-non" id=""  :style="[AddedPax=='DAMGA V'?{'display':'flex!important'}:{'':''}]">
-          
-          <label  >DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-          <div class="m-flex-row d-non" id=""  :style="[AddedPax=='DAMGA V'?{'display':'flex!important'}:{'':''}]">
-          
-          <label  >DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-
-          <div class="m-flex-row d-non" id=""  :style="[AddedPax=='DAMGA V'?{'display':'flex!important'}:{'':''}]">
-          
-          <label  >DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
-        </div>
-
-
-
-          <div class="m-flex-row d-non" id=""  :style="[AddedPax=='DAMGA V'?{'display':'flex!important'}:{'':''}]">
-          
-          <label  >DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-            <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="warning"
-      class="btn-icon"
-    >
-      <feather-icon icon="Trash2Icon" />
-    </b-button>
         </div>
       </b-card>
     </b-modal>
+
+
   </div>
 </template>
 <script>
 import AppTable from "@core/components/app-table/mukellefTable.vue";
+import Repeater from "../../../@core/repeater/repeater.vue";
 import {
   BRow,
   BFormCheckbox,
@@ -906,6 +522,7 @@ import Ripple from "vue-ripple-directive";
 import vSelect from "vue-select";
 export default {
   components: {
+    repeater: Repeater,
     AppTable,
     BRow,
     BTable,
@@ -946,6 +563,12 @@ export default {
       disableDate: null,
       inlineDate: null,
       option: [],
+      iade:[
+       {
+          FaturaNo: 40, DüzenlemeTarihi: 'Dickerson', İşlemler: 'Macdonald',
+        },
+
+      ],
       dir: "ltr",
       columns: [
         {
@@ -999,56 +622,6 @@ export default {
           caption: "IBAN",
         },
       ],
-      items: [
-        {
-          name: "",
-          quantity: 0,
-          unit: 0,
-          discounty: 0,
-          discountt: 0,
-          total: 0,
-          unitPrice: 0,
-          KDV: 0,
-        },
-      ],
-      BillType: [
-        { value: "Satış", text: "Satış" },
-        { value: "İade", text: "İade" },
-        { value: "Tevkifat", text: "Tevkifat" },
-        { value: "İstisna", text: "İstisna" },
-        { value: "Özel Matrah", text: "Özel Matrah" },
-        { value: "İhraç Kayıtlı", text: "İhraç Kayıtlı" },
-      ],
-
-      ShippingMethod: [
-        { value: "Elektronik", text: "Elektronik" },
-        { value: "Kağıt", text: "Kağıt" },
-      ],
-          PaxList: [
-        { value: "BMV", text: "BMV" },
-        { value: "GV-STOPAJI", text: "GV STOPAJI" },
-        { value: "KV-STOPAJI", text: "KV STOPAJI" },
-        { value: "MERA-FONU", text: "MERA FONU" },
-        { value: "1.LİSTE", text: "ÖTV 1.LİSTE" },
-        { value: "3.LİSTE", text: "ÖTV 3.LİSTE" },
-        { value: "4.LİSTE", text: "ÖTV 4.LİSTE" },
-        { value: "3A-LİSTE", text: "ÖTV 3A LİSTE" },
-        { value: "3B-LİSTE", text: "ÖTV 3B LİSTE" },
-        { value: "3C-LİSTE", text: "ÖTV 3C LİSTE" },
-        { value: "DAMGA-V", text: "DAMGA V" },
-        { value: "5035SKDAMGAV", text: "5035SKDAMGAV" },
-        { value: "ÖZEL-İLETİŞİM-VERGİSİ", text: "ÖZEL İLETİŞİM VERGİSİ" },
-        { value: "2.LİSTE", text: "ÖTV 2.LİSTE" },
-        { value: "TES.ÜC", text: "BORSA TES.ÜC" },
-
-      ],
-      money: [
-        { value: "Türk Lirasi", text: "Türk Lirasi" },
-        { value: "Euro", text: "Euro" },
-        { value: "US Dolar", text: "US Dolar" },
-        { value: "İngiliz Sterlini", text: "İngiliz Sterlini" },
-      ],
-      XSLTFile: [{ value: "Gib XSLT", text: "Gib XSLT" }],
       Unit: [
         { value: "Kg-Metre kare", text: "Kg-Metre kare" },
         { value: "Adet(Unit)", text: "Adet(Unit)" },
@@ -1093,18 +666,39 @@ export default {
           text: "SODYUM HİDROKSİT KİLOGRAMI",
         },
       ],
-      fields: [
-        "#",
-        "Ürün-Hizmet",
-        "Miktar",
-        "Birim",
-        "BirimFiyati",
-        "İskonto-yüzde",
-        "İskonto",
-        "KDV",
-        "ToplamFiyat",
-        "İşlemler",
+      items: [
+        {
+          name: "test-address",
+          value: {},
+        },
       ],
+      İrsaliye: [
+        {
+          name: "İrsaliye",
+          value: {},
+        },
+      ],
+      BillType: [
+        { value: "Satış", text: "Satış" },
+        { value: "İade", text: "İade" },
+        { value: "Tevkifat", text: "Tevkifat" },
+        { value: "İstisna", text: "İstisna" },
+        { value: "Özel Matrah", text: "Özel Matrah" },
+        { value: "İhraç Kayıtlı", text: "İhraç Kayıtlı" },
+      ],
+
+      ShippingMethod: [
+        { value: "Elektronik", text: "Elektronik" },
+        { value: "Kağıt", text: "Kağıt" },
+      ],
+
+      money: [
+        { value: "Türk Lirasi", text: "Türk Lirasi" },
+        { value: "Euro", text: "Euro" },
+        { value: "US Dolar", text: "US Dolar" },
+        { value: "İngiliz Sterlini", text: "İngiliz Sterlini" },
+      ],
+      XSLTFile: [{ value: "Gib XSLT", text: "Gib XSLT" }],
       BillTypeValue: "",
       ShippingMethodValue: "",
       moneyValue: "",
@@ -1119,42 +713,11 @@ export default {
         unitPrice: 0,
         KDV: 0,
       },
-      AddedPax:"",
       selected: "",
     };
   },
   methods: {
     AddBill() {},
-    calculation(e) {
-      let cal = this.ProductCalc.quantity * this.ProductCalc.unitPrice;
-
-      //İskonto değeri hesaplanmasi
-      let YüzdeIskonto = this.ProductCalc.discounty / 100;
-      this.ProductCalc.discountt = YüzdeIskonto;
-
-      let iskonto = cal - cal * YüzdeIskonto;
-      console.log(iskonto);
-      //KDV hesaplanması
-      let Brüt;
-      let KdvHesaplama;
-      if (this.ProductCalc.KDV != 0) {
-        if (this.ProductCalc.discounty != 0) {
-          Brüt = iskonto;
-        } else {
-          Brüt = cal;
-        }
-        console.log(Brüt);
-        KdvHesaplama = Brüt * (this.ProductCalc.KDV / 100) + Brüt;
-        console.log(KdvHesaplama);
-        this.ProductCalc.total = KdvHesaplama;
-      } else {
-        if (this.ProductCalc.discounty != 0) {
-          this.ProductCalc.total = iskonto;
-        } else {
-          this.ProductCalc.total = cal;
-        }
-      }
-    },
     AddLine() {
       console.log(this.ProductCalc);
       let pro = {
@@ -1172,19 +735,16 @@ export default {
       this.items.push(this.ProductCalc);
     },
   },
-  watch:{
-    AddedPax(){
-      console.log(this.AddedPax);
-      document.getElementById(this.AddedPax).style.display="flex"
-    }
-  }
+ 
 };
 </script>
 
 
 <style lang="scss">
 @import "@core/scss/vue/libs/vue-flatpicker.scss";
-
+.tabs{
+  width: 100%;
+}
 .modal-header {
   background: #ff503c !important;
 }
@@ -1232,9 +792,8 @@ export default {
   width: 100%;
   display: flex;
   gap: 15px;
-align-items: center;
+  align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
 }
 .button-table {
   justify-content: flex-end !important;
@@ -1268,7 +827,7 @@ align-items: center;
   justify-content: space-between;
   align-items: center;
 }
-.d-non{
+.d-non {
   display: none;
 }
 h2 {
@@ -1384,6 +943,9 @@ h2 + hr {
 @media (max-width: 768px) {
   .m-popup-nav {
     gap: 5px;
+  }
+  .m-flex-row{
+    flex-wrap: wrap;
   }
   .m-popup-nav > li {
     padding: 0 5px;
