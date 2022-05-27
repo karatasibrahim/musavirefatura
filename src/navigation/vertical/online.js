@@ -1,5 +1,4 @@
-export default [
-  {
+export default [{
     header: 'ONLİNE İşlemlerİ',
   },
   {
@@ -7,48 +6,67 @@ export default [
     route: 'apps-email',
     icon: 'UsersIcon',
     children: [
-    
+
       {
-              title: 'Fatura Oluştur',
-              route: 'Fatura-Olustur',
-            },
-            {
-              title: 'Gelen E-arsiv',
-              route: 'Gelen-Earsiv',
-            },
-            {
-              title: 'Giden E-arsiv',
-              route: 'Giden-Earsiv',
-            },
-  ]
+        title: 'Fatura Oluştur',
+        route: 'Fatura-Olustur',
+      },
+      {
+        title: 'Gelen E-arsiv',
+        route: 'Gelen-Earsiv',
+      },
+      {
+        title: 'Giden E-arsiv',
+        route: 'Giden-Earsiv',
+      },
+    ]
   },
   {
     title: 'E-Fatura',
     route: 'apps-chat',
     icon: 'BriefcaseIcon',
-    children: [
-      {
+    children: [{
         title: 'Yeni Fatura Ekle',
         route: 'yeni-efatura',
       },
       {
         title: 'Fatura Listesi',
-        route: 'fatura-listesi"',
+        route: 'fatura-listesi',
       },
       {
         title: 'Düzenlenen Faturalar',
         route: 'düzenlenen-faturalar"',
       },
+      {
+        title: 'İptal / itiraz Talebi',
+        route: 'İptal-itiraz"',
+      },
+      {
+        title: 'Taslak Fatura',
+        route: 'Taslak-Fatura',
+      },
     ],
   },
   {
-    title: 'SGK İşlemleri',
-    route: 'apps-todo',
-    icon: 'CommandIcon',
-    children: [
-    
-    ],
+    title: 'Ba / Bs',
+    route: 'BaBs',
+    icon: 'AlignJustifyIcon',
   },
+  {
+    title: 'Cari',
+    route: 'Cari',
+    icon: 'UserIcon',
+  },
+  {
+    title: 'Raporlar',
+    route: 'Raporlar',
+    icon: 'FileTextIcon',
+  },
+  {
+    title: 'Stok Yönetimi',
+    route: 'Stok',
+    icon: 'ShoppingCartIcon',
+  }
   // {
   //   title: 'Finans İşlemleri',
   //   route: 'apps-calendar',

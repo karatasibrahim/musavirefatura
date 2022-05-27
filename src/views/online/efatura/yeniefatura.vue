@@ -1234,6 +1234,7 @@ export default {
   gap: 15px;
 align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 .button-table {
   justify-content: flex-end !important;
