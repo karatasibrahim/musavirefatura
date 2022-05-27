@@ -3,110 +3,41 @@ export default [
     header: 'ONLİNE İşlemlerİ',
   },
   {
-    title: 'Mükellef İşlemleri',
+    title: 'E-Arşiv',
     route: 'apps-email',
     icon: 'UsersIcon',
     children: [
+    
       {
-        title: 'Gelen E-Arşiv Fatura',
-        route: 'online-mükellef-gelen-earşiv-fatura',
-      },
-      {
-        title: 'Giden E-Arşiv Fatura',
-        route: 'online-mükellef-giden-earşiv-fatura',
-      },
-      // {
-      //   title: 'Mükellef Ekle',
-      //   route: 'online-maliye-mükellef-ekle',
-      // },
-      // {
-      //   title: 'Mükellef Listesi',
-      //   route: { name: 'online-mükellef-listesi', params: { id: 4987 } },
-      // },
-      // {
-      //   title: 'Mükellef Özeti',
-      //   route: { name: 'online-mükellef-özeti', params: { id: 4987 } },
-      // },
-      // {
-      //   title: 'Vergi No Sorgulama',
-      //   route: 'online-maliye-vergi-sorgula',
-      // },
-      {
-        title: 'Maliye',
-        children: [
-          // {
-          //   title: 'Gayrimenkul Satış',
-          //   route: 'online-mükellef-gayrimenkul-satış',
-          // },
-          // {
-          //   title: 'Geçmiş Araçlarım',
-          //   route: 'online-mükellef-geçmiş-araçlarım',
-          // },
-          
-          // {
-          //   title: 'Kesintiler (Stopaj)',
-          //   route: 'online-mükellef-stopaj',
-          // },
-          // {
-          //   title: 'Kira Ödemeleri',
-          //   route: 'online-mükellef-kira-ödemeleri',
-          // },
-          // {
-          //   title: 'Mevcut Araçlarım',
-          //   route: 'online-mükellef-mevcut-araçlarım',
-          // },
-          // {
-          //   title: 'Vergi Levhaları',
-          //   route: 'online-mükellef-vergi-levhaları',
-          // },
-          // {
-          //   title: 'Yoklama Denetim',
-          //   route: 'online-mükellef-denetim',
-          // },
-        ],
-      },
-    ],
+              title: 'Fatura Oluştur',
+              route: 'Fatura-Olustur',
+            },
+            {
+              title: 'Gelen E-arsiv',
+              route: 'Gelen-Earsiv',
+            },
+            {
+              title: 'Giden E-arsiv',
+              route: 'Giden-Earsiv',
+            },
+  ]
   },
   {
-    title: 'Maliye İşlemleri',
+    title: 'E-Fatura',
     route: 'apps-chat',
     icon: 'BriefcaseIcon',
     children: [
       {
-        title: 'Beyannameler',
-        route: 'online-maliye-beyannameler',
+        title: 'Yeni Fatura Ekle',
+        route: 'yeni-efatura',
       },
-      // {
-      //   title: 'Borcu Yoktur',
-      //   route: { name: 'online-maliye-borcu-yoktur', params: { id: 4987 } },
-      // },
       {
-        title: 'Kalan Beyannameler',
-        route: { name: 'online-maliye-kalan-beyannameler', params: { id: 4987 } },
+        title: 'Fatura Listesi',
+        route: 'fatura-listesi"',
       },
-      // {
-      //   title: 'Mükellefiyet Yazısı',
-      //   route: { name: 'online-maliye-mükellef-yazısı' },
-      // },
-      // {
-      //   title: 'Ödenen G-Geçici',
-      //   route: { name: 'online-maliye-ödenen-ggeçici' },
-      // },
-      // {
-      //   title: 'Ödenen K-Geçici',
-      //   route: { name: 'online-maliye-ödenen-kgeçici' },
-      // },
       {
-        title: 'Pos Sorgulama',
-        route: { name: 'online-maliye-pos-sorgulama' },
-      },
-      // {
-      //   title: 'Sicil Kaydım',
-      //   route: { name: 'online-maliye-sicil-kaydım' },
-      // },
-      {
-        title: 'Tebligat Sorgulama',
-        route: { name: 'online-maliye-tebligat-sorgulama' },
+        title: 'Düzenlenen Faturalar',
+        route: 'düzenlenen-faturalar"',
       },
     ],
   },
@@ -115,30 +46,7 @@ export default [
     route: 'apps-todo',
     icon: 'CommandIcon',
     children: [
-      {
-        title: 'Asgari İşçilik Hesabı',
-        route: 'online-sgk-işçilik-hesabı',
-      },
-      {
-        title: 'Bildirgeler',
-        route: { name: 'online-sgk-sgkbildirgeler', params: { id: 4987 } },
-      },
-      // {
-      //   title: 'Borcu Yoktur',
-      //   route: { name: 'online-sgk-borcu-yoktur', params: { id: 4987 } },
-      // },
-      // {
-      //   title: 'İşe Giriş - Çıkış',
-      //   route: { name: 'online-sgk-işçi-giriş-çıkış' },
-      // },
-      // {
-      //   title: 'SGK Takip',
-      //   route: { name: 'online-sgk-takip' },
-      // },
-      {
-        title: 'SGK Viziteler',
-        route: { name: 'online-sgk-viziteler' },
-      },
+    
     ],
   },
   // {

@@ -4,7 +4,7 @@
         <article class="card">
             <div class="title" style="background-color: #0073b7;">
                 <users-icon size="35" class="icon"></users-icon>
-                <span>{{mukellefData.length}}<span style="font-weight: 400; font-size: 15px;"> Mükellef </span></span>
+                <span>100<span style="font-weight: 400; font-size: 15px;"> Mükellef </span></span>
             </div>
 
             <div class="card-stats">
@@ -38,7 +38,7 @@
         <article class="card">
             <div class="title" style="background-color: #f39c12;">
                 <file-text-icon size="35" class="icon"></file-text-icon>
-                <span>{{beyannameData.length}}<span style="font-weight: 400; font-size: 15px;"> E-Beyanname </span></span>
+                <span>100<span style="font-weight: 400; font-size: 15px;"> E-Beyanname </span></span>
             </div>
 
             <div class="card-stats">
@@ -186,7 +186,6 @@
 
 <script>
 import { UsersIcon, FileIcon, FileTextIcon, ArrowRightCircleIcon } from 'vue-feather-icons';
-import { mapGetters,mapActions} from "vuex"
 export default {
     components: {
         UsersIcon,
@@ -195,47 +194,14 @@ export default {
         ArrowRightCircleIcon,
     },
     methods:{
-          ...mapActions(["fetchBeyanname","fetch", "fetchMukellef","fetchMesaj"]),
-    FecthPersonData() {
-      console.log("app çaliştim");
-      this.fetch().then((res) => {
-        console.log(res);
-        res.forEach((el) => {
-          console.log(el.data().KullaniciId);
-          this.fetchMukellef(el.data().KullaniciId)
-
-        });
-      });
-    },
-    fecthBeyan(){
-        console.log("çaliştim");
-   let arr=[]
-  this.mukellefData.forEach(element => {
-arr.push(element.MukellefId)
-  
-  }); 
-  console.log( this.mukellefData);
-this.fetchBeyanname(arr)
-  console.log(this.beyannameData);
-    },
-
+         
     },
     
   computed:{
-       ...mapGetters(["reMukellef","reBeyanname"]),
-    beyannameData(){
-      return this.reBeyanname
-    },
-    mukellefData(){
-      return this.reMukellef
-    }
+
   },
 
   mounted(){
-   this.FecthPersonData()
-   setTimeout(()=>{
-       this.fecthBeyan()
-   },5000)
   }
 }
 </script>

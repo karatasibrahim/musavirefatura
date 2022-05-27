@@ -101,7 +101,6 @@ import {
 } from 'bootstrap-vue'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import Ripple from 'vue-ripple-directive'
-import {mapGetters,mapActions} from 'vuex'
 export default {
   components: {
     BNavItemDropdown,
@@ -122,25 +121,10 @@ export default {
     }
   },
   computed:{
-...mapGetters(['renotification']),
-getNot(){
-    return this.renotification
-}
+
   },
   methods:{
-  ...mapActions(['fetchMesaj','fetchMukellef']),
-    FecthPersonData() {
-      console.log("app çaliştim");
-
-          this.fetchMukellef(115)
-    },
-    fetchNot(){
-this.fetchMesaj()
-setTimeout(()=>{
-  this.items=this.getNot
-  console.log("çaliştim");
-},1000)
-  },
+ 
   },
   setup() {
     /* eslint-disable global-require */
@@ -197,10 +181,6 @@ setTimeout(()=>{
       systemNotifications,
       perfectScrollbarSettings,
     }
-  },
-  created(){
-     this.fetchNot() 
-     this.FecthPersonData()
   },
 mounted(){
   console.log("not");
