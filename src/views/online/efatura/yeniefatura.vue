@@ -4,7 +4,15 @@
       <b-tabs>
         <b-tab title="Temel Bilgiler">
           <b-row>
-            <b-col lg="8" md="6" :style="[BillTypeValue=='Satış'?{'display':'none'}:{'display':'inline-block'}]">
+            <b-col
+              lg="8"
+              md="6"
+              :style="[
+                BillTypeValue == 'Satış'
+                  ? { display: 'none' }
+                  : { display: 'inline-block' },
+              ]"
+            >
               <b-card
                 ref="taxPayerPopup"
                 title="Müşteri Bilgileri"
@@ -16,7 +24,11 @@
                   <b-input-group-prepend is-text>
                     <feather-icon icon="SearchIcon" />
                   </b-input-group-prepend>
-                  <b-form-input placeholder="Search" />
+                  <b-form-input
+                    placeholder="Search"
+                    @keyup="findPerson($event.target.value)"
+                  />
+
                   <b-button
                     v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     variant="primary"
@@ -29,11 +41,11 @@
                     <div class="m-input">
                       <div class="m-input-c">
                         <label>VKN/TCKN</label>
-                        <input type="text" />
+                        <input type="text" v-model="SerchData.vkn" />
                       </div>
                       <div class="m-input-c">
                         <label>Vergi D.</label>
-                        <input type="text" />
+                        <input type="text" v-model="SerchData.vkn" />
                       </div>
                       <div class="m-input-c">
                         <label>e-Posta</label>
@@ -64,57 +76,70 @@
                     </div>
                   </div>
                 </b-card-text>
-                <b-button type="submit" v-b-modal.modal-1 variant="success">
+                <b-button type="submit" @click="PersonBankShow"  variant="success">
                   <span class="align-middle">Yeni Alıcı Oluştur</span>
                   <feather-icon icon="ArrowRightIcon" class="ml-50" />
                 </b-button>
               </b-card>
             </b-col>
-<b-col lg="8" md="6"  :style="[BillTypeValue=='Satış'?{'display':'inline-block'}:{'display':'none'}]">
-                  <b-card
-                                  ref="taxPayerPopup"
+            <b-col
+              lg="8"
+              md="6"
+              :style="[
+                BillTypeValue == 'Satış'
+                  ? { display: 'inline-block' }
+                  : { display: 'none' },
+              ]"
+            >
+              <b-card
+                ref="taxPayerPopup"
                 title="Müşteri Bilgileri"
                 size="lg"
                 centered
                 no-close-on-backdrop
-                  >
-                  <div class="m-flex-row">
-                    <div class="m-input">
-                      <div class="m-input-c">
-                        <label>VKN/TCKN</label>
-                        <input type="text" />
-                      </div>
-                      <div class="m-input-c">
-                        <label>İl</label>
-                        <input type="text" />
-                      </div>
-                      <div class="m-input-c">
-                        <label>Unvan</label>
-                        <input type="text" />
-                      </div>
+              >
+                <div class="m-flex-row">
+                  <div class="m-input">
+                    <div class="m-input-c">
+                      <label>VKN/TCKN</label>
+                      <input type="text" />
                     </div>
-                    <div class="m-input">
-                      <div class="m-input-c">
-                        <label>Ülke</label>
-                        <input type="text" />
-                      </div>
-                      <div class="m-input-c">
-                        <label>İlçe</label>
-                        <input type="text" />
-                      </div>
-                      <div class="m-input-c">
-                        <label>Vergi Dairesi*</label>
-                        <input type="text" />
-                      </div>
+                    <div class="m-input-c">
+                      <label>İl</label>
+                      <input type="text" />
+                    </div>
+                    <div class="m-input-c">
+                      <label>Unvan</label>
+                      <input type="text" />
                     </div>
                   </div>
-              
-                                <b-button class="mt-2" type="submit" v-b-modal.modal-diger variant="success">
+                  <div class="m-input">
+                    <div class="m-input-c">
+                      <label>Ülke</label>
+                      <input type="text" />
+                    </div>
+                    <div class="m-input-c">
+                      <label>İlçe</label>
+                      <input type="text" />
+                    </div>
+                    <div class="m-input-c">
+                      <label>Vergi Dairesi*</label>
+                      <input type="text" />
+                    </div>
+                  </div>
+                </div>
+
+                <b-button
+                  class="mt-2"
+                  type="submit"
+                  v-b-modal.modal-diger
+                  variant="success"
+                >
                   <span class="align-middle">Diger Bilgiler</span>
                   <feather-icon icon="ArrowRightIcon" class="ml-50" />
-                </b-button> 
-                 </b-card>
-</b-col>
+                </b-button>
+              </b-card>
+            </b-col>
             <b-col lg="4" md="6">
               <b-card
                 ref="taxPayerPopup"
@@ -190,16 +215,15 @@
         <b-tab title="Diger Bilgiler">
           <b-tabs>
             <b-tab title="İrsaliye Bilgileri">
-
-                <b-card>
-                  <repeater v-model="İrsaliye"></repeater>
-                </b-card>
+              <b-card>
+                <repeater v-model="İrsaliye"></repeater>
+              </b-card>
             </b-tab>
             <b-tab title="İade Bilgileri">
               <b-card>
-                  <b-table responsive="sm" :items="iade"/>
+                <b-table responsive="sm" :items="iade" />
               </b-card>
-               </b-tab>
+            </b-tab>
           </b-tabs>
         </b-tab>
       </b-tabs>
@@ -226,11 +250,12 @@
                     </b-dropdown>
                   </b-col>
 
-                  <b-col  cols="8" lg="4">
+                  <b-col cols="8" lg="4">
                     <b-button
                       v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                       variant="info"
                       class="button-wit"
+                      v-b-modal.modal-toplu
                     >
                       Toplu Vergi Düzenleme
                       <feather-icon icon="EditIcon" class="mr-50" />
@@ -309,56 +334,57 @@
     </b-row>
 
     <b-modal
-      id="modal-1"
+      ref="modal-1"
       title="Müşteri Bilgileri"
       ok-only
       size="lg"
       ok-title="Accept"
+      @ok="AddSenderPerson"
     >
       <b-card>
         <div class="m-flex-row">
           <div class="m-input">
             <div class="m-input-c">
               <label>VKN/TCKN *</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.vkn" />
             </div>
             <div class="m-input-c">
               <label>Ad</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.name" />
             </div>
             <div class="m-input-c">
               <label>Soyad</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.surname" />
             </div>
             <div class="m-input-c">
               <label>Vergi D. Şehir</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.vergiDSehir" />
             </div>
             <div class="m-input-c">
               <label>Mersis No</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.MersisNo" />
             </div>
           </div>
           <div class="m-input">
             <div class="m-input-c">
               <label>Unvan *</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.Unvan" />
             </div>
             <div class="m-input-c">
               <label>Orta Adı</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.ortaAdi" />
             </div>
             <div class="m-input-c">
               <label>Ticaret Odası</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.TicOdasi" />
             </div>
             <div class="m-input-c">
               <label>Vergi D.</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.VergiD" />
             </div>
             <div class="m-input-c">
               <label>Tic. Sic. No</label>
-              <input type="text" />
+              <input type="text" v-model="senderReceiver.TicSicNo" />
             </div>
           </div>
         </div>
@@ -392,14 +418,15 @@
             title="Yeni Hesap Bilgisi"
             ok-only
             ok-title="Ekle"
+            @ok="AddBank"
           >
             <div class="m-flex-row">
               <b-row class="m-input">
                 <label>Banka Adı</label>
-                <input type="text" />
+                <input type="text" v-model="bank.Name" />
 
                 <label>IBAN *</label>
-                <input type="text" />
+                <input type="text" v-model="bank.iban" />
               </b-row>
             </div>
           </b-modal>
@@ -407,7 +434,7 @@
             <app-table
               :pk="id"
               :mukellefid="id"
-              :items="items"
+              :items="BankData"
               :selectable="'none'"
               :totalRows="16"
               :title="' '"
@@ -417,7 +444,7 @@
         </b-tab>
       </b-tabs>
     </b-modal>
-  <b-modal
+    <b-modal
       id="modal-diger"
       title="Perakende Müşteri Bilgileri"
       ok-only
@@ -447,11 +474,11 @@
               <label>E-posta</label>
               <input type="text" />
             </div>
-             <div class="m-input-c">
+            <div class="m-input-c">
               <label>Vergi Dairesi</label>
               <input type="text" />
             </div>
-             <div class="m-input-c">
+            <div class="m-input-c">
               <label>Mersis No</label>
               <input type="text" />
             </div>
@@ -477,11 +504,11 @@
               <label>Web Sitesi</label>
               <input type="text" />
             </div>
-                        <div class="m-input-c">
+            <div class="m-input-c">
               <label>Ticaret Odası</label>
               <input type="text" />
             </div>
-                        <div class="m-input-c">
+            <div class="m-input-c">
               <label>Ticaret Sicil No</label>
               <input type="text" />
             </div>
@@ -489,8 +516,6 @@
         </div>
       </b-card>
     </b-modal>
-
-
   </div>
 </template>
 <script>
@@ -520,6 +545,8 @@ import {
 import flatPickr from "vue-flatpickr-component";
 import Ripple from "vue-ripple-directive";
 import vSelect from "vue-select";
+import { mapActions, mapGetters } from "vuex";
+const kullaniciId=JSON.parse(localStorage.getItem("userData")).userId
 export default {
   components: {
     repeater: Repeater,
@@ -563,11 +590,12 @@ export default {
       disableDate: null,
       inlineDate: null,
       option: [],
-      iade:[
-       {
-          FaturaNo: 40, DüzenlemeTarihi: 'Dickerson', İşlemler: 'Macdonald',
+      iade: [
+        {
+          FaturaNo: 40,
+          DüzenlemeTarihi: "Dickerson",
+          İşlemler: "Macdonald",
         },
-
       ],
       dir: "ltr",
       columns: [
@@ -612,13 +640,11 @@ export default {
           showInColumnChooser: false,
         },
         {
-          dataField: "Banka Adi",
+          dataField: "Name",
           caption: "Banka Adi",
-          width: "50",
-          cellTemplate: "mukellefColumnTemplate",
         },
         {
-          dataField: "IBAN",
+          dataField: "iban",
           caption: "IBAN",
         },
       ],
@@ -713,10 +739,30 @@ export default {
         unitPrice: 0,
         KDV: 0,
       },
+      senderReceiver: {
+        vkn: "",
+        name: "",
+        surname: "",
+        vergiDSehir: "",
+        vergiD: "",
+        MersisNo: "",
+        Unvan: "",
+        ortaAdi: "",
+        TicOdasi: "",
+        VergiD: "",
+        TicSicNo: "",
+        kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
+      },
+      bank: {
+        Name: "",
+        iban: "",
+        kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
+      },
       selected: "",
     };
   },
   methods: {
+    ...mapActions(["AddNewAlici", "AddNewBank", "FetchPerson","FetchBank"]),
     AddBill() {},
     AddLine() {
       console.log(this.ProductCalc);
@@ -734,15 +780,42 @@ export default {
       this.items.push(pro);
       this.items.push(this.ProductCalc);
     },
+    AddSenderPerson() {
+      this.AddNewAlici(this.senderReceiver);
+    },
+    AddBank() {
+      this.AddNewBank(this.bank);
+    },
+    findPerson(e) {
+      let data = {
+        kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
+        data: e,
+      };
+      this.FetchPerson(data);
+      console.log(data);
+    },
+    PersonBankShow(){
+      this.$refs['modal-1'].show()
+      this.FetchBank(kullaniciId)
+    }
   },
- 
+  computed: {
+    ...mapGetters(["GetSerach","GetBank"]),
+    SerchData() {
+      return this.GetSerach;
+    },
+    BankData(){
+      return this.GetBank
+    }
+  },
+
 };
 </script>
 
 
 <style lang="scss">
 @import "@core/scss/vue/libs/vue-flatpicker.scss";
-.tabs{
+.tabs {
   width: 100%;
 }
 .modal-header {
@@ -944,7 +1017,7 @@ h2 + hr {
   .m-popup-nav {
     gap: 5px;
   }
-  .m-flex-row{
+  .m-flex-row {
     flex-wrap: wrap;
   }
   .m-popup-nav > li {

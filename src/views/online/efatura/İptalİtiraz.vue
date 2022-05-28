@@ -146,7 +146,7 @@
 </div>
 </template>
 <script>
-import AppTable from "@core/components/app-table/AppTable.vue";
+import AppTable from "@core/components/app-table/İptalİtiraz.vue";
 import { BRow, BCol, BFormGroup, BFormDatepicker,BTabs, BTab } from "bootstrap-vue";
 import lng from "../../utils/strings";
 import mockData from "../../../services/online/finance/service";

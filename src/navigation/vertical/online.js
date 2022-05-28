@@ -39,7 +39,7 @@ export default [{
       },
       {
         title: 'İptal / itiraz Talebi',
-        route: 'İptal-itiraz"',
+        route: 'İptal-itiraz',
       },
       {
         title: 'Taslak Fatura',

@@ -20,9 +20,9 @@ export default [
     component: () => import("@/views/online/efatura/TaslakFatura.vue"),
   },
   {
-    path: "/efatura/İptal_itiraz",
+    path: "/efatura/iptalitiraz",
     name: "İptal-itiraz",
-    component: () => import("@/views/online/efatura/İptal_itiraz.vue"),
+    component: () => import("@/views/online/efatura/İptalİtiraz.vue"),
   },
   {
     path: "/earsiv/FaturaOlustur",

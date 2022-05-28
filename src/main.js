@@ -51,16 +51,6 @@ require("@/assets/scss/style.scss");
 
 Vue.config.productionTip = false;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDn3x_-3uQT3e_u4EFIMqXKy40iKgvUf8c",
-  authDomain: "emusavirim-3c193.firebaseapp.com",
-  databaseURL: "https://emusavirim-3c193-default-rtdb.firebaseio.com",
-  projectId: "emusavirim-3c193",
-  storageBucket: "emusavirim-3c193.appspot.com",
-  messagingSenderId: "112360446427",
-  appId: "1:112360446427:web:af06b497a6a34ed47aaffe",
-};
-
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAGYIjNuHfBgGGowOSyENhtcUGBEYRXd_Q",
 //   authDomain: "authtestapp-68c8f.firebaseapp.com",
@@ -70,7 +60,7 @@ const firebaseConfig = {
 //   appId: "1:585600464106:web:bd32eab3ddb626c0b4d393",
 // };
 
-Vue.prototype.$app =initializeApp(firebaseConfig);
+
 new Vue({
   router,
   store,

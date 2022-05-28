@@ -5,6 +5,7 @@
       :key-expr="pk"
       :columns="columns"
       :show-borders="true"
+      :mukellefid="mukellefid"
       ref="appGrid"
       :allow-column-reordering="true"
       :allow-column-resizing="true"
@@ -48,40 +49,31 @@
       <DxFilterRow :visible="true" />
       <DxToolbar>
         <DxItem location="before" template="headerTemplate" />
+        <DxItem location="before" template="inquireTemplate" />
         <DxItem location="before" template="listTemplate" />
-        <DxItem location="before" template="printTemplate" />
-        <DxItem location="before" template="sendTemplate" />
+        <DxItem location="before" template="okTemp" />
+        <DxItem location="before" template="cancelTamp" />
         <DxItem name="columnChooserButton" />
         <DxItem template="exportPdfTemplate" />
         <DxItem name="exportButton" />
       </DxToolbar>
 
-      <template #sendTemplate>
-        <DxDropDownButton
+      <template #okTemp>
+        <DxButton
           width="150"
+                    text="İtirazı Kabul Et"
+
           ref="sendDrop"
-          :split-button="false"
-          :use-select-mode="false"
-          :items="sendSettings"
-          @item-click="sendClick"
-          display-expr="name"
-          key-expr="id"
-          text="Gönder"
-          icon="share"
+          @click="sendClick"
         />
       </template>
-      
-      <template #printTemplate>
-        <DxDropDownButton
+
+      <template #cancelTamp>
+        <DxButton
+           text="İtirazı Reddet"
           width="150"
-          :split-button="false"
-          :use-select-mode="false"
-          :items="printSettings"
-          @itemClick="printClick"
-          display-expr="name"
-          key-expr="id"
-          text="Yazdır"
-          icon="print"
+          @Click="printClick"
+
         />
       </template>
 
@@ -91,6 +83,16 @@
           text="Listele"
           icon="detailslayout"
           @click="listClick"
+        />
+      </template>
+
+      <template #inquireTemplate>
+        <DxButton
+          type="normal"
+          text="Sorgula"
+          icon="search"
+        
+          @click="inquireClick('http://89.43.29.189:1880/test1')"
         />
       </template>
 
@@ -106,19 +108,23 @@
 
       <template #panelColumnTemplate="{ data }">
         <div class="text-center">
-          <img
+                      <feather-icon  @click="showPanelClick(data.data.beyan_pdf)" icon="BriefcaseIcon"/>
+
+          <!-- <img
             src="https://musavir.tacminyazilim.com/app-assets/images/tacmin/logo_20px.png"
-            @click="showPanelClick(data.data.beyan_pdf)"
-          />
+           
+          /> -->
         </div>
       </template>
 
       <template #mukellefColumnTemplate="{ data }">
         <div class="text-center">
-          <img
+                  <feather-icon   @click="showTaxPayerInfoClick(data.data.beyan_pdf,data.data.MukellefId)" icon="UserIcon"/>
+
+          <!-- <img
             src="https://musavir.tacminyazilim.com/app-assets/images/tacmin/edit_20px.png"
-            @click="showTaxPayerInfoClick(data.data.beyan_pdf)"
-          />
+          
+          /> -->
         </div>
       </template>
 
@@ -149,7 +155,7 @@
           <span> &nbsp; &nbsp; &nbsp;</span>
           <img
             src="https://i.ibb.co/mGfSXHG/tahakkuk.jpg"
-            @click="showPdfPopupClick(data.data.tahak_pdf)"
+            @click="showPdfPopupTahClick(data.data.tahak_pdf)"
           />
 
           <span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
@@ -172,7 +178,6 @@ import {
   BCardTitle,
   BCardText,
 } from "bootstrap-vue";
-
 import {
   DxDataGrid,
   DxScrolling,
@@ -203,7 +208,6 @@ import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
-
 export default {
   name: "AppTable",
   components: {
@@ -237,7 +241,6 @@ export default {
   directives: {
     Ripple,
   },
-
   props: {
     pk: {
       type: String,
@@ -271,6 +274,7 @@ export default {
   },
   data() {
     return {
+      mukellefid:"",
       pageSizes: [10, 20, 50, "all"],
       selectedRowKeys: [],
       downloadSettings: [
@@ -332,7 +336,6 @@ export default {
     onExporting(e) {
       const workbook = new Workbook();
       const worksheet = workbook.addWorksheet(this.title);
-
       exportDataGrid({
         component: e.component,
         worksheet,
@@ -353,5 +356,10 @@ export default {
 <style scoped>
 #exportButton {
   margin-bottom: 10px;
+}
+.feather.feather-trash,
+.feather.feather-user{
+    width: 27px;
+  height: 19px;
 }
 </style>

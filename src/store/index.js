@@ -6,35 +6,33 @@ import app from "./app";
 import appConfig from "./app-config";
 import verticalMenu from "./vertical-menu";
 
-// import {
-//   collection,
-//   getDocs,
-//   getDoc,
-//   limit,
-//   query,
-//   where,
-//   doc
-// } from "firebase/firestore";
-// var firebase = require("firebase/app")
-// import {
-//   getFirestore
-// } from "firebase/firestore";
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDn3x_-3uQT3e_u4EFIMqXKy40iKgvUf8c",
-//   authDomain: "emusavirim-3c193.firebaseapp.com",
-//   databaseURL: "https://emusavirim-3c193-default-rtdb.firebaseio.com",
-//   projectId: "emusavirim-3c193",
-//   storageBucket: "emusavirim-3c193.appspot.com",
-//   messagingSenderId: "112360446427",
-//   appId: "1:112360446427:web:af06b497a6a34ed47aaffe",
-// };
+import {
+  collection,
+  getDocs,
+  getDoc,
+  limit,
+  query,
+  where,
+  doc,
+  addDoc
+} from "firebase/firestore";
+var firebase = require("firebase/app")
+import {
+  getFirestore
+} from "firebase/firestore";
+const firebaseConfig = {
+  apiKey: "AIzaSyCMuWEx_ldoMCic0nQjx3YxdPDlwFHZKfM",
+  authDomain: "musavirefaturam.firebaseapp.com",
+  projectId: "musavirefaturam",
+  storageBucket: "musavirefaturam.appspot.com",
+  messagingSenderId: "1053917644242",
+  appId: "1:1053917644242:web:379a6dcc066c14c958f40b"
+};
 
-// // Add the Firebase services that you want to use
-// import "firebase/auth";
-// import "firebase/firestore";
-// const db = getFirestore(firebase.initializeApp(firebaseConfig));
-let documentıd = ""
-
+// Add the Firebase services that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+const db = getFirestore(firebase.initializeApp(firebaseConfig));
 
 Vue.use(Vuex);
 
@@ -45,17 +43,62 @@ export default new Vuex.Store({
     verticalMenu
   },
   state: {
-
+Search:{},
+bank:[],
   },
   getters: {
-   
+   GetSerach(state,payload){
+     return state.Search
+   },
+   GetBank(state,payload){
+    return state.bank
+  }
   },
   mutations: {
-   
+   SetSearch(state,payload){
+state.Search=payload
+   },
+   SetBank(state,payload){
+     state.bank.push(payload)
+   }
   },
   actions: {
-  
+//! Fetch data
+async FetchPerson(context,payload){
+  const q = query(collection(db, "Kullanici"),
+    where("kullaniciId", "==", payload.kullaniciId),
+    where("vkn", "==", payload.data)
+    );
+  const mukellefdata = await getDocs(q);
+  mukellefdata.forEach((doc) => {
+    context.commit('SetSearch',doc.data())
+    console.log(doc.data());
+  });
 
+},
+async FetchBank(context,payload){
+  const q = query(collection(db, "Banka"),
+    where("kullaniciId", "==", payload),
+    );
+  const mukellefdata = await getDocs(q);
+  mukellefdata.forEach((doc) => {
+    context.commit('SetBank',doc.data())
+    console.log(doc.data());
+  });
+
+},
+  //! Add Name
+  async AddNewAlici(context,payload){
+    console.log(payload);
+    const res = await addDoc(collection(db, "Cari"), payload)
+    console.log(res);
+  },
+  async AddNewBank(context,payload){
+    console.log(payload);
+    const res = await addDoc(collection(db, "Banka"), payload)
+    console.log(res);
+    context.commit('SetBank',payload)
+  }
   },
   strict: process.env.DEV,
 });

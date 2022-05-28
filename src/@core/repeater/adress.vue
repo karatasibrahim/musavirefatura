@@ -107,6 +107,7 @@
           </div>
         </div>
         <hr />
+       
         <div class="m-flex-row">
           <b-form-select :options="PaxList" v-model="AddedPax" size="sm" />
           <b-form-select
@@ -116,27 +117,26 @@
           />
         </div>
         <div class="m-flex-row as mt-2">
-          <b-col  lg="2">
+          <b-col lg="2">
             <label>İSKONTO</label>
           </b-col>
 
           <div class="m-input">
-              <label> Oran (%) veya Birim Fiyatı (₺)</label>
+            <label> Oran (%) veya Birim Fiyatı (₺)</label>
             <b-col>
               <input type="text" v-model="modalValue.discounty" />
             </b-col>
           </div>
           <div class="m-input">
-              <label> Tutar (₺)</label>
-            <b-col >
+            <label> Tutar (₺)</label>
+            <b-col>
               <input type="text" v-model="modalValue.discountt" />
             </b-col>
           </div>
           <div class="m-input">
             <label> İskonto / Artırım Sebebi</label>
             <b-col>
-
-            <input type="text" />
+              <input type="text" />
             </b-col>
           </div>
         </div>
@@ -170,37 +170,37 @@
           <b-col>
             <b-button
               v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-              variant="warning"
+              variant="secondary"
               class="btn-icon"
             >
-              <feather-icon icon="Trash2Icon" @click="deleteİtem('BMV')"/>
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('BMV')" />
             </b-button>
           </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="İSKONTO-3">
           <b-col lg="2">
-<label>İSKONTO 3</label>
+            <label>İSKONTO 3</label>
           </b-col>
           <b-col>
-  <input type="text" v-model="modalValue.Diskount3" />
+            <input type="text" v-model="modalValue.Diskount3" />
           </b-col>
-<b-col>
+          <b-col>
             <input type="text" v-model="modalValue.Diskount3Tl" />
+          </b-col>
 
-</b-col>
-        
-
-<b-col>
-  <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" @click="deleteİtem(İSKONTO-3)" />
-          </b-button>
-</b-col>
-          
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem(İSKONTO - 3)"
+              />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="GV-STOPAJI">
@@ -208,344 +208,930 @@
             <label>GV STOPAJI</label>
           </b-col>
           <b-col>
-          <input type="text" v-model="modalValue.GVStopaj" />
-
+            <input type="text" v-model="modalValue.GVStopaj" />
           </b-col>
-<b-col>
-          <input type="text" v-model="modalValue.GVStopajTl" />
-
-</b-col>
-<b-col>
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" @click="deleteİtem('GV-STOPAJI')"/>
-          </b-button>
-
-</b-col>
-
+          <b-col>
+            <input type="text" v-model="modalValue.GVStopajTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('GV-STOPAJI')"
+              />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="KV-STOPAJI">
-          <label>KV STOPAJI</label>
-
-          <input type="text" v-model="modalValue.KVStopaj" />
-
-          <input type="text" v-model="modalValue.GVStopajTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>KV-STOPAJI</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.KVSTOPAJI" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.KVSTOPAJITl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('KV-STOPAJI')"
+              />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="MERA-FONU">
-          <label>MERA FONU</label>
-
-          <input type="text" v-model="modalValue.Mera" />
-
-          <input type="text" v-model="modalValue.MeraTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>MERA FONU</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.MERAFONU" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.MERAFONUTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('MERA-FONU')"
+              />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="1.LİSTE">
-          <label>ÖTV 1.LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV1" />
-
-          <input type="text" v-model="modalValue.ÖTV1Tl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 1.LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.OneLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.OneLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('1.LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="3.LİSTE">
-          <label>ÖTV 3.LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV3" />
-
-          <input type="text" v-model="modalValue.ÖTV3Tl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 3.LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3.LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="4.LİSTE">
-          <label>ÖTV 4.LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV4" />
-
-          <input type="text" v-model="modalValue.ÖTV4Tl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 4.LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.FourLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.FourLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('4.LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="3A-LİSTE">
-          <label>ÖTV 3A LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV3A" />
-
-          <input type="text" v-model="modalValue.ÖTV3ATl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 3A LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeALİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeALİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3A-LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="3B-LİSTE">
-          <label>ÖTV 3B LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV3B" />
-
-          <input type="text" v-model="modalValue.ÖTV3BTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 3B LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeBLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeBLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3B-LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="3C-LİSTE">
-          <label>ÖTV 3C LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV3C" />
-
-          <input type="text" v-model="modalValue.ÖTV3CTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 3C LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreCALİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeCLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3C-LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="DAMGA-V">
-          <label>DAMGA V</label>
-
-          <input type="text" v-model="modalValue.DAMGAV" />
-
-          <input type="text" v-model="modalValue.DAMGAVTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>DAMGA V</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.DAMGAV" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.DAMGAVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('DAMGA-V')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="5035SKDAMGAV">
-          <label>5035SKDAMGAV</label>
-
-          <input type="text" v-model="modalValue.SKDAMGAV" />
-
-          <input type="text" v-model="modalValue.SKDAMGAVTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>5035SKDAMGAV</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.SKDAMGAV" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.SKDAMGAVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('5035SKDAMGAV')"
+              />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="ÖZEL-İLETİŞİM-VERGİSİ">
-          <label>ÖZEL İLETİŞİM VERGİSİ</label>
-
-          <input type="text" v-model="modalValue.ÖİV" />
-
-          <input type="text" v-model="modalValue.ÖİVTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖZEL İLETİŞİM VERGİSİ</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ÖİV" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ÖİVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('ÖZEL-İLETİŞİM-VERGİSİ')"
+              />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="2.LİSTE">
-          <label>ÖTV 2.LİSTE</label>
-
-          <input type="text" v-model="modalValue.ÖTV2L" />
-
-          <input type="text" v-model="modalValue.ÖTV2LTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>ÖTV 2 LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TwoALİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TwoALİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('2.LİSTE')" />
+            </b-button>
+          </b-col>
         </div>
 
         <div class="m-flex-row d-non" id="TES.ÜC">
-          <label>BORSA TES.ÜC</label>
-
-          <input type="text" v-model="modalValue.TESÜC" />
-
-          <input type="text" v-model="modalValue.TESÜCTl" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+          <b-col lg="2">
+            <label>Borsa TES.ÜC</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TESÜC" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TESÜCTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('TES.ÜC')" />
+            </b-button>
+          </b-col>
         </div>
 
-        <div
-          class="m-flex-row d-non"
-          id=""
-          :style="[
-            AddedPax == 'DAMGA V' ? { display: 'flex!important' } : { '': '' },
-          ]"
-        >
-          <label>DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+  <div class="m-flex-row d-non" id="İskonto3">
+          <b-col lg="2">
+            <label>İskonto 3</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskontoThree" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskontoThreeTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('İskonto3')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="Artırım">
+          <b-col lg="2">
+            <label>Artırım</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ArtırımTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('Artırım')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="Artırım2">
+          <b-col lg="2">
+            <label>Artırım2</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım2" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım2Tl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('Artırım2')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="Artırım3">
+          <b-col lg="2">
+            <label>Artırım3</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım3" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım3Tl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('Artırım3')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="İskonto2">
+          <b-col lg="2">
+            <label>İskonto2</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskonto2" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskonto2Tl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('İskonto2')" />
+            </b-button>
+          </b-col>
         </div>
 
-        <div
-          class="m-flex-row d-non"
-          id=""
-          :style="[
-            AddedPax == 'DAMGA V' ? { display: 'flex!important' } : { '': '' },
-          ]"
-        >
-          <label>DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+        <br><br>
+             <div class="m-flex-row d-non" :style="[(DiscoundValue || AddedPax)== ''?{'display':'none'}:{'display':'flex'} ]">
+          <b-col lg="2">
+            <label>Avans Mahsubu</label>
+          </b-col>
+          <b-col lg="3">
+            <input type="text" v-model="modalValue.Avans" />
+          </b-col>
+        </div>
+               <div class="m-flex-row d-non" :style="[(DiscoundValue || AddedPax)== ''?{'display':'none'}:{'display':'flex'} ]">
+          <b-col lg="2">
+            <label>Nakit Teminatı</label>
+          </b-col>
+          <b-col lg="3">
+            <input type="text" v-model="modalValue.Nakit" />
+          </b-col>
         </div>
 
-        <div
-          class="m-flex-row d-non"
-          id=""
-          :style="[
-            AddedPax == 'DAMGA V' ? { display: 'flex!important' } : { '': '' },
-          ]"
-        >
-          <label>DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
-        </div>
-
-        <div
-          class="m-flex-row d-non"
-          id=""
-          :style="[
-            AddedPax == 'DAMGA V' ? { display: 'flex!important' } : { '': '' },
-          ]"
-        >
-          <label>DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
-        </div>
-
-        <div
-          class="m-flex-row d-non"
-          id=""
-          :style="[
-            AddedPax == 'DAMGA V' ? { display: 'flex!important' } : { '': '' },
-          ]"
-        >
-          <label>DAMGA V</label>
-
-          <input type="text" />
-
-          <input type="text" />
-
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            class="btn-icon"
-          >
-            <feather-icon icon="Trash2Icon" />
-          </b-button>
+<hr>
+          <div class="m-flex-row">
+          <b-col lg="2">
+            <label>KDV İstisna</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskonto2" />
+          </b-col>
+          <b-col lg="2">
+            <label>ÖTV İstisna</label>
+          </b-col>
+         <b-col>
+            <input type="text" v-model="modalValue.İskonto2" />
+          </b-col>
         </div>
       </b-card>
+    </b-modal>
+       <b-modal
+      id="modal-toplu"
+      title="Müşteri Bilgileri"
+      ok-only
+      size="lg"
+      ok-title="Accept"
+    >
+    <b-col lg="4" class="mb-3">
+
+<b-form-select :options="AllPaxList" v-model="AllAddedPax" size="sm" />
+    </b-col>
+        <div class="m-flex-row d-non" id="BMV">
+          <b-col lg="2">
+            <label>BMV</label>
+          </b-col>
+
+          <b-col>
+            <input type="text" v-model="modalValue.BMV" />
+          </b-col>
+
+          <b-col>
+            <input type="text" v-model="modalValue.BMVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('BMV')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="İSKONTO-3">
+          <b-col lg="2">
+            <label>İSKONTO 3</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Diskount3" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Diskount3Tl" />
+          </b-col>
+
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem(İSKONTO - 3)"
+              />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="GV-STOPAJI">
+          <b-col lg="2">
+            <label>GV STOPAJI</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.GVStopaj" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.GVStopajTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('GV-STOPAJI')"
+              />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="KV-STOPAJI">
+          <b-col lg="2">
+            <label>KV-STOPAJI</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.KVSTOPAJI" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.KVSTOPAJITl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('KV-STOPAJI')"
+              />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="MERA-FONU">
+          <b-col lg="2">
+            <label>MERA FONU</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.MERAFONU" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.MERAFONUTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('MERA-FONU')"
+              />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="1.LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 1.LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.OneLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.OneLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('1.LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="3.LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 3.LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3.LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="4.LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 4.LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.FourLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.FourLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('4.LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="3A-LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 3A LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeALİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeALİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3A-LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="3B-LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 3B LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeBLİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeBLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3B-LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="3C-LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 3C LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreCALİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ThreeCLİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('3C-LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="DAMGA-V">
+          <b-col lg="2">
+            <label>DAMGA V</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.DAMGAV" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.DAMGAVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('DAMGA-V')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="5035SKDAMGAV">
+          <b-col lg="2">
+            <label>5035SKDAMGAV</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.SKDAMGAV" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.SKDAMGAVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('5035SKDAMGAV')"
+              />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="ÖZEL-İLETİŞİM-VERGİSİ">
+          <b-col lg="2">
+            <label>ÖZEL İLETİŞİM VERGİSİ</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ÖİV" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ÖİVTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon
+                icon="Trash2Icon"
+                @click="deleteİtem('ÖZEL-İLETİŞİM-VERGİSİ')"
+              />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="2.LİSTE">
+          <b-col lg="2">
+            <label>ÖTV 2 LİSTE</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TwoALİSTE" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TwoALİSTETl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('2.LİSTE')" />
+            </b-button>
+          </b-col>
+        </div>
+
+        <div class="m-flex-row d-non" id="TES.ÜC">
+          <b-col lg="2">
+            <label>Borsa TES.ÜC</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TESÜC" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.TESÜCTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('TES.ÜC')" />
+            </b-button>
+          </b-col>
+        </div>
+
+  <div class="m-flex-row d-non" id="İskonto3">
+          <b-col lg="2">
+            <label>İskonto 3</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskontoThree" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskontoThreeTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('İskonto3')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="Artırım">
+          <b-col lg="2">
+            <label>Artırım</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.ArtırımTl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('Artırım')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="Artırım2">
+          <b-col lg="2">
+            <label>Artırım2</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım2" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım2Tl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('Artırım2')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="Artırım3">
+          <b-col lg="2">
+            <label>Artırım3</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım3" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.Artırım3Tl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('Artırım3')" />
+            </b-button>
+          </b-col>
+        </div>
+          <div class="m-flex-row d-non" id="İskonto2">
+          <b-col lg="2">
+            <label>İskonto2</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskonto2" />
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskonto2Tl" />
+          </b-col>
+          <b-col>
+            <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="secondary"
+              class="btn-icon"
+            >
+              <feather-icon icon="Trash2Icon" @click="deleteİtem('İskonto2')" />
+            </b-button>
+          </b-col>
+        </div>
+
+<hr>
+          <div class="m-flex-row">
+          <b-col lg="2">
+            <label>KDV İstisna</label>
+          </b-col>
+          <b-col>
+            <input type="text" v-model="modalValue.İskonto2" />
+          </b-col>
+          <b-col lg="2">
+            <label>ÖTV İstisna</label>
+          </b-col>
+         <b-col>
+            <input type="text" v-model="modalValue.İskonto2" />
+          </b-col>
+        </div>
     </b-modal>
   </div>
 </template>
@@ -629,14 +1215,36 @@ export default {
         { value: "2.LİSTE", text: "ÖTV 2.LİSTE" },
         { value: "TES.ÜC", text: "BORSA TES.ÜC" },
       ],
+      AllPaxList:[
+                { value: "İskonto3", text: "İskonto3" },
+        { value: "Artırım", text: "Artırım" },
+        { value: "Artırım2", text: "Artırım2" },
+        { value: "Artırım3", text: "Artırım3" },
+        { value: "İskonto2", text: "İskonto2" },
+          { value: "BMV", text: "BMV" },
+        { value: "GV-STOPAJI", text: "GV STOPAJI" },
+        { value: "KV-STOPAJI", text: "KV STOPAJI" },
+        { value: "MERA-FONU", text: "MERA FONU" },
+        { value: "1.LİSTE", text: "ÖTV 1.LİSTE" },
+        { value: "3.LİSTE", text: "ÖTV 3.LİSTE" },
+        { value: "4.LİSTE", text: "ÖTV 4.LİSTE" },
+        { value: "3A-LİSTE", text: "ÖTV 3A LİSTE" },
+        { value: "3B-LİSTE", text: "ÖTV 3B LİSTE" },
+        { value: "3C-LİSTE", text: "ÖTV 3C LİSTE" },
+        { value: "DAMGA-V", text: "DAMGA V" },
+        { value: "5035SKDAMGAV", text: "5035SKDAMGAV" },
+        { value: "ÖZEL-İLETİŞİM-VERGİSİ", text: "ÖZEL İLETİŞİM VERGİSİ" },
+        { value: "2.LİSTE", text: "ÖTV 2.LİSTE" },
+        { value: "TES.ÜC", text: "BORSA TES.ÜC" },
+      ],
       DiscoundList: [
         { value: "İskonto3", text: "İskonto3" },
         { value: "Artırım", text: "Artırım" },
         { value: "Artırım2", text: "Artırım2" },
         { value: "Artırım3", text: "Artırım3" },
-        { value: "İskonto", text: "İskonto" },
         { value: "İskonto2", text: "İskonto2" },
       ],
+      AllAddedPax:"",
       DiscoundValue: "",
       AddedPax: "",
       Unit: [
@@ -702,6 +1310,10 @@ export default {
       this.$refs["my-modal"].show();
       this.modalValue = e;
     },
+    deleteİtem(item){
+document.getElementById(item).style.display="none"
+
+    },
     calculation(field) {
       console.log(field);
       let cal = field.quantity * field.unitPrice;
@@ -752,6 +1364,10 @@ export default {
     DiscoundValue() {
       document.getElementById(this.DiscoundValue).style.display = "flex";
     },
+    AllAddedPax(){
+      document.getElementById(this.AllAddedPax).style.display = "flex";
+
+    },
     modalValue() {
       console.log(this.modalValue);
     },
@@ -763,26 +1379,103 @@ export default {
       let total = this.modalValue.quantity * this.modalValue.unitPrice;
       this.modalValue.TESÜCTl = total * (2 / 100);
     },
-    "modalValue.BMV"(){
+    "modalValue.BMV"() {
       let total = this.modalValue.quantity * this.modalValue.unitPrice;
       this.modalValue.BMVTl = total * (this.modalValue.BMV / 100);
     },
-    "modalValue.Diskount3"(){
-            let total = this.modalValue.quantity * this.modalValue.unitPrice;
+    "modalValue.Diskount3"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
       this.modalValue.Diskount3Tl = total * (this.modalValue.Diskount3 / 100);
     },
-    'modalValue.GVStopaj'(){
-                let total = this.modalValue.quantity * this.modalValue.unitPrice;
+    "modalValue.GVStopaj"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
       this.modalValue.GVStopajTl = total * (this.modalValue.GVStopaj / 100);
-   
-    }
+    },
+    "modalValue.KVSTOPAJI"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.KVSTOPAJIjTl = total * (this.modalValue.KVSTOPAJI / 100);
+    },
+    "modalValue.MERAFONU"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.MERAFONUTl = total * (this.modalValue.MERAFONU / 100);
+    },
+    "modalValue.OneLİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.OneLİSTETl = total * (this.modalValue.OneLİSTE / 100);
+    },
+    "modalValue.ThreeLİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.ThreeLİSTETl = total * (this.modalValue.ThreeLİSTE / 100);
+    },
+    "modalValue.FourLİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.FourLİSTETl = total * (this.modalValue.FourLİSTE / 100);
+    },
+    "modalValue.ThreeALİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.ThreeALİSTETl =
+        total * (this.modalValue.ThreeALİSTE / 100);
+    },
+    "modalValue.ThreeBLİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.ThreeBLİSTETl =
+        total * (this.modalValue.ThreeBLİSTE / 100);
+    },
+    "modalValue.ThreCALİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.ThreCALİSTETl =
+        total * (this.modalValue.ThreCALİSTE / 100);
+    },
+    "modalValue.DAMGAV"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.DAMGAVTl = total * (this.modalValue.DAMGAV / 100);
+    },
+    "modalValue.SKDAMGAV"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.SKDAMGAVTl = total * (this.modalValue.SKDAMGAV / 100);
+    },
+    "modalValue.ÖİV"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.ÖİVTl = total * (this.modalValue.ÖİV / 100);
+    },
+    "modalValue.TwoALİSTE"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.TwoALİSTETl = total * (this.modalValue.TwoALİSTE / 100);
+    },
+    "modalValue.TESÜC"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.TESÜCTl = total * (this.modalValue.TESÜC / 100);
+    },
+        "modalValue.İskontoThree"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.İskontoThreeTl = total * (this.modalValue.İskontoThree / 100);
+    },
+        "modalValue.Artırım"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.ArtırımTl = total * (this.modalValue.Artırım / 100);
+    },
+        "modalValue.Artırım2"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.Artırım2Tl = total * (this.modalValue.Artırım2 / 100);
+    },
+        "modalValue.Artırım3"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.Artırım3Tl = total * (this.modalValue.Artırım3 / 100);
+    },
+        "modalValue.İskonto2"() {
+      let total = this.modalValue.quantity * this.modalValue.unitPrice;
+      this.modalValue.İskonto2Tl = total * (this.modalValue.İskonto2 / 100);
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
+.feather-trash-2{
+color: #fff;
+}
 .as .col input,
-.d-non .col input{
+.d-non .col input {
   width: 100%;
 }
 .address {
