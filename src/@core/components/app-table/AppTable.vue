@@ -11,11 +11,11 @@
       :allow-column-resizing="true"
       :show-column-lines="true"
       :show-row-lines="true"
-      :selected-row-keys="selectedRowKeys"
       @selection-changed="onSelectionChanged"
       :columns-auto-width="true"
       :data-source="items"
       @exporting="onExporting"
+      :selectedRowKeys="selectedRowKeys"
     >
       <DxExport :enabled="true" :allow-export-selected-data="true" />
       <DxLoadPanel :enabled="true" />
@@ -309,10 +309,12 @@ export default {
     },
   },
   methods: {
+    
     onSelectionChanged({ selectedRowKeys, selectedRowsData }) {
       console.log(selectedRowsData);
       this.selectedRowKeys = selectedRowKeys;
       this.selectionChangedBySelectBox = false;
+
     },
     saveLayout(state) {
       state.columns.forEach((element) => {

@@ -35,6 +35,21 @@ export default [
     component: () => import("@/views/online/earsiv/GelenEarsiv.vue"),
   },
   {
+    path: "/ayarlar/FaturaTasarim",
+    name: "FaturaTasarim",
+    component: () => import("@/views/online/ayarlar/FaturaTasarim.vue"),
+  },
+  {
+    path: "/ayarlar/FirmaProfil",
+    name: "FirmaProfil",
+    component: () => import("@/views/online/ayarlar/FirmaProfil.vue"),
+  },
+  {
+    path: "/ayarlar/Kullanicislemleri",
+    name: "Kullanicislemleri",
+    component: () => import("@/views/online/ayarlar/Kullanicislemleri.vue"),
+  },
+  {
     path: "/earsiv/GidenEarsiv",
     name: "Giden-Earsiv",
     component: () => import("@/views/online/earsiv/GidenEarsiv.vue"),
@@ -49,11 +64,11 @@ export default [
     name: "Cari",
     component: () => import("@/views/online/Cari.vue"),
   },
-  {
-    path: "/Raporlar",
-    name: "Raporlar",
-    component: () => import("@/views/online/Raporlar.vue"),
-  },
+  // {
+  //   path: "/Raporlar",
+  //   name: "Raporlar",
+  //   component: () => import("@/views/online/Raporlar.vue"),
+  // },
   {
     path: "/Stok",
     name: "Stok",

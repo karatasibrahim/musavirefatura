@@ -15,6 +15,7 @@
       @selection-changed="onSelectionChanged"
       :columns-auto-width="true"
       :data-source="items"
+      :selection-filter="selectionFilter"
       @exporting="onExporting"
     >
       <DxExport :enabled="true" :allow-export-selected-data="true" />
@@ -134,6 +135,16 @@
         </div>
       </template>
 
+      <template #Editdata="{ data }">
+        <div class="text-center">
+                  <feather-icon   @click="showTaxPayerInfoClick(data.data)" icon="EditIcon"/>
+
+          <!-- <img
+            src="https://musavir.tacminyazilim.com/app-assets/images/tacmin/edit_20px.png"
+          
+          /> -->
+        </div>
+      </template>
       <template #beyanColumnTemplate="{ data }">
         <div class="text-center">
           <img
@@ -215,6 +226,7 @@ import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
+import {mapMutations} from 'vuex'
 
 export default {
   name: "AppTable",
@@ -271,6 +283,9 @@ export default {
       type: String,
       default: "multiple",
     },
+    SelectionChanged:{
+      type:Object,
+    },
     showPdfPopupClick: Function,
     inquireClick: Function,
     downloadClick: Function,
@@ -300,6 +315,7 @@ export default {
         { id: 2, name: "E-Posta", icon: "email" },
         { id: 3, name: "Whatsapp", icon: "attach" },
       ],
+      selectionFilter: ['select', '=', 'true'],
     };
   },
   computed: {
@@ -308,11 +324,13 @@ export default {
     },
   },
   methods: {
-
+...mapMutations(["SetSelectedData"]),
     onSelectionChanged({ selectedRowKeys, selectedRowsData }) {
       console.log(selectedRowsData);
       this.selectedRowKeys = selectedRowKeys;
       this.selectionChangedBySelectBox = false;
+      console.log( Object.assign(selectedRowKeys[0],{select:true}));
+     this.SetSelectedData(Object.assign(selectedRowKeys[0],{select:true}) )
     },
     saveLayout(state) {
       state.columns.forEach((element) => {
@@ -362,6 +380,9 @@ export default {
       e.cancel = true;
     },
   },
+  mounted(){
+    console.log();
+  }
 };
 </script>
 <style scoped>

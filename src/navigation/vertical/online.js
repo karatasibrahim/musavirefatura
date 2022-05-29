@@ -35,7 +35,7 @@ export default [{
       },
       {
         title: 'Düzenlenen Faturalar',
-        route: 'düzenlenen-faturalar"',
+        route: 'düzenlenen-faturalar',
       },
       {
         title: 'İptal / itiraz Talebi',
@@ -48,6 +48,24 @@ export default [{
     ],
   },
   {
+    title: 'Ayarlar',
+    route: 'apps-chat',
+    icon: 'BriefcaseIcon',
+    children: [{
+        title: 'Firma Profil',
+        route: "FirmaProfil",
+      },
+      {
+        title: 'Fatura Tasarim',
+        route: "FaturaTasarim",
+      },
+      {
+        title: 'Kullanici İşlemleri',
+        route: "Kullanicislemleri",
+      }
+    ],
+  },
+  {
     title: 'Ba / Bs',
     route: 'BaBs',
     icon: 'AlignJustifyIcon',
@@ -57,11 +75,11 @@ export default [{
     route: 'Cari',
     icon: 'UserIcon',
   },
-  {
-    title: 'Raporlar',
-    route: 'Raporlar',
-    icon: 'FileTextIcon',
-  },
+  // {
+  //   title: 'Raporlar',
+  //   route: 'Raporlar',
+  //   icon: 'FileTextIcon',
+  // },
   {
     title: 'Stok Yönetimi',
     route: 'Stok',

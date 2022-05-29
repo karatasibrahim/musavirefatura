@@ -20,63 +20,68 @@
                 centered
                 no-close-on-backdrop
               >
-                <b-input-group style="margin-bottom: 11px">
-                  <b-input-group-prepend is-text>
-                    <feather-icon icon="SearchIcon" />
-                  </b-input-group-prepend>
-                  <b-form-input
-                    placeholder="Search"
-                    @keyup="findPerson($event.target.value)"
+                <b-form-group>
+                  <v-select
+                    v-model="searchvalue"
+                    label="title"
+                    :options="SearchData"
+                    v-search
                   />
-
                   <b-button
                     v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     variant="primary"
                   >
                     Temizle
                   </b-button>
-                </b-input-group>
+                </b-form-group>
                 <b-card-text>
                   <div class="m-flex-row">
                     <div class="m-input">
                       <div class="m-input-c">
                         <label>VKN/TCKN</label>
-                        <input type="text" v-model="SerchData.vkn" />
+                        <input
+                          type="text"
+                          v-model="senderReceiver.vkn"
+                        />
                       </div>
                       <div class="m-input-c">
                         <label>Vergi D.</label>
-                        <input type="text" v-model="SerchData.vkn" />
+                        <input type="text" v-model="senderReceiver.vergiD" />
                       </div>
                       <div class="m-input-c">
                         <label>e-Posta</label>
-                        <input type="text" />
+                        <input type="text"  v-model="senderReceiver.EPosta"/>
                       </div>
                       <div class="m-input-c">
                         <label>Faks</label>
-                        <input type="text" />
+                        <input type="text"  v-model="senderReceiver.Faks"/>
                       </div>
                     </div>
                     <div class="m-input">
                       <div class="m-input-c">
                         <label>Unvan</label>
-                        <input type="text" />
+                        <input type="text" v-model="senderReceiver.Unvan"/>
                       </div>
                       <div class="m-input-c">
                         <label>Adres</label>
-                        <input type="text" />
+                        <input type="text" v-model="senderReceiver.adress" />
                       </div>
                       <div class="m-input-c">
                         <label>Telefon</label>
-                        <input type="text" />
+                        <input type="text" v-model="senderReceiver.adress" />
                       </div>
                       <div class="m-input-c">
                         <label>Web Sitesi</label>
-                        <input type="text" />
+                        <input type="text" v-model="senderReceiver.Website"/>
                       </div>
                     </div>
                   </div>
                 </b-card-text>
-                <b-button type="submit" @click="PersonBankShow"  variant="success">
+                <b-button
+                  type="submit"
+                  @click="PersonBankShow"
+                  variant="success"
+                >
                   <span class="align-middle">Yeni Alıcı Oluştur</span>
                   <feather-icon icon="ArrowRightIcon" class="ml-50" />
                 </b-button>
@@ -338,15 +343,16 @@
       title="Müşteri Bilgileri"
       ok-only
       size="lg"
-      ok-title="Accept"
+      ok-title="Kaydet"
       @ok="AddSenderPerson"
+  
     >
       <b-card>
         <div class="m-flex-row">
           <div class="m-input">
             <div class="m-input-c">
               <label>VKN/TCKN *</label>
-              <input type="text" v-model="senderReceiver.vkn" />
+              <input type="text"  v-model="senderReceiver.vkn " />
             </div>
             <div class="m-input-c">
               <label>Ad</label>
@@ -392,16 +398,110 @@
       <b-tabs>
         <b-tab title="Adres Bilgileri">
           <b-card-text>
+            <b-button
+              class="mb-2"
+              type="submit"
+              v-b-modal.adressadd
+              variant="success"
+            >
+              <span class="align-middle">Yeni Adres Ekle</span>
+              <feather-icon icon="ArrowRightIcon" class="ml-50" />
+            </b-button>
             <app-table
-              :pk="id"
-              :mukellefid="id"
-              :items="items"
-              :selectable="'none'"
-              :totalRows="16"
-              :title="' '"
-              :columns="columns"
+      :pk="id"
+      :items="getadress"
+      :totalRows="16"
+      :title="'Adres'"
+      :columns="columns"
+            :showTaxPayerInfoClick="showPdfPopup"
+
             />
           </b-card-text>
+          <b-modal
+          ref="adressadd"
+            id="adressadd"
+            title="Müşteri Bilgileri"
+            ok-only
+            size="lg"
+            ok-title="Accept"
+            @ok="AddSenderPersonAdress"
+          >
+              <div class="m-flex-row">
+          <div class="m-input">
+            <div class="m-input-c">
+              <label>Adres Adı:</label>
+              <input type="text" v-model="senderReceiverAdress.adress" />
+            </div>
+            <div class="m-input-c">
+              <label>e-Fatura Alıcı Etiketi:</label>
+              <input type="text" v-model="senderReceiverAdress.eFatura" />
+            </div>
+            <div class="m-input-c">
+              <label>Şehir *</label>
+              <input type="text" v-model="senderReceiverAdress.city" />
+            </div>
+            <div class="m-input-c">
+              <label>Ülke *</label>
+              <input type="text" v-model="senderReceiverAdress.country" />
+            </div>
+            <div class="m-input-c">
+              <label>E-Posta</label>
+              <input type="text" v-model="senderReceiverAdress.EPosta" />
+            </div>
+                    <div class="m-input-c">
+              <label>Faks</label>
+              <input type="text" v-model="senderReceiverAdress.Faks" />
+            </div>
+                    <div class="m-input-c">
+              <label>Bina Adı</label>
+              <input type="text" v-model="senderReceiverAdress.BinaAdi" />
+            </div>
+                                <div class="m-input-c">
+              <label>Daire No </label>
+              <input type="text" v-model="senderReceiverAdress.DaireNo " />
+            </div>
+          </div>
+          <div class="m-input">
+            <div class="m-input-c">
+              <label>Yetkili Kişi:</label>
+              <input type="text" v-model="senderReceiverAdress.YetkiliKişi" />
+            </div>
+            <div class="m-input-c">
+              <label>e-İrsaliye Alıcı Etiketi</label>
+              <input type="text" v-model="senderReceiverAdress.eirsaliye" />
+            </div>
+            <div class="m-input-c">
+              <label>İlçe *</label>
+              <input type="text" v-model="senderReceiverAdress.İlce" />
+            </div>
+            <div class="m-input-c">
+              <label>Web Sitesi</label>
+              <input type="text" v-model="senderReceiverAdress.Website" />
+            </div>
+            <div class="m-input-c">
+              <label>Telefon</label>
+              <input type="text" v-model="senderReceiverAdress.Telefon" />
+            </div>
+                       <div class="m-input-c">
+              <label>Mahalle/Cadde</label>
+              <input type="text" v-model="senderReceiverAdress.MahalleCadde" />
+            </div>
+                       <div class="m-input-c">
+              <label>Bina No </label>
+              <input type="text" v-model="senderReceiverAdress.BinaNo " />
+            </div>
+                       <div class="m-input-c">
+              <label>Posta Kodu </label>
+              <input type="text" v-model="senderReceiverAdress.PostaKodu " />
+            </div>
+
+                    <div class="m-input-c">
+              <label>Bayi No </label>
+              <input type="text" v-model="senderReceiverAdress.BayiNo" />
+            </div>
+          </div>
+        </div>
+          </b-modal>
         </b-tab>
         <b-tab title="Banka Bilgileri">
           <b-button
@@ -541,12 +641,13 @@ import {
   BFormTextarea,
   BTabs,
   BTab,
+  BFormGroup,
 } from "bootstrap-vue";
 import flatPickr from "vue-flatpickr-component";
 import Ripple from "vue-ripple-directive";
 import vSelect from "vue-select";
 import { mapActions, mapGetters } from "vuex";
-const kullaniciId=JSON.parse(localStorage.getItem("userData")).userId
+const kullaniciId = JSON.parse(localStorage.getItem("userData")).userId;
 export default {
   components: {
     repeater: Repeater,
@@ -560,6 +661,7 @@ export default {
     BCol,
     BCardGroup,
     BFormSelect,
+    BFormGroup,
     BDropdown,
     BFormTextarea,
     BDropdownItem,
@@ -573,9 +675,7 @@ export default {
     flatPickr,
     BModal,
   },
-  directives: {
-    Ripple,
-  },
+
   data() {
     return {
       id: "",
@@ -606,17 +706,15 @@ export default {
           showInColumnChooser: false,
         },
         {
-          dataField: "Adres",
+          dataField: "adress",
           caption: "Adres",
-          width: "50",
-          cellTemplate: "mukellefColumnTemplate",
         },
         {
-          dataField: "İl",
+          dataField: "city",
           caption: "İl",
         },
         {
-          dataField: "Şehir",
+          dataField: "country",
           caption: "Şehir",
         },
         {
@@ -624,12 +722,17 @@ export default {
           caption: "Telefon",
         },
         {
-          dataField: "Eposta",
+          dataField: "EPosta",
           caption: "Eposta",
         },
         {
-          dataField: "Websitesi",
+          dataField: "Website",
           caption: "Websitesi",
+        },
+              {
+          dataField: "Düzenle",
+          caption: "Düzenle",
+            cellTemplate: "Editdata",
         },
       ],
       columnsk: [
@@ -753,17 +856,63 @@ export default {
         TicSicNo: "",
         kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
       },
+      senderReceiverAdress:{
+        adress:"",
+eFatura:"",
+city:"",
+country:"",
+EPosta:"",
+Faks:"",
+BinaAdi:"",
+DaireNo:"",
+BayiNo:"",
+PostaKodu:"",
+BinaNo:"",
+MahalleCadde:"",
+Telefon:"",
+İlce:"",
+Website:"",
+eirsaliye:"",
+YetkiliKişi:"",
+kullaniciId:kullaniciId,
+path:""
+},
+SelectionChanged:{},
       bank: {
         Name: "",
         iban: "",
         kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
       },
       selected: "",
+      searchvalue: {
+        title: "",
+      },
     };
   },
+  directives: {
+    Ripple,
+    search: {
+      bind: (el, binding, vnode) => {
+        el.addEventListener("focusin", () => {
+          console.log(el);
+          document.getElementsByClassName("vs__search")[0].addEventListener("keyup", () => {
+            vnode.context.findPerson(
+              document.getElementsByClassName("vs__search")[0].value
+            );
+
+          });
+        });
+         
+      },
+    },
+  },
   methods: {
-    ...mapActions(["AddNewAlici", "AddNewBank", "FetchPerson","FetchBank"]),
-    AddBill() {},
+    ...mapActions(["FetchAdress","UpdateNewAlici", "AddNewBank", "FetchPerson", "FetchBank","AddNewPersonAdress","UptadeAdressa" ]),
+    showPdfPopup(e) {
+      console.log(e);
+      this.senderReceiverAdress=e,
+      this.$refs["adressadd"].show()
+    },
     AddLine() {
       console.log(this.ProductCalc);
       let pro = {
@@ -781,7 +930,9 @@ export default {
       this.items.push(this.ProductCalc);
     },
     AddSenderPerson() {
-      this.AddNewAlici(this.senderReceiver);
+      console.log({...this.senderReceiver,CariAdres:this.getSelectDAta.path});
+
+     this.UpdateNewAlici({...this.senderReceiver,CariAdres:this.getSelectDAta.path});
     },
     AddBank() {
       this.AddNewBank(this.bank);
@@ -791,24 +942,61 @@ export default {
         kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
         data: e,
       };
-      this.FetchPerson(data);
+      this.FetchPerson(data).then(res=>{
+        this.senderReceiver=res.person;
+        this.SelectionChanged=res.adress
+        console.log( res);
+      });
       console.log(data);
     },
-    PersonBankShow(){
-      this.$refs['modal-1'].show()
-      this.FetchBank(kullaniciId)
+    PersonBankShow() {
+      this.$refs["modal-1"].show();
+      this.FetchBank(kullaniciId);
+      this.FetchAdress(kullaniciId);
+    },
+    AddSenderPersonAdress(){
+      if(this.senderReceiverAdress.hasOwnProperty("path")){
+        let id=this.senderReceiverAdress.path.split("/")[1]
+    delete this.senderReceiverAdress.path
+    console.log(id,this.senderReceiverAdress);
+this.UptadeAdressa({data:this.senderReceiverAdress,id:id})
+      }else{
+        this.AddNewPersonAdress(this.senderReceiverAdress)
+     }
+    },
+    onSelectionChanged(e){
+      console.log();
     }
   },
   computed: {
-    ...mapGetters(["GetSerach","GetBank"]),
-    SerchData() {
+    ...mapGetters(["GetSerach", "GetBank","GetAdress","GetSelected","UptadeAdress"]),
+    VuexSerchData() {
       return this.GetSerach;
     },
-    BankData(){
-      return this.GetBank
-    }
+    SearchData() {
+      if (Object.keys(this.VuexSerchData).length == 0) {
+        return this.option;
+      } else {
+        return [{ title: this.VuexSerchData.Unvan, data: this.VuexSerchData }];
+      }
+    },
+    BankData() {
+      return this.GetBank;
+    },
+    getadress(){
+  return this.GetAdress
+},
+getSelectDAta(){
+  return  this.GetSelected
+}
   },
-
+  watch: {
+    searchvalue() {
+      console.log(this.searchvalue);
+      this.findPerson(this.searchvalue);
+    },
+  },
+  mounted() {},
 };
 </script>
 
