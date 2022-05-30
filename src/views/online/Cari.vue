@@ -1,5 +1,14 @@
 <template>
 <div>
+                    <b-button
+                   
+                   variant="outline-primary"
+                    
+                  >
+                  <router-link :to="{path:'/YeniMusteri'}">
+                    Yeni Müşteri Ekle 
+                  </router-link>
+                  </b-button>
         <app-table
       :showPdfPopupClick="showPdfPopup"
       :inquireClick="queryClick"
@@ -7,10 +16,12 @@
       :listClick="listClick"
       :printClick="printClick"
       :sendClick="sendClick"
+            :UpdateData="UpdateData"
+      :DeleteData="DeleteData"
       :pk="id"
-      :items="items"
+      :items="getAllPerson"
       :totalRows="16"
-      :title="'BA/BS'"
+      :title="'Cari'"
       :columns="columns"
     />
 
@@ -146,17 +157,19 @@
 </div>
 </template>
 <script>
-import AppTable from "@core/components/app-table/AppTable.vue";
-import { BRow, BCol, BFormGroup, BFormDatepicker,BTabs, BTab } from "bootstrap-vue";
+import AppTable from "@core/components/app-table/cariTable.vue";
+import { BRow, BCol, BFormGroup,BButton, BFormDatepicker,BTabs, BTab } from "bootstrap-vue";
 import lng from "../utils/strings";
 import mockData from "../../services/online/finance/service";
 import vSelect from "vue-select";
+import {mapActions,mapGetters} from 'vuex'
 export default {
   components: {
     AppTable,
     BTabs, BTab,
     BRow,
     vSelect,
+    BButton,
     BCol,
     BFormGroup,
     BFormDatepicker,
@@ -199,42 +212,39 @@ export default {
           showInColumnChooser: false,
         },
         {
-          dataField: "TakipNo",
-          caption: "Takip No",
-        },
-        {
-          dataField: "SiraNo",
-          caption: "Sıra No",
-        },
-        {
-          dataField: "Vaka",
-          caption: "Vaka",
-        },
-        {
-          dataField: "TC",
-          caption: "TC",
+          dataField: "vkn",
+          caption: "VKN/TCKN",
         },
         {
           dataField: "Unvan",
-          caption: "Ad Soyad",
+          caption: "Unvan",
         },
         {
-          dataField: "RaporBaşlangıç",
-          caption: "Rapor Başlangıç",
+          dataField: "name",
+          caption: "Ad",
         },
         {
-          dataField: "Kontrol",
-          caption: "Kontrol",
+          dataField: "ortaAdi",
+          caption: "orta Ad",
         },
         {
-          dataField: "Durum",
-          caption: "Durum",
-          
-        }
+          dataField: "surname",
+          caption: "Soyadı",
+        },
+        {
+          dataField: "Müşteri Tipi",
+          caption: "Müşteri Tipi",
+        },
+        {
+          dataField: "İşlemler",
+          cellTemplate: "AddAndDelete",
+        },
+
       ],
     };
   },
   computed: {
+    ...mapGetters(['GetAllPerson']),
     inquireMinDate() {
       return this.inquireRequest.startDate;
     },
@@ -247,10 +257,13 @@ export default {
     listMaxDate() {
       return this.listRequest.endDate;
     },
-
+getAllPerson(){
+  return this.GetAllPerson
+}
   },
  
   methods: {
+    ...mapActions(['FetchAllPerson','DeletePerson']),
     trash(){},
     queryClick() {
       this.$refs.queryPopup.show();
@@ -269,11 +282,25 @@ export default {
     listRunClick() {
       console.log(this.listRequest.type);
     },
+    fetchdata(){
+      this.FetchAllPerson()
+    },
+UpdateData(e){
+ this.$router.push({ name: 'YeniMüsteri',params: { data: e }})
+},
+DeleteData(e){
+ this.DeletePerson(e.id)
+ 
+let fin=  this.getAllPerson.findIndex(el=>{
+return el.id==e.id
+  })
+ this.getAllPerson.splice(fin,1)
+   console.log(this.getAllPerson);
 
-
+}
   },
   mounted(){
-
+this.fetchdata()
   }
 };
 </script>

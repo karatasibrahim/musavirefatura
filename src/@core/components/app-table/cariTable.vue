@@ -14,6 +14,8 @@
       @selection-changed="onSelectionChanged"
       :columns-auto-width="true"
       :data-source="items"
+      :UpdateData="UpdateData"
+      :DeleteData="DeleteData"
       @exporting="onExporting"
     >
       <DxExport :enabled="true" :allow-export-selected-data="true" />
@@ -136,7 +138,13 @@
           />
         </div>
       </template>
+      <template #AddAndDelete="{ data }">
+        <div class="text-center">
+                      <feather-icon  @click="UpdateData(data.data)" icon="EditIcon"/>
+ <feather-icon  @click="DeleteData(data.data)" icon="Trash2Icon"/>
 
+        </div>
+      </template>
       <template #mukellefColumnTemplate="{ data }">
         <div class="text-center">
           <img
@@ -292,6 +300,8 @@ export default {
     deleteInsuranceClick: Function,
     showTaxPayerInfoClick: Function,
     showPanelClick: Function,
+    DeleteData:Function,
+    UpdateData:Function,
   },
   data() {
     return {

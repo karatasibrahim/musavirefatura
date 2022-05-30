@@ -64,6 +64,11 @@ export default [
     name: "Cari",
     component: () => import("@/views/online/Cari.vue"),
   },
+  {
+    path: "/YeniMusteri",
+    name: "YeniMüsteri",
+    component: () => import("@/views/online/MüsteriEkle.vue"),
+  },
   // {
   //   path: "/Raporlar",
   //   name: "Raporlar",

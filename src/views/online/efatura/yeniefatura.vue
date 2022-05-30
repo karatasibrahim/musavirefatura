@@ -996,7 +996,7 @@ getSelectDAta(){
       this.findPerson(this.searchvalue);
     },
   },
-  mounted() {},
+
 };
 </script>
 

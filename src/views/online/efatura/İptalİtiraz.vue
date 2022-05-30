@@ -151,6 +151,7 @@ import { BRow, BCol, BFormGroup, BFormDatepicker,BTabs, BTab } from "bootstrap-v
 import lng from "../../utils/strings";
 import mockData from "../../../services/online/finance/service";
 import vSelect from "vue-select";
+import {mapGetters} from 'vuex'
 export default {
   components: {
     AppTable,
@@ -188,7 +189,12 @@ export default {
       },
       activePdfUrl:
         "https://firebasestorage.googleapis.com/v0/b/emusavirim-3c193.appspot.com/o/AL%C4%B0%20%C3%9CZ%C3%9CMC%C3%9C%2F1ukxyryp3t1xhp.pdf?alt=media",
-      items: [],
+      items: [
+        {BelgeNo:"GIB2021000000047",VKN:"0430373470",Unvan:"AKUZ MÜH. SAN. VE TİC. L..",TalepTarihi:"2021-11-27"
+        ,BelgeTürü:"",İtirazYönt:"",İtirazBelgeNo:"",İtirazBelgeTarihi:"",İptalİtiraz:""},
+              {BelgeNo:"GIB27",VKN:"0430373470",Unvan:"AKUZ MÜH. SAN. VE TİC. L..",TalepTarihi:"2021-11-27"
+        ,BelgeTürü:"",İtirazYönt:"",İtirazBelgeNo:"",İtirazBelgeTarihi:"",İptalİtiraz:""}
+      ],
       unvanlar: mockData.unvanlar,
       turler: mockData.turler,
       columns: [
@@ -199,42 +205,47 @@ export default {
           showInColumnChooser: false,
         },
         {
-          dataField: "TakipNo",
-          caption: "Takip No",
-        },
-        {
-          dataField: "SiraNo",
-          caption: "Sıra No",
-        },
-        {
-          dataField: "Vaka",
-          caption: "Vaka",
-        },
-        {
-          dataField: "TC",
-          caption: "TC",
+          dataField: "BelgeNo",
+          caption: "Belge Numarası",
         },
         {
           dataField: "Unvan",
-          caption: "Ad Soyad",
+          caption: "Alıcı Unvan/Ad Soyad",
+        },
+            {
+          dataField: "VKN",
+          caption: "VKN/TC",
         },
         {
-          dataField: "RaporBaşlangıç",
-          caption: "Rapor Başlangıç",
+          dataField: "TalepTarihi",
+          caption: "Talep Tarihi",
         },
         {
-          dataField: "Kontrol",
-          caption: "Kontrol",
+          dataField: "BelgeTürü",
+          caption: "Belge Türü",
         },
         {
-          dataField: "Durum",
-          caption: "Durum",
+          dataField: "İtirazYönt",
+          caption: "İtiraz Yöntemi",
+        },
+        {
+          dataField: "İtirazBelgeNo",
+          caption: "İtiraz Belge Numarası",
+        },
+        {
+          dataField: "İtirazBelgeTarihi",
+          caption: "İtiraz Belge Tarihi",
+        },
+        {
+          dataField: "İptalİtiraz",
+          caption: "İptal/İtiraz Durumu",
           
         }
       ],
     };
   },
   computed: {
+    ...mapGetters(['GetAllSelectedArray']),
     inquireMinDate() {
       return this.inquireRequest.startDate;
     },
@@ -247,7 +258,9 @@ export default {
     listMaxDate() {
       return this.listRequest.endDate;
     },
-
+getSelected(){
+  return this.GetAllSelectedArray
+}
   },
  
   methods: {
@@ -261,8 +274,24 @@ export default {
       this.$refs.pdfPopup.show();
     },
     downloadClick(e) {},
-    printClick(e) {},
-    sendClick(e) {},
+    printClick(e) {
+            console.log(this.getSelected);
+      this.getSelected.forEach(element => {
+        element.forEach(el=>{
+          console.log(el);
+        el.İptalİtiraz="Reddildi"
+        })
+      });
+    },
+    sendClick(e) {
+      console.log(this.getSelected);
+      this.getSelected.forEach(element => {
+        element.forEach(el=>{
+          console.log(el);
+        el.İptalİtiraz="Kabul Edildi"
+        })
+      });
+    },
     listClick() {
       this.$refs.listPopup.show();
     },

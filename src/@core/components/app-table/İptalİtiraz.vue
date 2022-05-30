@@ -39,6 +39,7 @@
         :select-all-mode="'allPages'"
         :show-check-boxes-mode="'always'"
         :mode="selectable"
+        multiple
       />
       <DxStateStoring
         :enabled="true"
@@ -62,7 +63,6 @@
         <DxButton
           width="150"
                     text="İtirazı Kabul Et"
-
           ref="sendDrop"
           @click="sendClick"
         />
@@ -178,6 +178,7 @@ import {
   BCardTitle,
   BCardText,
 } from "bootstrap-vue";
+
 import {
   DxDataGrid,
   DxScrolling,
@@ -208,6 +209,7 @@ import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
+import {mapMutations}  from 'vuex'
 export default {
   name: "AppTable",
   components: {
@@ -299,10 +301,12 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(['SetSelectedArray']),
     onSelectionChanged({ selectedRowKeys, selectedRowsData }) {
       console.log(selectedRowsData);
       this.selectedRowKeys = selectedRowKeys;
       this.selectionChangedBySelectBox = false;
+      this.SetSelectedArray(selectedRowsData)
     },
     saveLayout(state) {
       state.columns.forEach((element) => {

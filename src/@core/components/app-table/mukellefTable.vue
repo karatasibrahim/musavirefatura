@@ -37,7 +37,6 @@
       <DxPaging :page-size="10" />
       <DxSorting mode="multiple" />
       <DxSelection
-        :select-all-mode="'allPages'"
         :show-check-boxes-mode="'always'"
         :mode="selectable"
       />
@@ -381,7 +380,6 @@ export default {
     },
   },
   mounted(){
-    console.log();
   }
 };
 </script>
