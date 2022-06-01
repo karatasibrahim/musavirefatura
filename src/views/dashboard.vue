@@ -7,7 +7,7 @@
 <script>
 import stats from "./stats.vue";
 import HomeTable1 from "@core/components/app-table/HomeTable1.vue";
-import HomeTable2 from "@core/components/app-table/HomeTable2.vue";
+import HomeTable2 from "@/@core/components/app-table/HomeTable2.vue";
 
 import HomeChart from "@/@core/components/charts/HomeChart.vue";
 import { BRow, BCol, BFormGroup, BFormDatepicker } from "bootstrap-vue";

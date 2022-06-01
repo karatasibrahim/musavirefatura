@@ -8559,6 +8559,11 @@
   "resolved" "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
   "version" "1.5.1"
 
+"qrcode-js-package@^1.0.4":
+  "integrity" "sha1-uhH39nK1NwE8OA0DPjuqhl0Htb0="
+  "resolved" "https://registry.npmjs.org/qrcode-js-package/-/qrcode-js-package-1.0.4.tgz"
+  "version" "1.0.4"
+
 "qs@~6.5.2":
   "integrity" "sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA=="
   "resolved" "https://registry.npmjs.org/qs/-/qs-6.5.3.tgz"
@@ -10619,6 +10624,14 @@
   dependencies:
     "vue-class-component" "^7.1.0"
 
+"vue-qrcode-component@^2.1.1":
+  "integrity" "sha1-csN1Z62QvKKpNyRWvSiE8PQ+3zg="
+  "resolved" "https://registry.npmjs.org/vue-qrcode-component/-/vue-qrcode-component-2.1.1.tgz"
+  "version" "2.1.1"
+  dependencies:
+    "qrcode-js-package" "^1.0.4"
+    "vue" "^2.0.1"
+
 "vue-quill-editor@3.0.6":
   "integrity" "sha512-g20oSZNWg8Hbu41Kinjd55e235qVWPLfg4NvsLW6d+DhgBTFbEuMpcWlUdrD6qT3+Noim6DRu18VLM9lVShXOQ=="
   "resolved" "https://registry.npmjs.org/vue-quill-editor/-/vue-quill-editor-3.0.6.tgz"
@@ -10710,7 +10723,7 @@
   dependencies:
     "vue" "^2.4.4"
 
-"vue@*", "vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.2.1", "vue@^2.4.0", "vue@^2.4.4", "vue@^2.5.16 || ^3.0.0", "vue@^2.5.17", "vue@^2.5.18", "vue@^2.6.10", "vue@^2.6.12", "vue@^2.6.14", "vue@^3.0.0-0 || ^2.6.0", "vue@>= 2.5 < 3", "vue@>= 2.5.0", "vue@2.x":
+"vue@*", "vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.0.1", "vue@^2.2.1", "vue@^2.4.0", "vue@^2.4.4", "vue@^2.5.16 || ^3.0.0", "vue@^2.5.17", "vue@^2.5.18", "vue@^2.6.10", "vue@^2.6.12", "vue@^2.6.14", "vue@^3.0.0-0 || ^2.6.0", "vue@>= 2.5 < 3", "vue@>= 2.5.0", "vue@2.x":
   "integrity" "sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"

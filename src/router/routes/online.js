@@ -1,5 +1,10 @@
 export default [
   {
+    path: "/earsiv/FaturaOlustur",
+    name: "yeni-efatura-earsiv",
+    component: () => import("@/views/online/earsiv/FaturaOlustur.vue"),
+  },
+  {
     path: "/efatura/yenifatura",
     name: "yeni-efatura",
     component: () => import("@/views/online/efatura/yeniefatura.vue"),

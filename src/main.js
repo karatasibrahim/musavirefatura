@@ -9,7 +9,8 @@ import App from "./App.vue";
 import { initializeApp } from "firebase/app";
 import Address from './@core/repeater/adress.vue'
 import İrsaliye from './@core/repeater/irsaliye.vue'
-
+import VueQRCodeComponent from 'vue-qrcode-component'
+Vue.component('qr-code', VueQRCodeComponent)
 // Global Components
 import "./global-components";
 Vue.component('test-address', Address)

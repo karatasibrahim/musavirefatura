@@ -1,5 +1,29 @@
 <template>
   <div>
+    <b-button
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="primary"
+      @click="toats"
+      v-b-modal.fatura
+    >
+      Fatura Göster
+ 
+    </b-button>
+    <b-modal
+      id="fatura"
+      title="Fatura"
+      ok-only
+      size="xl"
+      ok-title="Kaydet"
+      v-if="showbill"
+    >
+      <arsiv
+        v-if="showbill"
+        :data="items"
+        :person="VuexSerchData"
+        :total="totals"
+      />
+    </b-modal>
     <b-row class="match-height">
       <b-tabs>
         <b-tab title="Temel Bilgiler">
@@ -30,9 +54,11 @@
                   <b-button
                     v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     variant="primary"
+                    @click="searchvalue.title = ''"
                   >
                     Temizle
                   </b-button>
+                  {{ searchvalue.title == "" }}
                 </b-form-group>
                 <b-card-text>
                   <div class="m-flex-row">
@@ -40,39 +66,68 @@
                       <div class="m-input-c">
                         <label>VKN/TCKN</label>
                         <input
+                          :disabled="searchvalue.title == '' ? false : true"
                           type="text"
                           v-model="senderReceiver.vkn"
                         />
                       </div>
                       <div class="m-input-c">
                         <label>Vergi D.</label>
-                        <input type="text" v-model="senderReceiver.vergiD" />
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.vergiD"
+                        />
                       </div>
                       <div class="m-input-c">
                         <label>e-Posta</label>
-                        <input type="text"  v-model="senderReceiver.EPosta"/>
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.EPosta"
+                        />
                       </div>
                       <div class="m-input-c">
                         <label>Faks</label>
-                        <input type="text"  v-model="senderReceiver.Faks"/>
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.Faks"
+                        />
                       </div>
                     </div>
                     <div class="m-input">
                       <div class="m-input-c">
                         <label>Unvan</label>
-                        <input type="text" v-model="senderReceiver.Unvan"/>
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.Unvan"
+                        />
                       </div>
                       <div class="m-input-c">
                         <label>Adres</label>
-                        <input type="text" v-model="senderReceiver.adress" />
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.adress"
+                        />
                       </div>
                       <div class="m-input-c">
                         <label>Telefon</label>
-                        <input type="text" v-model="senderReceiver.adress" />
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.adress"
+                        />
                       </div>
                       <div class="m-input-c">
                         <label>Web Sitesi</label>
-                        <input type="text" v-model="senderReceiver.Website"/>
+                        <input
+                          :disabled="searchvalue.title == '' ? false : true"
+                          type="text"
+                          v-model="senderReceiver.Website"
+                        />
                       </div>
                     </div>
                   </div>
@@ -82,7 +137,11 @@
                   @click="PersonBankShow"
                   variant="success"
                 >
-                  <span class="align-middle">Yeni Alıcı Oluştur</span>
+                  <span class="align-middle">{{
+                    searchvalue.title == ""
+                      ? "Yeni Alıcı Oluştur"
+                      : "Alıcıyı Düzenle"
+                  }}</span>
                   <feather-icon icon="ArrowRightIcon" class="ml-50" />
                 </b-button>
               </b-card>
@@ -107,21 +166,21 @@
                   <div class="m-input">
                     <div class="m-input-c">
                       <label>VKN/TCKN</label>
-                      <input type="text" />
+                      <input type="text"  v-model="senderReceiver.vkn" />
                     </div>
                     <div class="m-input-c">
                       <label>İl</label>
-                      <input type="text" />
+                      <input type="text"  v-model="senderReceiverAdress.city" />
                     </div>
                     <div class="m-input-c">
                       <label>Unvan</label>
-                      <input type="text" />
+                      <input type="text" v-model="senderReceiver.Unvan"/>
                     </div>
                   </div>
                   <div class="m-input">
                     <div class="m-input-c">
                       <label>Ülke</label>
-                      <input type="text" />
+                      <input type="text"  v-model="senderReceiverAdress.country"/>
                     </div>
                     <div class="m-input-c">
                       <label>İlçe</label>
@@ -129,7 +188,7 @@
                     </div>
                     <div class="m-input-c">
                       <label>Vergi Dairesi*</label>
-                      <input type="text" />
+                      <input type="text" v-model="senderReceiver.vergiD" />
                     </div>
                   </div>
                 </div>
@@ -246,7 +305,7 @@
                     <b-dropdown
                       id="dropdown-1"
                       v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-                      text="Primary"
+                      text="Excel"
                       variant="primary"
                     >
                       <b-dropdown-item>Excelden yükle</b-dropdown-item>
@@ -281,7 +340,6 @@
           <b-row>
             <b-col lg="7" style="border-right: 2px solid #575151">
               <h3>Açıklama</h3>
-              <label for="textarea-default">Textarea</label>
               <b-form-textarea
                 id="textarea-default"
                 placeholder="Textarea"
@@ -295,38 +353,84 @@
                   <h3>Toplamlar</h3>
                   <div class="m-input-c">
                     <label>Ürün/Hizmet Tutar</label>
-                    <input type="text" />
+                    <input
+                      v-model="totals.total"
+                      :disabled="manuel ? false : true"
+                      type="text"
+                    />
                   </div>
                   <div class="m-input-c">
                     <label class="w-65">İskonto Tutar</label>
                     <b-form-textarea
+                      v-model="totals.TotalDiscount"
+                      :disabled="manuel ? false : true"
                       id="textarea-default"
                       placeholder="Textarea"
                       rows="1"
                       size="sm"
                     />
                   </div>
-                  <div class="m-input-c">
-                    <label>KDV (%18)</label>
-                    <input type="text" />
+                  <div class="m-input-c" v-if="totals.KDVtotala != 0">
+                    <label>KDV(18%)</label>
+                    <input
+                      v-model="totals.KDVtotala"
+                      :disabled="manuel ? false : true"
+                      type="text"
+                    />
+                  </div>
+                  <div class="m-input-c" v-if="totals.KDVtotalb != 0">
+                    <label>KDV(8%)</label>
+                    <input
+                      v-model="totals.KDVtotalb"
+                      :disabled="manuel ? false : true"
+                      type="text"
+                    />
+                  </div>
+                  <div class="m-input-c" v-if="totals.KDVtotalc != 0">
+                    <label>KDV(1%)</label>
+                    <input
+                      v-model="totals.KDVtotalc"
+                      :disabled="manuel ? false : true"
+                      type="text"
+                    />
+                  </div>
+                  <div class="m-input-c" v-if="totals.KDVtotald != 0">
+                    <label>KDV(0%)</label>
+                    <input
+                      v-model="totals.KDVtotald"
+                      :disabled="manuel ? false : true"
+                      type="text"
+                    />
                   </div>
                   <div class="m-input-c">
                     <label>Vergiler Hariç Tutar</label>
-                    <input type="text" />
+                    <input
+                      :disabled="manuel ? false : true"
+                      v-model="totals.KDVwithoutTotal"
+                      type="text"
+                    />
                   </div>
 
                   <div class="m-input-c">
                     <label>Vergiler Dahil Tutar</label>
-                    <input type="text" />
+                    <input
+                      :disabled="manuel ? false : true"
+                      v-model="totals.KDVwithTotal"
+                      type="text"
+                    />
                   </div>
 
                   <div class="m-input-c">
                     <label>Ödenecek Tutar</label>
-                    <input type="text" />
+                    <input
+                      :disabled="manuel ? false : true"
+                      v-model="totals.allTotal"
+                      type="text"
+                    />
                   </div>
 
                   <div class="m-input-c">
-                    <b-form-checkbox v-model="selected" value="A" plain>
+                    <b-form-checkbox v-model="manuel" plain>
                       Manuel Giriş
                     </b-form-checkbox>
                   </div>
@@ -345,14 +449,13 @@
       size="lg"
       ok-title="Kaydet"
       @ok="AddSenderPerson"
-  
     >
       <b-card>
         <div class="m-flex-row">
           <div class="m-input">
             <div class="m-input-c">
               <label>VKN/TCKN *</label>
-              <input type="text"  v-model="senderReceiver.vkn " />
+              <input type="text" v-model="senderReceiver.vkn" />
             </div>
             <div class="m-input-c">
               <label>Ad</label>
@@ -408,17 +511,16 @@
               <feather-icon icon="ArrowRightIcon" class="ml-50" />
             </b-button>
             <app-table
-      :pk="id"
-      :items="getadress"
-      :totalRows="16"
-      :title="'Adres'"
-      :columns="columns"
-            :showTaxPayerInfoClick="showPdfPopup"
-
+              :pk="id"
+              :items="getadress"
+              :totalRows="16"
+              :title="'Adres'"
+              :columns="columns"
+              :showTaxPayerInfoClick="showPdfPopup"
             />
           </b-card-text>
           <b-modal
-          ref="adressadd"
+            ref="adressadd"
             id="adressadd"
             title="Müşteri Bilgileri"
             ok-only
@@ -426,81 +528,87 @@
             ok-title="Accept"
             @ok="AddSenderPersonAdress"
           >
-              <div class="m-flex-row">
-          <div class="m-input">
-            <div class="m-input-c">
-              <label>Adres Adı:</label>
-              <input type="text" v-model="senderReceiverAdress.adress" />
-            </div>
-            <div class="m-input-c">
-              <label>e-Fatura Alıcı Etiketi:</label>
-              <input type="text" v-model="senderReceiverAdress.eFatura" />
-            </div>
-            <div class="m-input-c">
-              <label>Şehir *</label>
-              <input type="text" v-model="senderReceiverAdress.city" />
-            </div>
-            <div class="m-input-c">
-              <label>Ülke *</label>
-              <input type="text" v-model="senderReceiverAdress.country" />
-            </div>
-            <div class="m-input-c">
-              <label>E-Posta</label>
-              <input type="text" v-model="senderReceiverAdress.EPosta" />
-            </div>
-                    <div class="m-input-c">
-              <label>Faks</label>
-              <input type="text" v-model="senderReceiverAdress.Faks" />
-            </div>
-                    <div class="m-input-c">
-              <label>Bina Adı</label>
-              <input type="text" v-model="senderReceiverAdress.BinaAdi" />
-            </div>
-                                <div class="m-input-c">
-              <label>Daire No </label>
-              <input type="text" v-model="senderReceiverAdress.DaireNo " />
-            </div>
-          </div>
-          <div class="m-input">
-            <div class="m-input-c">
-              <label>Yetkili Kişi:</label>
-              <input type="text" v-model="senderReceiverAdress.YetkiliKişi" />
-            </div>
-            <div class="m-input-c">
-              <label>e-İrsaliye Alıcı Etiketi</label>
-              <input type="text" v-model="senderReceiverAdress.eirsaliye" />
-            </div>
-            <div class="m-input-c">
-              <label>İlçe *</label>
-              <input type="text" v-model="senderReceiverAdress.İlce" />
-            </div>
-            <div class="m-input-c">
-              <label>Web Sitesi</label>
-              <input type="text" v-model="senderReceiverAdress.Website" />
-            </div>
-            <div class="m-input-c">
-              <label>Telefon</label>
-              <input type="text" v-model="senderReceiverAdress.Telefon" />
-            </div>
-                       <div class="m-input-c">
-              <label>Mahalle/Cadde</label>
-              <input type="text" v-model="senderReceiverAdress.MahalleCadde" />
-            </div>
-                       <div class="m-input-c">
-              <label>Bina No </label>
-              <input type="text" v-model="senderReceiverAdress.BinaNo " />
-            </div>
-                       <div class="m-input-c">
-              <label>Posta Kodu </label>
-              <input type="text" v-model="senderReceiverAdress.PostaKodu " />
-            </div>
+            <div class="m-flex-row">
+              <div class="m-input">
+                <div class="m-input-c">
+                  <label>Adres Adı:</label>
+                  <input type="text" v-model="senderReceiverAdress.adress" />
+                </div>
+                <div class="m-input-c">
+                  <label>e-Fatura Alıcı Etiketi:</label>
+                  <input type="text" v-model="senderReceiverAdress.eFatura" />
+                </div>
+                <div class="m-input-c">
+                  <label>Şehir *</label>
+                  <input type="text" v-model="senderReceiverAdress.city" />
+                </div>
+                <div class="m-input-c">
+                  <label>Ülke *</label>
+                  <input type="text" v-model="senderReceiverAdress.country" />
+                </div>
+                <div class="m-input-c">
+                  <label>E-Posta</label>
+                  <input type="text" v-model="senderReceiverAdress.EPosta" />
+                </div>
+                <div class="m-input-c">
+                  <label>Faks</label>
+                  <input type="text" v-model="senderReceiverAdress.Faks" />
+                </div>
+                <div class="m-input-c">
+                  <label>Bina Adı</label>
+                  <input type="text" v-model="senderReceiverAdress.BinaAdi" />
+                </div>
+                <div class="m-input-c">
+                  <label>Daire No </label>
+                  <input type="text" v-model="senderReceiverAdress.DaireNo" />
+                </div>
+              </div>
+              <div class="m-input">
+                <div class="m-input-c">
+                  <label>Yetkili Kişi:</label>
+                  <input
+                    type="text"
+                    v-model="senderReceiverAdress.YetkiliKişi"
+                  />
+                </div>
+                <div class="m-input-c">
+                  <label>e-İrsaliye Alıcı Etiketi</label>
+                  <input type="text" v-model="senderReceiverAdress.eirsaliye" />
+                </div>
+                <div class="m-input-c">
+                  <label>İlçe *</label>
+                  <input type="text" v-model="senderReceiverAdress.İlce" />
+                </div>
+                <div class="m-input-c">
+                  <label>Web Sitesi</label>
+                  <input type="text" v-model="senderReceiverAdress.Website" />
+                </div>
+                <div class="m-input-c">
+                  <label>Telefon</label>
+                  <input type="text" v-model="senderReceiverAdress.Telefon" />
+                </div>
+                <div class="m-input-c">
+                  <label>Mahalle/Cadde</label>
+                  <input
+                    type="text"
+                    v-model="senderReceiverAdress.MahalleCadde"
+                  />
+                </div>
+                <div class="m-input-c">
+                  <label>Bina No </label>
+                  <input type="text" v-model="senderReceiverAdress.BinaNo" />
+                </div>
+                <div class="m-input-c">
+                  <label>Posta Kodu </label>
+                  <input type="text" v-model="senderReceiverAdress.PostaKodu" />
+                </div>
 
-                    <div class="m-input-c">
-              <label>Bayi No </label>
-              <input type="text" v-model="senderReceiverAdress.BayiNo" />
+                <div class="m-input-c">
+                  <label>Bayi No </label>
+                  <input type="text" v-model="senderReceiverAdress.BayiNo" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
           </b-modal>
         </b-tab>
         <b-tab title="Banka Bilgileri">
@@ -616,6 +724,15 @@
         </div>
       </b-card>
     </b-modal>
+    <b-card>
+      <b-button
+        v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+        variant="primary"
+        @click="SaveDate"
+      >
+        Kaydet
+      </b-button>
+    </b-card>
   </div>
 </template>
 <script>
@@ -648,8 +765,12 @@ import Ripple from "vue-ripple-directive";
 import vSelect from "vue-select";
 import { mapActions, mapGetters } from "vuex";
 const kullaniciId = JSON.parse(localStorage.getItem("userData")).userId;
+import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
+
+import arsiv from "../earsiv/FaturaOlustur.vue";
 export default {
   components: {
+    arsiv,
     repeater: Repeater,
     AppTable,
     BRow,
@@ -690,6 +811,7 @@ export default {
       disableDate: null,
       inlineDate: null,
       option: [],
+      manuel: false,
       iade: [
         {
           FaturaNo: 40,
@@ -697,6 +819,18 @@ export default {
           İşlemler: "Macdonald",
         },
       ],
+      totals: {
+        total: 0,
+        TotalDiscount: 0,
+        KDVwithoutTotal: 0,
+        KDVtotal: 0,
+        allTotal: 0,
+        KDVtotala: 0,
+        KDVtotalb: 0,
+        KDVtotala: 0,
+        KDVtotalc: 0,
+        KDVtotald: 0,
+      },
       dir: "ltr",
       columns: [
         {
@@ -729,10 +863,10 @@ export default {
           dataField: "Website",
           caption: "Websitesi",
         },
-              {
+        {
           dataField: "Düzenle",
           caption: "Düzenle",
-            cellTemplate: "Editdata",
+          cellTemplate: "Editdata",
         },
       ],
       columnsk: [
@@ -856,28 +990,28 @@ export default {
         TicSicNo: "",
         kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
       },
-      senderReceiverAdress:{
-        adress:"",
-eFatura:"",
-city:"",
-country:"",
-EPosta:"",
-Faks:"",
-BinaAdi:"",
-DaireNo:"",
-BayiNo:"",
-PostaKodu:"",
-BinaNo:"",
-MahalleCadde:"",
-Telefon:"",
-İlce:"",
-Website:"",
-eirsaliye:"",
-YetkiliKişi:"",
-kullaniciId:kullaniciId,
-path:""
-},
-SelectionChanged:{},
+      senderReceiverAdress: {
+        adress: "",
+        eFatura: "",
+        city: "",
+        country: "",
+        EPosta: "",
+        Faks: "",
+        BinaAdi: "",
+        DaireNo: "",
+        BayiNo: "",
+        PostaKodu: "",
+        BinaNo: "",
+        MahalleCadde: "",
+        Telefon: "",
+        İlce: "",
+        Website: "",
+        eirsaliye: "",
+        YetkiliKişi: "",
+        kullaniciId: kullaniciId,
+        path: "",
+      },
+      SelectionChanged: {},
       bank: {
         Name: "",
         iban: "",
@@ -887,6 +1021,7 @@ SelectionChanged:{},
       searchvalue: {
         title: "",
       },
+      showbill: false,
     };
   },
   directives: {
@@ -895,23 +1030,56 @@ SelectionChanged:{},
       bind: (el, binding, vnode) => {
         el.addEventListener("focusin", () => {
           console.log(el);
-          document.getElementsByClassName("vs__search")[0].addEventListener("keyup", () => {
-            vnode.context.findPerson(
-              document.getElementsByClassName("vs__search")[0].value
-            );
-
-          });
+          document
+            .getElementsByClassName("vs__search")[0]
+            .addEventListener("keyup", () => {
+              vnode.context.findPerson(
+                document.getElementsByClassName("vs__search")[0].value
+              );
+            });
         });
-         
       },
     },
   },
   methods: {
-    ...mapActions(["FetchAdress","UpdateNewAlici", "AddNewBank", "FetchPerson", "FetchBank","AddNewPersonAdress","UptadeAdressa" ]),
+    ...mapActions([
+      "FetchAdress",
+      "UpdateNewAlici",
+      "AddNewBank",
+      "FetchPerson",
+      "FetchBank",
+      "AddNewPersonAdress",
+      "UptadeAdressa",
+      "AddBill",
+    ]),
+    SaveDate() {
+      const data = {
+        AliciUnvan: this.senderReceiver.Unvan,
+        AliciVknTckn: this.senderReceiver.vkn,
+        BelgeNumarasi: "",
+        BelgeTarihi: "",
+        BelgeTuru: "",
+        BelgeUrl: "",
+        Ettn: "",
+        KullaniciId: kullaniciId,
+        OnayDurumu: false,
+      };
+      this.AddBill(data);
+      console.log(data);
+      this.$toast({
+        component: ToastificationContent,
+        position: "top-right",
+        props: {
+          title: ``,
+          icon: "CoffeeIcon",
+          variant: "success",
+          text: `Kayıt başarılı.`,
+        },
+      });
+    },
     showPdfPopup(e) {
       console.log(e);
-      this.senderReceiverAdress=e,
-      this.$refs["adressadd"].show()
+      (this.senderReceiverAdress = e), this.$refs["adressadd"].show();
     },
     AddLine() {
       console.log(this.ProductCalc);
@@ -930,9 +1098,15 @@ SelectionChanged:{},
       this.items.push(this.ProductCalc);
     },
     AddSenderPerson() {
-      console.log({...this.senderReceiver,CariAdres:this.getSelectDAta.path});
+      console.log({
+        ...this.senderReceiver,
+        CariAdres: this.getSelectDAta.path,
+      });
 
-     this.UpdateNewAlici({...this.senderReceiver,CariAdres:this.getSelectDAta.path});
+      this.UpdateNewAlici({
+        ...this.senderReceiver,
+        CariAdres: this.getSelectDAta.path,
+      });
     },
     AddBank() {
       this.AddNewBank(this.bank);
@@ -942,10 +1116,10 @@ SelectionChanged:{},
         kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
         data: e,
       };
-      this.FetchPerson(data).then(res=>{
-        this.senderReceiver=res.person;
-        this.SelectionChanged=res.adress
-        console.log( res);
+      this.FetchPerson(data).then((res) => {
+        this.senderReceiver = res.person;
+        this.SelectionChanged = res.adress;
+        console.log(res);
       });
       console.log(data);
     },
@@ -954,22 +1128,51 @@ SelectionChanged:{},
       this.FetchBank(kullaniciId);
       this.FetchAdress(kullaniciId);
     },
-    AddSenderPersonAdress(){
-      if(this.senderReceiverAdress.hasOwnProperty("path")){
-        let id=this.senderReceiverAdress.path.split("/")[1]
-    delete this.senderReceiverAdress.path
-    console.log(id,this.senderReceiverAdress);
-this.UptadeAdressa({data:this.senderReceiverAdress,id:id})
-      }else{
-        this.AddNewPersonAdress(this.senderReceiverAdress)
-     }
+    AddSenderPersonAdress() {
+      if (this.senderReceiverAdress.hasOwnProperty("path")) {
+        let id = this.senderReceiverAdress.path.split("/")[1];
+        delete this.senderReceiverAdress.path;
+        console.log(id, this.senderReceiverAdress);
+        this.UptadeAdressa({ data: this.senderReceiverAdress, id: id });
+      } else {
+        this.AddNewPersonAdress(this.senderReceiverAdress);
+      }
     },
-    onSelectionChanged(e){
+    onSelectionChanged(e) {
       console.log();
-    }
+    },
+    toats() {
+      //  :data="items" :person="VuexSerchData"  :total="totals"
+      console.log();
+      console.log();
+      if (
+        Object.keys(this.VuexSerchData).length > 0 &&
+        Object.keys(this.items[0].value) > 0 &&
+        this.items[0].value.title != ""
+      ) {
+        this.showbill = false;
+      } else {
+        this.$toast({
+          component: ToastificationContent,
+          position: "top-right",
+          props: {
+            title: `Uyarı`,
+            icon: "AlertTriangleIcon",
+            variant: "danger",
+            text: `Değerleri Kontrol Ediniz`,
+          },
+        });
+      }
+    },
   },
   computed: {
-    ...mapGetters(["GetSerach", "GetBank","GetAdress","GetSelected","UptadeAdress"]),
+    ...mapGetters([
+      "GetSerach",
+      "GetBank",
+      "GetAdress",
+      "GetSelected",
+      "UptadeAdress",
+    ]),
     VuexSerchData() {
       return this.GetSerach;
     },
@@ -983,20 +1186,54 @@ this.UptadeAdressa({data:this.senderReceiverAdress,id:id})
     BankData() {
       return this.GetBank;
     },
-    getadress(){
-  return this.GetAdress
-},
-getSelectDAta(){
-  return  this.GetSelected
-}
+    getadress() {
+      return this.GetAdress;
+    },
+    getSelectDAta() {
+      return this.GetSelected;
+    },
   },
   watch: {
+    items() {
+      var totals = 0;
+      var total = 0;
+      var iskontoTotal = 0;
+      var kdva = 0;
+      var kdvb = 0;
+      var kdvc = 0;
+      var kdvd = 0;
+      this.items.forEach((el) => {
+        iskontoTotal += el.value.discountt;
+        console.log(el.value.KDV);
+        if (el.value.KDV == 18) {
+          kdva += el.value.kdvTl;
+        }
+        if (el.value.KDV == 8) {
+          kdvb += el.value.kdvTl;
+        }
+        if (el.value.KDV == 1) {
+          kdvc += el.value.kdvTl;
+        }
+        if (el.value.KDV == 0) {
+          kdvd += el.value.kdvTl;
+        }
+        total += el.value.quantity * el.value.unitPrice;
+        totals += el.value.total;
+      });
+      this.totals.allTotal = totals;
+      this.totals.KDVwithTotal = totals;
+      this.totals.total = total;
+      this.totals.TotalDiscount = iskontoTotal;
+      this.totals.KDVtotala = kdva;
+      this.totals.KDVtotalb = kdvb;
+      this.totals.KDVtotalc = kdvc;
+      this.totals.KDVtotald = kdvd;
+    },
     searchvalue() {
       console.log(this.searchvalue);
       this.findPerson(this.searchvalue);
     },
   },
-
 };
 </script>
 
@@ -1009,6 +1246,16 @@ getSelectDAta(){
 .modal-header {
   background: #ff503c !important;
 }
+@media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 71%;
+  }
+  [dir="ltr"] .modal-xl {
+    margin-left: 11%;
+    margin-right: 11%;
+  }
+}
+
 .feather-trash-2 {
   color: #ff4e4f;
   width: 16px;

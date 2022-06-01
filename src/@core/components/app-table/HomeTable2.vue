@@ -47,7 +47,6 @@ import {
   BCardTitle,
   BCardText,
 } from "bootstrap-vue";
-
 import {
   DxDataGrid,
   DxScrolling,
@@ -78,7 +77,6 @@ import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
-
 export default {
   name: "AppTable",
   components: {
@@ -112,7 +110,6 @@ export default {
   directives: {
     Ripple,
   },
-
   props: {
     pk: {
       type: String,
@@ -207,7 +204,6 @@ export default {
     onExporting(e) {
       const workbook = new Workbook();
       const worksheet = workbook.addWorksheet(this.title);
-
       exportDataGrid({
         component: e.component,
         worksheet,

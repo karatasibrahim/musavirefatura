@@ -1,42 +1,109 @@
 <template>
-  <b-card no-body class="b-card">
+  <b-card no-body>
     <DxDataGrid
       style="margin-left: 10px; margin-right: 10px; margin-top: 15px"
       :key-expr="pk"
       :columns="columns"
       :show-borders="true"
+      :mukellefid="mukellefid"
       ref="appGrid"
       :allow-column-reordering="true"
       :allow-column-resizing="true"
       :show-column-lines="true"
       :show-row-lines="true"
-      :selected-row-keys="selectedRowKeys"
       @selection-changed="onSelectionChanged"
       :columns-auto-width="true"
       :data-source="items"
       @exporting="onExporting"
+      :selectedRowKeys="selectedRowKeys"
     >
       <DxExport :enabled="true" :allow-export-selected-data="true" />
       <DxLoadPanel :enabled="true" />
       <DxColumnChooser :enabled="true" />
       <DxColumnFixing :enabled="true" />
-
+      <DxFilterPanel :visible="true" />
+      <DxHeaderFilter :visible="true" />
       <DxSearchPanel :visible="true" />
       <DxScrolling row-rendering-mode="virtual" />
+      <DxPager
+        :visible="true"
+        :allowed-page-sizes="pageSizes"
+        display-mode="full"
+        :show-page-size-selector="true"
+        :show-info="false"
+        :show-navigation-buttons="true"
+      />
+      <DxPaging :page-size="10" />
+      <DxSorting mode="multiple" />
+      <DxSelection
+        :select-all-mode="'allPages'"
+        :show-check-boxes-mode="'always'"
+        :mode="selectable"
+      />
+      <DxStateStoring
+        :enabled="true"
+        type="custom"
+        storage-key="storage"
+        :customSave="saveLayout"
+      />
 
       <DxFilterRow :visible="true" />
-
       <DxToolbar>
         <DxItem location="before" template="headerTemplate" />
         <DxItem location="before" template="inquireTemplate" />
+        <DxItem location="before" template="listTemplate" />
+        <DxItem location="before" template="printTemplate" />
+        <DxItem location="before" template="sendTemplate" />
+        <DxItem name="columnChooserButton" />
+        <DxItem template="exportPdfTemplate" />
+        <DxItem name="exportButton" />
       </DxToolbar>
+
+      <template #sendTemplate>
+        <DxDropDownButton
+          width="150"
+          ref="sendDrop"
+          :split-button="false"
+          :use-select-mode="false"
+          :items="sendSettings"
+          @item-click="sendClick"
+          display-expr="name"
+          key-expr="id"
+          text="Gönder"
+          icon="share"
+        />
+      </template>
+
+      <template #printTemplate>
+        <DxDropDownButton
+          width="150"
+          :split-button="false"
+          :use-select-mode="false"
+          :items="printSettings"
+          @itemClick="printClick"
+          display-expr="name"
+          key-expr="id"
+          text="Yazdır"
+          icon="print"
+        />
+      </template>
+
+      <template #listTemplate>
+        <DxButton
+          type="normal"
+          text="Listele"
+          icon="detailslayout"
+          @click="listClick"
+        />
+      </template>
 
       <template #inquireTemplate>
         <DxButton
           type="normal"
           text="Sorgula"
           icon="search"
-          @click="inquireClick"
+        
+          @click="inquireClick('http://89.43.29.189:1880/test1')"
         />
       </template>
 
@@ -46,6 +113,70 @@
         </div>
       </template>
 
+      <template #exportPdfTemplate>
+        <DxButton type="normal" icon="exportpdf" @click="exportPdf" />
+      </template>
+
+      <template #panelColumnTemplate="{ data }">
+        <div class="text-center">
+                      <feather-icon  @click="showPanelClick(data.data.beyan_pdf)" icon="BriefcaseIcon"/>
+
+          <!-- <img
+            src="https://musavir.tacminyazilim.com/app-assets/images/tacmin/logo_20px.png"
+           
+          /> -->
+        </div>
+      </template>
+
+      <template #mukellefColumnTemplate="{ data }">
+        <div class="text-center">
+                  <feather-icon   @click="showTaxPayerInfoClick(data.data.beyan_pdf,data.data.MukellefId)" icon="UserIcon"/>
+
+          <!-- <img
+            src="https://musavir.tacminyazilim.com/app-assets/images/tacmin/edit_20px.png"
+          
+          /> -->
+        </div>
+      </template>
+
+      <template #beyanColumnTemplate="{ data }">
+        <div class="text-center">
+          <img
+            src="https://i.ibb.co/CvqLvpj/beyanname.jpg"
+            @click="showPdfPopupClick(data.data.beyan_pdf)"
+          />
+        </div>
+      </template>
+
+      <template #tahakkukColumnTemplate="{ data }">
+        <div class="text-center">
+          <img
+            src="https://i.ibb.co/mGfSXHG/tahakkuk.jpg"
+            @click="showPdfPopupClick(data.data.tahak_pdf)"
+          />
+        </div>
+      </template>
+
+      <template #sgkGosterimColumnTemplate="{ data }">
+        <div class="text-left">
+          <img
+            src="https://i.ibb.co/mGfSXHG/tahakkuk.jpg"
+            @click="showPdfPopupClick(data.data.tahak_pdf)"
+          />
+          <span> &nbsp; &nbsp; &nbsp;</span>
+          <img
+            src="https://i.ibb.co/mGfSXHG/tahakkuk.jpg"
+            @click="showPdfPopupTahClick(data.data.tahak_pdf)"
+          />
+
+          <span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
+          <img
+            class="text-right"
+            src="https://musavir.tacminyazilim.com/app-assets/images/tacmin/sil_20px.png"
+            @click="deleteInsuranceClick(data.data)"
+          />
+        </div>
+      </template>
     </DxDataGrid>
   </b-card>
 </template>
@@ -58,7 +189,6 @@ import {
   BCardTitle,
   BCardText,
 } from "bootstrap-vue";
-
 import {
   DxDataGrid,
   DxScrolling,
@@ -89,7 +219,6 @@ import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
-
 export default {
   name: "AppTable",
   components: {
@@ -123,7 +252,6 @@ export default {
   directives: {
     Ripple,
   },
-
   props: {
     pk: {
       type: String,
@@ -157,6 +285,7 @@ export default {
   },
   data() {
     return {
+      mukellefid:"",
       pageSizes: [10, 20, 50, "all"],
       selectedRowKeys: [],
       downloadSettings: [
@@ -181,10 +310,12 @@ export default {
     },
   },
   methods: {
+    
     onSelectionChanged({ selectedRowKeys, selectedRowsData }) {
       console.log(selectedRowsData);
       this.selectedRowKeys = selectedRowKeys;
       this.selectionChangedBySelectBox = false;
+
     },
     saveLayout(state) {
       state.columns.forEach((element) => {
@@ -218,7 +349,6 @@ export default {
     onExporting(e) {
       const workbook = new Workbook();
       const worksheet = workbook.addWorksheet(this.title);
-
       exportDataGrid({
         component: e.component,
         worksheet,
@@ -237,10 +367,12 @@ export default {
 };
 </script>
 <style scoped>
-.b-card {
-  padding-bottom: 10px;
-}
 #exportButton {
   margin-bottom: 10px;
+}
+.feather.feather-trash,
+.feather.feather-user{
+    width: 27px;
+  height: 19px;
 }
 </style>

@@ -51,7 +51,8 @@ export default new Vuex.Store({
     adress: [],
     SelectData: {},
     AllPerson: [],
-    SelectedArray:[]
+    SelectedArray:[],
+    GelenFaturalar:[]
   },
   getters: {
     GetSerach(state, payload) {
@@ -71,6 +72,10 @@ export default new Vuex.Store({
     },
     GetAllSelectedArray(state,payload){
 return state.SelectedArray
+    },
+    GetGelenArsiv(state){
+      console.log(state.GelenFaturalar);
+      return state.GelenFaturalar
     }
   },
   mutations: {
@@ -94,6 +99,10 @@ return state.SelectedArray
     },
     SetAllPerson(state, payload) {
       state.AllPerson.push(payload)
+    },
+    SetGelenFaturalar(state,payload){
+      console.log(payload);
+state.GelenFaturalar.push(payload);
     }
   },
   actions: {
@@ -108,9 +117,8 @@ return state.SelectedArray
         const mukellefdata = getDocs(q);
         mukellefdata.then(dt => {
           dt.forEach((doca) => {
-            context.commit('SetSearch', doca.data())
             console.log(doca.data());
-            if (doca.data().CariAdres != undefined) {
+            if (doca.data().CariAdres != undefined && doca.data().CariAdres != "" ) {
               const ax = getDoc(doc(db, doca.data().CariAdres))
               ax.then(e => {
                 console.log(e.data());
@@ -118,6 +126,7 @@ return state.SelectedArray
                   person: doca.data(),
                   adress: e.data()
                 }
+                context.commit('SetSearch', senddata)
                 resolve(senddata)
               })
             }
@@ -187,6 +196,38 @@ return state.SelectedArray
         console.log(doc.ref.path);
       });
     },
+     FecthGelenFaturalar(context,payload){
+       return new Promise((resolve,reject)=>{
+               const q = query(collection(db, "GelenFaturalar"),
+      where("KullaniciId", "==", payload),
+    );
+    const mukellefdata =  getDocs(q);
+    mukellefdata.then(res=>{
+      var arr=[]
+     res.forEach(el=>{
+       arr.push(el.data())
+    })
+    resolve(arr)
+    })
+       })
+
+    },
+    FecthGidenFaturalar(context,payload){
+      return new Promise((resolve,reject)=>{
+        const q = query(collection(db, "GidenFaturalar"),
+where("KullaniciId", "==", payload),
+);
+const mukellefdata =  getDocs(q);
+mukellefdata.then(res=>{
+var arr=[]
+res.forEach(el=>{
+arr.push(el.data())
+})
+resolve(arr)
+})
+})
+
+    },
     //! Add Name
 
     async AddNewBank(context, payload) {
@@ -201,7 +242,12 @@ return state.SelectedArray
       console.log(res);
       this.dispatch("FetchAdress", payload.kullaniciId)
     },
+async AddBill(context,payload){
+  console.log(payload);
+  const res = await addDoc(collection(db, "FaturaIcerik"), payload)
+  console.log(res);
 
+},
     //! Uptade 
     async UpdateNewAlici(context, payload) {
 
