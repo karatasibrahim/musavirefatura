@@ -22,6 +22,8 @@
         :data="items"
         :person="VuexSerchData"
         :total="totals"
+        :bill="BillOption"
+        :desc="Description"
       />
     </b-modal>
     <b-row class="match-height">
@@ -32,7 +34,7 @@
               lg="8"
               md="6"
               :style="[
-                BillTypeValue == 'Satış'
+               BillOption.BillTypeValue == 'Satış'
                   ? { display: 'none' }
                   : { display: 'inline-block' },
               ]"
@@ -58,7 +60,6 @@
                   >
                     Temizle
                   </b-button>
-                  {{ searchvalue.title == "" }}
                 </b-form-group>
                 <b-card-text>
                   <div class="m-flex-row">
@@ -150,7 +151,7 @@
               lg="8"
               md="6"
               :style="[
-                BillTypeValue == 'Satış'
+                BillOption.BillTypeValue == 'Satış'
                   ? { display: 'inline-block' }
                   : { display: 'none' },
               ]"
@@ -218,7 +219,7 @@
                       <div class="m-input-c">
                         <label class="w-50">Fatura Türü *</label>
                         <b-form-select
-                          v-model="BillTypeValue"
+                          v-model="BillOption.BillTypeValue"
                           :options="BillType"
                           size="sm"
                         />
@@ -226,7 +227,7 @@
                       <div class="m-input-c">
                         <label class="w-50">Gönderim Şekli*</label>
                         <b-form-select
-                          v-model="ShippingMethodValue"
+                          v-model="BillOption.SendingType"
                           :options="ShippingMethod"
                           size="sm"
                         />
@@ -234,14 +235,14 @@
                       <div class="m-input-c">
                         <label class="w-50">Düzenlenme Tarihi *</label>
                         <flat-pickr
-                          v-model="dateDefault"
+                          v-model="BillOption.BillDate"
                           class="form-control"
                         />
                       </div>
                       <div class="m-input-c">
                         <label class="w-50">Düzenlenme Saati*</label>
                         <flat-pickr
-                          v-model="timePicker"
+                          v-model="BillOption.BillTime"
                           class="form-control"
                           :config="{
                             enableTime: true,
@@ -253,7 +254,7 @@
                       <div class="m-input-c">
                         <label class="w-50">Para Birimi*</label>
                         <b-form-select
-                          v-model="moneyValue"
+                          v-model="BillOption.moneyType"
                           :options="money"
                           size="sm"
                         />
@@ -261,7 +262,7 @@
                       <div class="m-input-c">
                         <label class="w-50">XSLT Dosyası:*</label>
                         <b-form-select
-                          v-model="XSLTFileValue"
+                          v-model="BillOption.XSLTFileValue"
                           :options="XSLTFile"
                           size="sm"
                         />
@@ -269,7 +270,7 @@
                     </div>
                   </div>
                 </b-card-text>
-                <b-form-checkbox v-model="irsaliye" value="true">
+                <b-form-checkbox v-model="BillOption.irsaliye" value="İrsaliye Yerine Geçer">
                   İrsaliye yerine geçer.
                 </b-form-checkbox>
               </b-card>
@@ -296,12 +297,12 @@
         <b-card>
           <b-container>
             <b-row align-v="center" align-h="between" class="mb-2">
-              <b-col lg="5">
+              <b-col lg="7">
                 <h4>Ürün Hizmet Bilgileri</h4>
               </b-col>
-              <b-col lg="6">
-                <b-row align-content="end">
-                  <b-col md="4" lg="4">
+              <b-col lg="5">
+                <b-row align-content="end" align-h="end">
+                  <b-col md="4" >
                     <b-dropdown
                       id="dropdown-1"
                       v-ripple.400="'rgba(255, 255, 255, 0.15)'"
@@ -314,7 +315,7 @@
                     </b-dropdown>
                   </b-col>
 
-                  <b-col cols="8" lg="4">
+                  <b-col cols="8">
                     <b-button
                       v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                       variant="info"
@@ -344,6 +345,7 @@
                 id="textarea-default"
                 placeholder="Textarea"
                 rows="3"
+                v-model="Description"
               />
             </b-col>
 
@@ -782,12 +784,12 @@ export default {
     BCol,
     BCardGroup,
     BFormSelect,
+    BButton,
     BFormGroup,
     BDropdown,
     BFormTextarea,
     BDropdownItem,
     BCard,
-    BButton,
     BCardText,
     BInputGroupPrepend,
     BFormInput,
@@ -932,7 +934,16 @@ export default {
       items: [
         {
           name: "test-address",
-          value: {},
+          value: {
+            name:"",
+quantity:0,
+unit:0,
+unitPrice:0,
+discounty:0,
+discountt:0,
+KDV:18,
+total:0,
+          },
         },
       ],
       İrsaliye: [
@@ -962,10 +973,17 @@ export default {
         { value: "İngiliz Sterlini", text: "İngiliz Sterlini" },
       ],
       XSLTFile: [{ value: "Gib XSLT", text: "Gib XSLT" }],
-      BillTypeValue: "",
-      ShippingMethodValue: "",
-      moneyValue: "",
-      XSLTFileValue: "",
+      BillOption:{
+SendingType:"",
+BillTypeValue:"",
+BillDate:"",
+BillTime:"",
+BillOption:"",
+XSLTFileValue:"",
+moneyType:"",
+irsaliye:""
+      },
+      Description:"",
       ProductCalc: {
         name: "",
         quantity: 0,
@@ -1143,14 +1161,14 @@ export default {
     },
     toats() {
       //  :data="items" :person="VuexSerchData"  :total="totals"
-      console.log();
-      console.log();
+
+      console.log(this.VuexSerchData,
+        this.items[0].value.name)
       if (
         Object.keys(this.VuexSerchData).length > 0 &&
-        Object.keys(this.items[0].value) > 0 &&
-        this.items[0].value.title != ""
+        this.items[0].value.name!=""
       ) {
-        this.showbill = false;
+        this.showbill = true;
       } else {
         this.$toast({
           component: ToastificationContent,
@@ -1202,7 +1220,7 @@ export default {
       var kdvb = 0;
       var kdvc = 0;
       var kdvd = 0;
-      this.items.forEach((el) => {
+      this.items.forEach((el) => {  
         iskontoTotal += el.value.discountt;
         console.log(el.value.KDV);
         if (el.value.KDV == 18) {
@@ -1220,10 +1238,11 @@ export default {
         total += el.value.quantity * el.value.unitPrice;
         totals += el.value.total;
       });
+    
       this.totals.allTotal = totals;
-      this.totals.KDVwithTotal = totals;
+      this.totals.KDVwithTotal = total==NaN?0:totals;
       this.totals.total = total;
-      this.totals.TotalDiscount = iskontoTotal;
+      this.totals.TotalDiscount = iskontoTotal==NaN?0:iskontoTotal;
       this.totals.KDVtotala = kdva;
       this.totals.KDVtotalb = kdvb;
       this.totals.KDVtotalc = kdvc;

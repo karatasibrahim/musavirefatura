@@ -10,15 +10,7 @@ export default [{
       {
         title: 'Fatura Oluştur',
         route: 'Fatura-Olustur',
-      },
-      {
-        title: 'Gelen E-arsiv',
-        route: 'Gelen-Earsiv',
-      },
-      {
-        title: 'Giden E-arsiv',
-        route: 'Giden-Earsiv',
-      },
+      }
     ]
   },
   {
@@ -36,6 +28,14 @@ export default [{
       {
         title: 'Düzenlenen Faturalar',
         route: 'düzenlenen-faturalar',
+      },
+      {
+        title: 'Gelen E-Fatura',
+        route: 'Gelen-Earsiv',
+      },
+      {
+        title: 'Giden E-Fatura',
+        route: 'Giden-Earsiv',
       },
       {
         title: 'İptal / itiraz Talebi',

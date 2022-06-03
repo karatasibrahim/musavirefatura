@@ -37,7 +37,7 @@ export default [
   {
     path: "/earsiv/GelenEarsiv",
     name: "Gelen-Earsiv",
-    component: () => import("@/views/online/earsiv/GelenEarsiv.vue"),
+    component: () => import("@/views/online/efatura/GelenEarsiv.vue"),
   },
   {
     path: "/ayarlar/FaturaTasarim",
@@ -57,7 +57,7 @@ export default [
   {
     path: "/earsiv/GidenEarsiv",
     name: "Giden-Earsiv",
-    component: () => import("@/views/online/earsiv/GidenEarsiv.vue"),
+    component: () => import("@/views/online/efatura/GidenEarsiv.vue"),
   },
   {
     path: "/BaBs",

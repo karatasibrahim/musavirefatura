@@ -1,9 +1,13 @@
 <template>
   <div class="address">
     <!-- Optional default data cell scoped slot -->
-    <div>
+    <div class="col-2">
       <label>Ürün İsmi</label>
-      <input type="text" v-model="localAddress.name" />
+      <v-select
+        v-search
+        v-model="localAddress.name"
+        :options="StokSearch"
+      />
     </div>
 
     <div>
@@ -47,7 +51,7 @@
       />
     </div>
     <div>
-      <label>KDv</label>
+      <label>KDV</label>
       <select
         name="kdv"
         @change="calculation(localAddress)"
@@ -58,16 +62,10 @@
         <option value="1">1%</option>
         <option value="0">0%</option>
       </select>
-      <!-- <input
-        type="number"
-        @keyup="calculation(localAddress)"
-        placeholder="0%"
-        
-      /> -->
     </div>
-    
+
     <div>
-      <label>KDV({{localAddress.KDV}})</label>
+      <label>KDV({{ localAddress.KDV }})</label>
       <input
         type="number"
         @keyup="calculation(localAddress)"
@@ -1180,7 +1178,7 @@ import {
 } from "bootstrap-vue";
 import flatPickr from "vue-flatpickr-component";
 import Ripple from "vue-ripple-directive";
-
+import {mapActions} from 'vuex';
 import vSelect from "vue-select";
 export default {
   name: "test-address",
@@ -1236,6 +1234,7 @@ export default {
         { value: "2.LİSTE", text: "ÖTV 2.LİSTE" },
         { value: "TES.ÜC", text: "BORSA TES.ÜC" },
       ],
+      StokSearch: [],
       AllPaxList: [
         { value: "İskonto3", text: "İskonto3" },
         { value: "Artırım", text: "Artırım" },
@@ -1326,7 +1325,24 @@ export default {
       ],
     };
   },
+  directives: {
+    search: {
+      bind: (el, binding, vnode) => {
+        el.addEventListener("focusin", () => {
+          console.log(el);
+          document
+            .getElementsByClassName("vs__search")[1]
+            .addEventListener("keyup", () => {
+             let input= document.getElementsByClassName("vs__search")[1].value
+                console.log(document.getElementsByClassName("vs__search")[1].value)
+                vnode.context.filterName(input)
+            });
+        });
+      },
+    },
+  },
   methods: {
+    ...mapActions(["FetchFilterStok"]),
     showModal(e) {
       this.$refs["my-modal"].show();
       this.modalValue = e;
@@ -1345,7 +1361,7 @@ export default {
       //KDV hesaplanması
       let Brüt;
       let KdvHesaplama;
-      if (field.KDV != 0 &&field.KDV != null) {
+      if (field.KDV != 0 && field.KDV != null) {
         if (field.discounty != 0 && field.discounty != null) {
           Brüt = iskonto;
         } else {
@@ -1354,7 +1370,7 @@ export default {
         console.log(Brüt);
         KdvHesaplama = Brüt * (field.KDV / 100) + Brüt;
         console.log(KdvHesaplama);
-        field.kdvTl=KdvHesaplama
+        field.kdvTl = KdvHesaplama;
         field.total = KdvHesaplama;
       } else {
         if (field.discounty != 0 && field.discounty != null) {
@@ -1364,6 +1380,17 @@ export default {
         }
       }
     },
+    filterName(e){
+      let datas={
+        id:JSON.parse(localStorage.getItem("userData")).userId,
+        data:e
+      }
+      console.log(datas);
+this.FetchFilterStok(datas).then(res=>{
+  this.StokSearch.push({title:res.UrunAd,data:res})
+  console.log( this.StokSearch);
+})
+    }
   },
   computed: {
     localAddress: {
@@ -1376,6 +1403,14 @@ export default {
     },
   },
   watch: {
+    "localAddress.name"() {
+      console.log(this.localAddress.name);
+      const dat=this.localAddress.name.data
+this.localAddress.name=dat.UrunAd,
+this.localAddress.unit=dat.unit,
+this.localAddress.unitPrice=dat.BrmFiyatSatis,
+this.localAddress.KDV =dat.KdvSatis
+    },
     AddedPax() {
       console.log(this.AddedPax);
       document.getElementById(this.AddedPax).style.display = "flex";
@@ -1506,11 +1541,21 @@ export default {
 .address div {
   padding-inline: 10px;
 }
+.v-select{
+  padding: 0px;
+}
+.address div select{
+    border: 1px solid #d8d6de;
+  border-radius: 0.357rem;
+  padding: 4px 8px;
+  background: #fff
+} 
 .address div input {
   width: 100%;
   border: 1px solid #d8d6de;
   border-radius: 0.357rem;
   padding: 4px 8px;
+  background: #fff;
 }
 .row {
   display: flex;
@@ -1522,7 +1567,6 @@ label {
   text-align: left;
   margin-bottom: 4px;
 }
-
 input {
   height: 32px;
   border-radius: 4px;

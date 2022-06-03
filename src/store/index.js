@@ -51,8 +51,8 @@ export default new Vuex.Store({
     adress: [],
     SelectData: {},
     AllPerson: [],
-    SelectedArray:[],
-    GelenFaturalar:[]
+    SelectedArray: [],
+    GelenFaturalar: []
   },
   getters: {
     GetSerach(state, payload) {
@@ -70,10 +70,10 @@ export default new Vuex.Store({
     GetAllPerson(state, payload) {
       return state.AllPerson
     },
-    GetAllSelectedArray(state,payload){
-return state.SelectedArray
+    GetAllSelectedArray(state, payload) {
+      return state.SelectedArray
     },
-    GetGelenArsiv(state){
+    GetGelenArsiv(state) {
       console.log(state.GelenFaturalar);
       return state.GelenFaturalar
     }
@@ -94,15 +94,15 @@ return state.SelectedArray
     },
     SetSelectedArray(state, payload) {
       console.log(payload);
-      state.SelectedArray=[]
-      state.SelectedArray.push(payload) 
+      state.SelectedArray = []
+      state.SelectedArray.push(payload)
     },
     SetAllPerson(state, payload) {
       state.AllPerson.push(payload)
     },
-    SetGelenFaturalar(state,payload){
+    SetGelenFaturalar(state, payload) {
       console.log(payload);
-state.GelenFaturalar.push(payload);
+      state.GelenFaturalar.push(payload);
     }
   },
   actions: {
@@ -118,7 +118,7 @@ state.GelenFaturalar.push(payload);
         mukellefdata.then(dt => {
           dt.forEach((doca) => {
             console.log(doca.data());
-            if (doca.data().CariAdres != undefined && doca.data().CariAdres != "" ) {
+            if (doca.data().CariAdres != undefined && doca.data().CariAdres != "") {
               const ax = getDoc(doc(db, doca.data().CariAdres))
               ax.then(e => {
                 console.log(e.data());
@@ -145,10 +145,10 @@ state.GelenFaturalar.push(payload);
       mukellefdata.forEach((doca) => {
         let withid = Object.assign(doca.data(), {
           id: doca.id
-         })
-   
+        })
+
         if (doca.data().CariAdres != undefined && doca.data().CariAdres != "") {
-                console.log(doca.data(),doca.data().CariAdres);
+          console.log(doca.data(), doca.data().CariAdres);
           const ax = getDoc(doc(db, doca.data().CariAdres))
           ax.then(e => {
             console.log(e.data());
@@ -196,37 +196,74 @@ state.GelenFaturalar.push(payload);
         console.log(doc.ref.path);
       });
     },
-     FecthGelenFaturalar(context,payload){
-       return new Promise((resolve,reject)=>{
-               const q = query(collection(db, "GelenFaturalar"),
-      where("KullaniciId", "==", payload),
-    );
-    const mukellefdata =  getDocs(q);
-    mukellefdata.then(res=>{
-      var arr=[]
-     res.forEach(el=>{
-       arr.push(el.data())
-    })
-    resolve(arr)
-    })
-       })
+    FecthGelenFaturalar(context, payload) {
+      return new Promise((resolve, reject) => {
+        const q = query(collection(db, "GelenFaturalar"),
+          where("KullaniciId", "==", payload),
+        );
+        const mukellefdata = getDocs(q);
+        mukellefdata.then(res => {
+          var arr = []
+          res.forEach(el => {
+            arr.push(el.data())
+          })
+          resolve(arr)
+        })
+      })
 
     },
-    FecthGidenFaturalar(context,payload){
-      return new Promise((resolve,reject)=>{
+    FecthGidenFaturalar(context, payload) {
+      return new Promise((resolve, reject) => {
         const q = query(collection(db, "GidenFaturalar"),
-where("KullaniciId", "==", payload),
-);
-const mukellefdata =  getDocs(q);
-mukellefdata.then(res=>{
-var arr=[]
-res.forEach(el=>{
-arr.push(el.data())
-})
-resolve(arr)
-})
-})
+          where("KullaniciId", "==", payload),
+        );
+        const mukellefdata = getDocs(q);
+        mukellefdata.then(res => {
+          var arr = []
+          res.forEach(el => {
+            arr.push(el.data())
+          })
+          resolve(arr)
+        })
+      })
 
+    },
+    FecthStok(context, payload) {
+      console.log(payload);
+      return new Promise((resolve, reject) => {
+        const q = query(collection(db, "Stok"),
+          where("kullaniciId", "==", payload),
+        );
+        const dataa = getDocs(q);
+        dataa.then(res => {
+          var arr = []
+          res.forEach(el => {
+            arr.push(Object.assign(el.data(),{id:el.id}) )
+          })
+          resolve(arr)
+        })
+      })
+
+    },
+    FetchFilterStok(context, payload) {
+
+      return new Promise((resolve, reject) => {
+        const q = query(collection(db, "Stok"),
+          where("kullaniciId", "==", payload.id),
+          where("UreticiKod", "==", payload.data)
+        );
+        const mukellefdata = getDocs(q);
+        mukellefdata.then(dt => {
+   
+          dt.forEach((doca) => {
+            console.log(doca.data());
+      
+   resolve(doca.data())
+            documentid = doca.id
+          })
+        })
+
+      })
     },
     //! Add Name
 
@@ -242,21 +279,25 @@ resolve(arr)
       console.log(res);
       this.dispatch("FetchAdress", payload.kullaniciId)
     },
-async AddBill(context,payload){
-  console.log(payload);
-  const res = await addDoc(collection(db, "FaturaIcerik"), payload)
-  console.log(res);
+    async AddBill(context, payload) {
+      console.log(payload);
+      const res = await addDoc(collection(db, "FaturaIcerik"), payload)
+      console.log(res);
 
-},
+    },
+    async AddStok(context, payload) {
+      console.log(payload);
+      const res = await addDoc(collection(db, "Stok"), payload)
+    },
     //! Uptade 
     async UpdateNewAlici(context, payload) {
 
-      if(payload.id != undefined){
-       const res = await updateDoc(doc(db, "Cari", payload.id), payload.data)
-      }else{
+      if (payload.id != undefined) {
+        const res = await updateDoc(doc(db, "Cari", payload.id), payload.data)
+      } else {
         console.log("else");
         const docRef = await addDoc(collection(db, "Cari"), payload.data);
-        
+
       }
     },
     async UptadeAdressa(context, payload) {
@@ -264,10 +305,26 @@ async AddBill(context,payload){
       const res = await updateDoc(doc(db, "CariAdres", payload.id), payload.data)
       console.log(res);
     },
+    async UptadeAdressa(context, payload) {
+      console.log(payload);
+      const res = await updateDoc(doc(db, "CariAdres", payload.id), payload.data)
+      console.log(res);
+    },
+    async UptadeStok(context, payload) {
+      console.log(payload);
+      const res = await updateDoc(doc(db, "Stok", payload.id), payload.data)
+    },
+
+    //! Delete
     async DeletePerson(context, payload) {
-      
+
       console.log(payload);
       await deleteDoc(doc(db, "Cari", payload));
+    },
+    async DeleteStok(context, payload) {
+
+      console.log(payload);
+      await deleteDoc(doc(db, "Stok", payload));
     }
   },
   strict: process.env.DEV,

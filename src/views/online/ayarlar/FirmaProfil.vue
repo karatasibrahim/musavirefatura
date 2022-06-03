@@ -1,46 +1,50 @@
 <template>
 <div>
     <b-card>
-
-    
+<div class="pl-4">
+   <h3>Firma Profili</h3>
+  
+</div>
+ <hr>   
   <div class="m-flex-row">
+    
     <div class="m-input">
       <div class="m-input-c row">
-        <label class="col-4" >VKN/TCKN*</label>
+        <label class="col-6" >VKN/TCKN*</label>
         <p>21635792566</p>
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Unvan</label>
-        <input type="text" />
+        <label class="col-6">Unvan</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Adı *</label>
-        <input type="text" />
+        <label class="col-6">Adı *</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Soyadı *</label>
-        <input type="text" />
+        <label class="col-6">Soyadı *</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">NACE Kodu</label>
-        <b-form-group>
+        <label class="col-6">NACE Kodu</label>
+        <b-form-group class="col-6 p-0">
           <v-select  label="title" :options="option" />
         </b-form-group>
       </div>
       <div class="m-input-c row">
-        <label class="col-4">KEP Adresi</label>
-        <input type="text" />
+        <label class="col-6">KEP Adresi</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Müşteri Temsilcisi</label>
-        <input type="text" />
+        <label class="col-6">Müşteri Temsilcisi</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Bilgilendirme maili almak istiyorum</label>
+        <label class="col-6">Bilgilendirme maili almak istiyorum</label>
         <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
       </div>
             <div class="m-input-c row">
-        <label class="col-4"
+        <label class="col-6"
           >e-Arşiv Faturaları 8 günden sonra da iptal etmek istiyorum.</label
         >
         <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
@@ -48,31 +52,31 @@
     </div>
     <div class="m-input">
     <div class="m-input-c row">
-        <label class="col-4">Müşteri Adı *</label>
-        <input type="text" />
+        <label class="col-6">Müşteri Adı *</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Orta Adı </label>
-        <input type="text" />
+        <label class="col-6">Orta Adı </label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Kurumsal e-Posta *</label>
-        <input type="text" />
+        <label class="col-6">Kurumsal e-Posta *</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Müsteri No</label>
-        <input type="text" />
+        <label class="col-6">Müsteri No</label>
+        <input class="col-6" type="text" />
       </div>
             <div class="m-input-c row">
-        <label class="col-4">Müşteri Temsilcisi</label>
-        <input type="text" />
+        <label class="col-6">Müşteri Temsilcisi</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Bilgilendirme maili almak istiyorum</label>
+        <label class="col-6">Bilgilendirme maili almak istiyorum</label>
         <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
       </div>
             <div class="m-input-c row">
-        <label class="col-4"
+        <label class="col-6"
           >e-Arşiv Faturaları 8 günden sonra da iptal etmek istiyorum.</label
         >
         <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
@@ -83,26 +87,26 @@
     <div class="m-flex-row">
     <div class="m-input">
       <div class="m-input-c row">
-        <label class="col-4" >Sorumlu Tckn</label>
-        <input type="text" />
+        <label class="col-6" >Sorumlu Tckn</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Sorumlu Adı</label>
-        <input type="text" />
+        <label class="col-6">Sorumlu Adı</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Sorumlu Cep Tel.Adı *</label>
-        <input type="text" />
+        <label class="col-6">Sorumlu Cep Tel.Adı *</label>
+        <input class="col-6" type="text" />
       </div>
     </div>
       <div class="m-input">
       <div class="m-input-c row">
-        <label class="col-4" >Sorumlu Soyadı</label>
-        <input type="text" />
+        <label class="col-6" >Sorumlu Soyadı</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Sorumlu e-Posta</label>
-        <input type="text" />
+        <label class="col-6">Sorumlu e-Posta</label>
+        <input class="col-6" type="text" />
       </div>
 
     </div>
@@ -111,26 +115,26 @@
      <div class="m-flex-row">
     <div class="m-input">
       <div class="m-input-c row">
-        <label class="col-4" >Ver. Dairesi *</label>
-        <input type="text" />
+        <label class="col-6" >Ver. Dairesi *</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Oda Kayıt Numarası</label>
-        <input type="text" />
+        <label class="col-6">Oda Kayıt Numarası</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Ticari Uygulama</label>
-        <input type="text" />
+        <label class="col-6">Ticari Uygulama</label>
+        <input class="col-6" type="text" />
       </div>
     </div>
       <div class="m-input">
       <div class="m-input-c row">
-        <label class="col-4" >Mersis No</label>
-        <input type="text" />
+        <label class="col-6" >Mersis No</label>
+        <input class="col-6" type="text" />
       </div>
       <div class="m-input-c row">
-        <label class="col-4">Kayıtlı Olduğu Oda</label>
-        <input type="text" />
+        <label class="col-6">Kayıtlı Olduğu Oda</label>
+        <input class="col-6" type="text" />
       </div>
 
     </div>
@@ -199,7 +203,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@core/scss/vue/libs/vue-flatpicker.scss";
 .tabs {
   width: 100%;

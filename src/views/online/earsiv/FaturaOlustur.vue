@@ -162,7 +162,7 @@
                   <td align="left">
                     <span style="font-weight: bold">Fatura Tipi:</span>
                   </td>
-                  <td align="left">SATIS</td>
+                  <td align="left">{{bill.BillTypeValue}}</td>
                 </tr>
                 <tr style="height: 13px">
                   <td align="left">
@@ -174,7 +174,7 @@
                   <td align="left">
                     <span style="font-weight: bold">Fatura Tarihi:</span>
                   </td>
-                  <td align="left">08-03-2022&nbsp;13:03</td>
+                  <td align="left">{{bill.BillDate}}&nbsp;{{bill.BillTime}}</td>
                 </tr>
               </tbody>
             </table>
@@ -397,7 +397,9 @@
       <tbody>
         <tr align="left">
           <td height="100" id="notesTableTd">
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>{{SayiDonustur(total.allTotal)}} TL<br />
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>Sadece {{SayiDonustur(total.allTotal)}} TL<br />
+          <b v-if="desc!=''">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>{{desc}} <br />
+          <b v-if="bill.irsaliye!=''">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>{{bill.irsaliye}}<br />
           </td>
         </tr>
       </tbody>
@@ -406,7 +408,7 @@
 </template>
 <script>
 export default {
-  props: ["data", "person", "total"],
+  props: ["data", "person", "total","bill","desc"],
   data() {
     return {
       value: "https://www.google.com/",

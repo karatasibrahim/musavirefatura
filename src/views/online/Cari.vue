@@ -288,7 +288,7 @@ getAllPerson(){
 UpdateData(e){
  this.$router.push({ name: 'YeniMüsteri',params: { data: e }})
 },
-DeleteData(e){
+DeleteStok(e){
  this.DeletePerson(e.id)
  
 let fin=  this.getAllPerson.findIndex(el=>{
