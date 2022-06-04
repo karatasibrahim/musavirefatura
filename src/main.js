@@ -8,13 +8,17 @@ import store from "./store";
 import App from "./App.vue";
 import { initializeApp } from "firebase/app";
 import Address from './@core/repeater/adress.vue'
-import İrsaliye from './@core/repeater/irsaliye.vue'
+import Irsaliye from './@core/repeater/irsaliye.vue'
+import Iade from './@core/repeater/iade.vue'
+
 import VueQRCodeComponent from 'vue-qrcode-component'
 Vue.component('qr-code', VueQRCodeComponent)
 // Global Components
 import "./global-components";
 Vue.component('test-address', Address)
-Vue.component('İrsaliye',İrsaliye)
+Vue.component('Irsaliye',Irsaliye)
+Vue.component('Iade',Iade)
+
 // 3rd party plugins
 import "@axios";
 import "@/libs/acl";

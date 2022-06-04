@@ -9,8 +9,16 @@ export default [{
 
       {
         title: 'Fatura Oluştur',
-        route: 'Fatura-Olustur',
-      }
+        route: 'yeni-efatura-earsv',
+      },
+      {
+        title: 'Gelen Arşiv',
+        route: 'gelen-arsiv',
+      },
+      {
+        title: 'Giden Arşiv',
+        route: 'giden-arsiv',
+      },
     ]
   },
   {

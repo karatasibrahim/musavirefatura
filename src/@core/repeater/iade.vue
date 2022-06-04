@@ -3,17 +3,16 @@
 
                 <!-- Optional default data cell scoped slot -->
                 <div >
-                  <label >İrsaliye No</label>
-                  <input type="text" v-model="localAddress.irsNo" />
+                  <label >Fatura No</label>
+                  <input type="text" v-model="localAddress.FaturaNo" />
                 </div>
 
                 <div >
-                  <label >İrsaliye Tarihi</label>
-                  <input
-                    type="number"
-                    @keyup="calculation(localAddress)"
-                    v-model.number="localAddress.irsTarih"
-                  />
+                  <label >Düzenlenme Tarihi</label>
+                          <flat-pickr
+           v-model.number="localAddress.irsTarih"
+          class="form-control"
+        />
                 </div>
     </div>
 </template>
@@ -43,7 +42,7 @@ import flatPickr from "vue-flatpickr-component";
 
 import vSelect from "vue-select";
 export default {
-  name: 'Irsaliye',
+  name: 'iade',
     components: {
     BRow,
     BTable,

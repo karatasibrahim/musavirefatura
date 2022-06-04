@@ -2,7 +2,22 @@ export default [
   {
     path: "/earsiv/FaturaOlustur",
     name: "yeni-efatura-earsiv",
-    component: () => import("@/views/online/earsiv/FaturaOlustur.vue"),
+    component: () => import("@/views/online/FaturaOlustur.vue"),
+  },
+  {
+    path: "/earsiv/FaturaOlustu",
+    name: "yeni-efatura-earsv",
+    component: () => import("@/views/online/earsiv/arsivOlustur.vue"),
+  },
+  {
+    path: "/earsiv/gelenArsiv",
+    name: "gelen-arsiv",
+    component: () => import("@/views/online/earsiv/gelenArsiv.vue"),
+  },
+  {
+    path: "/earsiv/gidenArsiv",
+    name: "giden-arsiv",
+    component: () => import("@/views/online/earsiv/gidenArsiv.vue"),
   },
   {
     path: "/efatura/yenifatura",
@@ -32,7 +47,7 @@ export default [
   {
     path: "/earsiv/FaturaOlustur",
     name: "Fatura-Olustur",
-    component: () => import("@/views/online/earsiv/FaturaOlustur.vue"),
+    component: () => import("@/views/online/FaturaOlustur.vue"),
   },
   {
     path: "/earsiv/GelenEarsiv",

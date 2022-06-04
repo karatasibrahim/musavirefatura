@@ -1,6 +1,11 @@
 <template>
   <div
-    style="margin-left:0.6in; margin-right:0.6in; margin-top:0.79in; margin-bottom:0.79in"
+    style="
+      margin-left: 0.6in;
+      margin-right: 0.6in;
+      margin-top: 0.79in;
+      margin-bottom: 0.79in;
+    "
     id="mainbody"
   >
     <table
@@ -84,7 +89,14 @@
               "malHizmetKDV(18)":68.64, "hesaplananKDV(18)":12.35,
               "malHizmet":68.64, "vergidahil":"80.99", "odenecek":"80.99"}
             </div>
-            <qr-code :text="value" :size="size"></qr-code>
+            <img
+              :src="logo.img"
+              alt="E-Fatura Logo"
+              align="middle"
+              style="width: 91px"
+              :width="logo.w"
+              :height="logo.h"
+            />
           </td>
         </tr>
         <tr valign="top" style="height: 118px">
@@ -162,7 +174,7 @@
                   <td align="left">
                     <span style="font-weight: bold">Fatura Tipi:</span>
                   </td>
-                  <td align="left">{{bill.BillTypeValue}}</td>
+                  <td align="left">{{ bill.BillTypeValue }}</td>
                 </tr>
                 <tr style="height: 13px">
                   <td align="left">
@@ -174,7 +186,9 @@
                   <td align="left">
                     <span style="font-weight: bold">Fatura Tarihi:</span>
                   </td>
-                  <td align="left">{{bill.BillDate}}&nbsp;{{bill.BillTime}}</td>
+                  <td align="left">
+                    {{ bill.BillDate }}&nbsp;{{ bill.BillTime }}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -304,12 +318,7 @@
                 </tr>
                 <tr align="right" v-if="total.KDVtotalb != 0">
                   <td></td>
-                  <td
-                    align="right"
-                    width="211px"
-                    class="lineTableBudgetTd"
-                    
-                  >
+                  <td align="right" width="211px" class="lineTableBudgetTd">
                     <span style="font-weight: bold">Hesaplanan KDV(%8)</span>
                   </td>
                   <td
@@ -320,33 +329,23 @@
                     {{ total.KDVtotalb }} TL
                   </td>
                 </tr>
-                
-                <tr align="right"  v-if="total.KDVtotalc != 0">
+
+                <tr align="right" v-if="total.KDVtotalc != 0">
                   <td></td>
-                  <td
-                    align="right"
-                    width="211px"
-                    class="lineTableBudgetTd"
-                  >
+                  <td align="right" width="211px" class="lineTableBudgetTd">
                     <span style="font-weight: bold">Hesaplanan KDV(%1)</span>
                   </td>
                   <td
                     align="right"
                     style="width: 82px"
                     class="lineTableBudgetTd"
-                  
                   >
                     {{ total.KDVtotalc }} TL
                   </td>
                 </tr>
-                <tr align="right"  v-if="total.KDVtotald != 0">
+                <tr align="right" v-if="total.KDVtotald != 0">
                   <td></td>
-                  <td
-                    align="right"
-                    width="211px"
-                    class="lineTableBudgetTd"
-                   
-                  >
+                  <td align="right" width="211px" class="lineTableBudgetTd">
                     <span style="font-weight: bold">Hesaplanan KDV(%0)</span>
                   </td>
                   <td
@@ -386,6 +385,9 @@
                     {{ total.allTotal }} TL
                   </td>
                 </tr>
+                <tr align="right">
+                  <td></td>
+                </tr>
               </tbody>
             </table>
           </td>
@@ -397,9 +399,16 @@
       <tbody>
         <tr align="left">
           <td height="100" id="notesTableTd">
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>Sadece {{SayiDonustur(total.allTotal)}} TL<br />
-          <b v-if="desc!=''">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>{{desc}} <br />
-          <b v-if="bill.irsaliye!=''">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>{{bill.irsaliye}}<br />
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b>Sadece
+            {{ SayiDonustur(total.allTotal) }} TL<br />
+            <b v-if="desc != ''">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b
+            >{{ desc }} <br />
+            <b v-if="bill.irsaliye != ''"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Not: </b
+            >{{ bill.irsaliye }}<br />
+          </td>
+          <td class="w-25" id="notesTableTd">
+            <qr-code :text="value" :size="size"></qr-code>
           </td>
         </tr>
       </tbody>
@@ -408,7 +417,121 @@
 </template>
 <script>
 export default {
-  props: ["data", "person", "total","bill","desc"],
+
+  props:{
+    data:{
+      required:false,
+      default(){
+        return [
+        {
+          name: "test-address",
+          value: {
+            name:"",
+quantity:0,
+unit:0,
+unitPrice:0,
+discounty:0,
+discountt:0,
+KDV:18,
+total:0,
+          }
+        }
+      ]
+        
+      },
+      type:Array
+    },
+    person:{
+            required:false,
+
+default(){return{
+    person:{
+            vkn: "212",
+        name: "Fatma",
+        surname: "Atasoy",
+        vergiDSehir: "Amasya",
+        vergiD: "Amasya",
+        MersisNo: "dsf",
+        Unvan: "Aş",
+        ortaAdi: "Aş",
+        TicOdasi: "sd",
+        VergiD: "sd",
+        TicSicNo: "sd",
+  },
+  adress:{
+    
+        adress: "",
+        eFatura: "",
+        city: "",
+        country: "",
+        EPosta: "",
+        Faks: "",
+        BinaAdi: "",
+        DaireNo: "",
+        BayiNo: "",
+        PostaKodu: "",
+        BinaNo: "",
+        MahalleCadde: "",
+        Telefon: "",
+        İlce: "",
+        Website: "",
+        eirsaliye: "",
+        YetkiliKişi: "",
+        path: "",
+  }
+}
+
+
+      },
+      type:Object
+    },
+    desc:{
+            required:false,
+
+default:"deneme",
+type:String
+    },
+    total:{
+            required:false,
+
+      default(){ return{
+        
+        total: 0,
+        TotalDiscount: 0,
+        KDVwithoutTotal: 0,
+        KDVtotal: 0,
+        allTotal: 0,
+        KDVtotala: 0,
+        KDVtotalb: 0,
+        KDVtotala: 0,
+        KDVtotalc: 0,
+        KDVtotald: 0,
+      }
+      },
+      type:Object
+    },
+    bill:{
+            required:false,
+
+      default(){ return{
+        SendingType:"",
+BillTypeValue:"",
+BillDate:"",
+BillTime:"",
+BillOption:"",
+XSLTFileValue:"",
+moneyType:"",
+irsaliye:""
+      }
+
+      },
+      type:Object
+    },
+    logo:{
+type:Object,
+required:false
+    }
+  },
   data() {
     return {
       value: "https://www.google.com/",
@@ -555,6 +678,9 @@ return this.sonuc
 };
 </script>
 <style scoped>
+table {
+  width: 100%;
+}
 #mainbody {
   background-color: #ffffff;
   font-family: "Tahoma", "Times New Roman", Times, serif;

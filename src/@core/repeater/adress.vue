@@ -5,6 +5,7 @@
       <label>Ürün İsmi</label>
       <v-select
         v-search
+         label="title"
         v-model="localAddress.name"
         :options="StokSearch"
       />
@@ -1152,6 +1153,148 @@
         </b-col>
       </div>
     </b-modal>
+        <b-modal
+      ref="stok"
+      title="Stok Ekle"
+      ok-title="Kaydet"
+      cancel-title="İptal"
+      size="lg"
+      cancel-variant="outline-secondary"
+      @ok="SaveStok"
+    >
+   <b-card
+                ref="taxPayerPopup"
+                title="Müşteri Bilgileri"
+                size="lg"
+                centered
+                no-close-on-backdrop
+              >
+              
+                <b-card-text>
+                <div class="m-flex-row">
+                    <div class="m-input">
+                      <div class="m-input-c">
+                        
+                         <label class="col-5 pl-0">Satıcı Ürün Kodu*</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.SaticiKod"
+                           :state="stok.SaticiKod==''?false:true"
+                          
+                        />
+                      </div>
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0">Alıcı Ürün Kodu</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.AliciKodu"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0" >Ürün/Hizmet Birimi*</label>
+                                  <b-form-select
+                :options="Unit"
+                size="sm"
+                v-model="stok.unit"
+                                           :state="stok.unit==''?false:true"
+
+              />
+                      </div>
+                    <div class="m-input-c">
+                         <label class="col-5 pl-0">Birim Fiyat Alış</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.BirimFiyat"
+                        />
+                      </div>
+                         <div class="m-input-c">
+                         <label class="col-5 pl-0">KDV Alış*(%)</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.KdvAlis"
+                          required
+                                                     :state="stok.KdvAlis==''?false:true"
+
+                        />
+                      </div>
+                           <div class="m-input-c">
+                         <label class="col-5 pl-0">Ürün/Hizmet Etiket</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.Etiket"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0">GTİP Numarası</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.GtipNo"
+                        />
+                      </div>
+                    </div>
+                    <div class="m-input">
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0">Ürün/Hizmet Adı*</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.UrunAd"
+                                                     :state="stok.UrunAd==''?false:true"
+
+                          required
+                        />
+                      </div>
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0">Üretici Ürün Kodu</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.UreticiKod"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0">Para Birimi*</label>
+                       <b-form-select
+                          v-model="stok.ParaBirimi"
+                          :options="money"
+                          size="sm"
+                                :state="stok.ParaBirimi === null ? false : true"
+                        />
+                      </div>
+                      <div class="m-input-c">
+                         <label class="col-5 pl-0">Birim Fiyat Satış</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.BrmFiyatSatis"
+                        />
+                      </div>
+                         <div class="m-input-c">
+                         <label class="col-5 pl-0">KDV Satış*</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.KdvSatis"
+                                                     :state="stok.KdvSatis==''?false:true"
+
+                        />
+                      </div>
+                         <div class="m-input-c">
+                         <label class="col-5 pl-0">Ürün/Hizmet Açıklaması</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.UrunAciklama"
+                        />
+                      </div>
+                         <div class="m-input-c">
+                         <label class="col-5 pl-0">KDV Tevkifatı</label>
+                        <b-form-input
+                          type="text"
+                          v-model="stok.KdvTevkifat"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </b-card-text>
+              </b-card>
+    </b-modal>
+
   </div>
 </template>
 <script>
@@ -1176,6 +1319,9 @@ import {
   BTabs,
   BTab,
 } from "bootstrap-vue";
+const kullaniciId = JSON.parse(localStorage.getItem("userData")).userId;
+import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
+
 import flatPickr from "vue-flatpickr-component";
 import Ripple from "vue-ripple-directive";
 import {mapActions} from 'vuex';
@@ -1234,7 +1380,9 @@ export default {
         { value: "2.LİSTE", text: "ÖTV 2.LİSTE" },
         { value: "TES.ÜC", text: "BORSA TES.ÜC" },
       ],
-      StokSearch: [],
+      StokSearch: [
+        {title:"Stoğa Ekle"}
+      ],
       AllPaxList: [
         { value: "İskonto3", text: "İskonto3" },
         { value: "Artırım", text: "Artırım" },
@@ -1267,7 +1415,7 @@ export default {
       AllAddedPax: "",
       DiscoundValue: "",
       AddedPax: "",
-      Unit: [
+            Unit: [
         { value: "Kg-Metre kare", text: "Kg-Metre kare" },
         { value: "Adet(Unit)", text: "Adet(Unit)" },
         {
@@ -1311,6 +1459,28 @@ export default {
           text: "SODYUM HİDROKSİT KİLOGRAMI",
         },
       ],
+      money: [
+        { value: "Türk Lirasi", text: "Türk Lirasi" },
+        { value: "Euro", text: "Euro" },
+        { value: "US Dolar", text: "US Dolar" },
+        { value: "İngiliz Sterlini", text: "İngiliz Sterlini" },
+      ],
+      stok:{
+        SaticiKod:"",
+AliciKodu:"",
+KdvAlis:"",
+BirimFiyat:"",
+Etiket:"",
+GtipNo:"",
+UrunAd:"",
+UreticiKod:"",
+ParaBirimi:"",
+BrmFiyatSatis:"",
+KdvSatis:"",
+UrunAciklama:"",
+KdvTevkifat:"",
+kullaniciId:kullaniciId
+      },
       fields: [
         "#",
         "Ürün-Hizmet",
@@ -1342,7 +1512,23 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["FetchFilterStok"]),
+    ...mapActions(["FetchFilterStok","AddStok"]),
+    SaveStok(){
+        if(this.stok.KdvSatis!="" && this.stok.UrunAd!="" && this.stok.KdvAlis!=""&& this.stok.unit!="" && this.stok.SaticiKod!=""){
+  this.AddStok(this.stok)
+}else {
+        this.$toast({
+          component: ToastificationContent,
+          position: "top-right",
+          props: {
+            title: `Uyarı`,
+            icon: "AlertTriangleIcon",
+            variant: "danger",
+            text: `Değerleri Kontrol Ediniz`,
+          },
+        });
+      }
+    },
     showModal(e) {
       this.$refs["my-modal"].show();
       this.modalValue = e;
@@ -1387,8 +1573,10 @@ export default {
       }
       console.log(datas);
 this.FetchFilterStok(datas).then(res=>{
-  this.StokSearch.push({title:res.UrunAd,data:res})
-  console.log( this.StokSearch);
+  let arr=[  {title:"Stoğa Ekle"}]
+arr.push({title:res.UrunAd,data:res})
+
+this.StokSearch=[...new Set(arr)]
 })
     }
   },
@@ -1404,12 +1592,20 @@ this.FetchFilterStok(datas).then(res=>{
   },
   watch: {
     "localAddress.name"() {
-      console.log(this.localAddress.name);
-      const dat=this.localAddress.name.data
+    console.log(this.localAddress.name);
+    if(this.localAddress.name.title=="Stoğa Ekle"){
+      this.$refs["stok"].show()
+      this.localAddress.name.title="Ekle"
+    }else{     
+console.log(this.localAddress.name)
+const dat=this.localAddress.name.data
 this.localAddress.name=dat.UrunAd,
 this.localAddress.unit=dat.unit,
 this.localAddress.unitPrice=dat.BrmFiyatSatis,
 this.localAddress.KDV =dat.KdvSatis
+}
+
+
     },
     AddedPax() {
       console.log(this.AddedPax);

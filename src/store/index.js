@@ -281,9 +281,13 @@ export default new Vuex.Store({
     },
     async AddBill(context, payload) {
       console.log(payload);
-      const res = await addDoc(collection(db, "FaturaIcerik"), payload)
-      console.log(res);
-
+      const res = await addDoc(collection(db, "FaturaIcerik"), payload.data)
+      const icerik = await addDoc(collection(db, "FaturaDetay"),Object.assign(payload.detay,{FaturaIcerik:res.path}))
+    },
+    async AddArsiv(context, payload) {
+      console.log(payload);
+      const res = await addDoc(collection(db, "ArsivIcerik"), payload.data)
+      const icerik = await addDoc(collection(db, "ArsivDetay"),Object.assign(payload.detay,{FaturaIcerik:res.path}))
     },
     async AddStok(context, payload) {
       console.log(payload);

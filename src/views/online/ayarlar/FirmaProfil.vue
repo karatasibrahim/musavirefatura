@@ -1,149 +1,637 @@
 <template>
-<div>
+  <div>
     <b-card>
-<div class="pl-4">
-   <h3>Firma Profili</h3>
-  
-</div>
- <hr>   
-  <div class="m-flex-row">
-    
-    <div class="m-input">
-      <div class="m-input-c row">
-        <label class="col-6" >VKN/TCKN*</label>
-        <p>21635792566</p>
+      <div class="pl-4">
+        <h3>Firma Profili</h3>
       </div>
-      <div class="m-input-c row">
-        <label class="col-6">Unvan</label>
-        <input class="col-6" type="text" />
+      <hr />
+      <div class="m-flex-row">
+        <div class="m-input">
+          <div class="m-input-c row">
+            <label class="col-6">VKN/TCKN*</label>
+            <p>21635792566</p>
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Unvan</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Adı *</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Soyadı *</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">NACE Kodu</label>
+            <b-form-group class="col-6 p-0">
+              <v-select label="title" :options="option" />
+            </b-form-group>
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">KEP Adresi</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Müşteri Temsilcisi</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Bilgilendirme maili almak istiyorum</label>
+            <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6"
+              >e-Arşiv Faturaları 8 günden sonra da iptal etmek
+              istiyorum.</label
+            >
+            <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
+          </div>
+        </div>
+        <div class="m-input">
+          <div class="m-input-c row">
+            <label class="col-6">Müşteri Adı *</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Orta Adı </label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Kurumsal e-Posta *</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Müsteri No</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Müşteri Temsilcisi</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Bilgilendirme maili almak istiyorum</label>
+            <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6"
+              >e-Arşiv Faturaları 8 günden sonra da iptal etmek
+              istiyorum.</label
+            >
+            <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
+          </div>
+        </div>
       </div>
-      <div class="m-input-c row">
-        <label class="col-6">Adı *</label>
-        <input class="col-6" type="text" />
+      <br /><br />
+      <div class="m-flex-row">
+        <div class="m-input">
+          <div class="m-input-c row">
+            <label class="col-6">Sorumlu Tckn</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Sorumlu Adı</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Sorumlu Cep Tel.Adı *</label>
+            <input class="col-6" type="text" />
+          </div>
+        </div>
+        <div class="m-input">
+          <div class="m-input-c row">
+            <label class="col-6">Sorumlu Soyadı</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Sorumlu e-Posta</label>
+            <input class="col-6" type="text" />
+          </div>
+        </div>
       </div>
-      <div class="m-input-c row">
-        <label class="col-6">Soyadı *</label>
-        <input class="col-6" type="text" />
+      <hr />
+      <div class="m-flex-row">
+        <div class="m-input">
+          <div class="m-input-c row">
+            <label class="col-6">Ver. Dairesi *</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Oda Kayıt Numarası</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Ticari Uygulama</label>
+            <input class="col-6" type="text" />
+          </div>
+        </div>
+        <div class="m-input">
+          <div class="m-input-c row">
+            <label class="col-6">Mersis No</label>
+            <input class="col-6" type="text" />
+          </div>
+          <div class="m-input-c row">
+            <label class="col-6">Kayıtlı Olduğu Oda</label>
+            <input class="col-6" type="text" />
+          </div>
+        </div>
       </div>
-      <div class="m-input-c row">
-        <label class="col-6">NACE Kodu</label>
-        <b-form-group class="col-6 p-0">
-          <v-select  label="title" :options="option" />
-        </b-form-group>
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">KEP Adresi</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Müşteri Temsilcisi</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Bilgilendirme maili almak istiyorum</label>
-        <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
-      </div>
-            <div class="m-input-c row">
-        <label class="col-6"
-          >e-Arşiv Faturaları 8 günden sonra da iptal etmek istiyorum.</label
-        >
-        <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
-      </div>
-    </div>
-    <div class="m-input">
-    <div class="m-input-c row">
-        <label class="col-6">Müşteri Adı *</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Orta Adı </label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Kurumsal e-Posta *</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Müsteri No</label>
-        <input class="col-6" type="text" />
-      </div>
-            <div class="m-input-c row">
-        <label class="col-6">Müşteri Temsilcisi</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Bilgilendirme maili almak istiyorum</label>
-        <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
-      </div>
-            <div class="m-input-c row">
-        <label class="col-6"
-          >e-Arşiv Faturaları 8 günden sonra da iptal etmek istiyorum.</label
-        >
-        <b-form-checkbox v-model="selected" value="A"> </b-form-checkbox>
-      </div>
-    </div>
-  </div>
-<br><br>
-    <div class="m-flex-row">
-    <div class="m-input">
-      <div class="m-input-c row">
-        <label class="col-6" >Sorumlu Tckn</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Sorumlu Adı</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Sorumlu Cep Tel.Adı *</label>
-        <input class="col-6" type="text" />
-      </div>
-    </div>
-      <div class="m-input">
-      <div class="m-input-c row">
-        <label class="col-6" >Sorumlu Soyadı</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Sorumlu e-Posta</label>
-        <input class="col-6" type="text" />
-      </div>
+    </b-card>
+    <b-card>
+      <b-tabs>
+        <b-tab title="Sözleşme Bilgileri">
+          <hr>
+          <b-button
+            v-ripple.400="'rgba(30, 30, 30, 0.15)'"
+            variant="outline-dark"
+            class="w-100"
+            v-b-toggle.collapse-1
+          >
+            <b-row>
+              <b-col>
+                <label>Sözleşme Tarihi</label>
+                <p>
+                  <b> (24-01-2022) - (24-01-2023) </b>
+                </p>
+              </b-col>
+              <b-col>
+                <label>Hizmetler</label>
+                <p>
+                  <b> e-Arşiv 5000/30000 </b>
+                </p>
+              </b-col>
+              <b-col>
+                <label>Sözleşme Türü</label>
+                <p>
+                  <b> Kontörlü </b>
+                </p>
+              </b-col>
+            </b-row>
+          </b-button>
 
-    </div>
-    </div>
-  <hr>
-     <div class="m-flex-row">
-    <div class="m-input">
-      <div class="m-input-c row">
-        <label class="col-6" >Ver. Dairesi *</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Oda Kayıt Numarası</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Ticari Uygulama</label>
-        <input class="col-6" type="text" />
-      </div>
-    </div>
-      <div class="m-input">
-      <div class="m-input-c row">
-        <label class="col-6" >Mersis No</label>
-        <input class="col-6" type="text" />
-      </div>
-      <div class="m-input-c row">
-        <label class="col-6">Kayıtlı Olduğu Oda</label>
-        <input class="col-6" type="text" />
-      </div>
+          <b-collapse id="collapse-1" class="mt-2">
+            <b-card class="border mb-0">
+              <b-card-text class="card-text">
+                <b-row>
+                  <b-col>
+                    <label>Sözleşme Başlangıç Tarihi: </label>
+                    <p>2022-01-24</p>
+                  </b-col>
+                  <b-col>
+                    <label>Sözleşme Bitiş Tarihi: </label>
+                    <p>2023-01-24</p>
+                  </b-col>
+                  <b-col>
+                    <label>Sözleşme </label>
+                    <p>
+                      PDF: <span> <feather-icon icon="InboxIcon" /> </span>
+                    </p>
+                  </b-col>
+                </b-row>
+                <hr />
+                <app-table
+                  :pk="id"
+                  :items="items"
+                  :totalRows="16"
+                  :title="'Sözleşmeye Dahil Hİzmetler'"
+                  :columns="columns"
+                />
+              </b-card-text>
+            </b-card>
+          </b-collapse>
+        </b-tab>
 
-    </div>
-    </div>
-  </b-card>
+        <b-tab active title="Şube Bilgileri">
+          <hr>
+                    <b-button
+            class="mb-2"
+            type="submit"
+            v-b-modal.bankaadd
+            variant="success"
+          >
+            <span class="align-middle">Yeni Banka Ekle</span>
+            <feather-icon icon="ArrowRightIcon" class="ml-50" />
+          </b-button>
+          <b-modal
+            id="bankaadd"
+            title="Yeni Hesap Bilgisi"
+            ok-only
+            ok-title="Ekle"
+            @ok="AddBank"
+          >
+            <div class="m-flex-row">
+              <b-row class="m-input">
+                <label>Banka Adı</label>
+                <input type="text" v-model="bank.Name" />
+
+                <label>IBAN *</label>
+                <input type="text" v-model="bank.iban" />
+              </b-row>
+            </div>
+          </b-modal>
+          <b-card-text>
+            <app-table
+              :pk="id"
+              :items="items"
+              :totalRows="16"
+              :title="'Sözleşmeye Dahil Hİzmetler'"
+              :columns="columnsk"
+            />
+          </b-card-text>
+           </b-tab>
+
+
+        <b-tab title="Banka Bilgileri">
+          <hr>
+          <b-button
+            class="mb-2"
+            type="submit"
+            v-b-modal.bankaadd
+            variant="success"
+          >
+            <span class="align-middle">Yeni Banka Ekle</span>
+            <feather-icon icon="ArrowRightIcon" class="ml-50" />
+          </b-button>
+          <b-modal
+            id="bankaadd"
+            title="Yeni Hesap Bilgisi"
+            ok-only
+            ok-title="Ekle"
+            @ok="AddBank"
+          >
+            <div class="m-flex-row">
+              <b-row class="m-input">
+                <label>Banka Adı</label>
+                <input type="text" v-model="bank.Name" />
+
+                <label>IBAN *</label>
+                <input type="text" v-model="bank.iban" />
+              </b-row>
+            </div>
+          </b-modal>
+          <b-card-text>
+            <app-table
+              :pk="id"
+              :items="items"
+              :totalRows="16"
+              :title="'Sözleşmeye Dahil Hİzmetler'"
+              :columns="columnsk"
+            />
+          </b-card-text>
+        </b-tab>
+        <b-tab title="Kullanıcı Bilgileri">
+          <hr>
+          <app-table
+            :pk="id"
+            :items="items"
+            :totalRows="16"
+            :title="'Kullanıcı Bilgileri'"
+            :columns="columnKullanıcı"
+          />
+        </b-tab>
+        <b-tab title="E-Posta Sunucu Bilgisi">
+          <hr>
+          <b-row class="mb-2">
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Protocol: * </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.protocol"
+                    :state="eposta.protocol == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Host: * </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.host"
+                    :state="eposta.host == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+
+          <b-row  class="mb-2">
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Port: * </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.port"
+                    :state="eposta.port == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> E-Posta/Kullanıcı Adı:* </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.user"
+                    :state="eposta.user == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+
+          <b-row  class="mb-2">
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Şifre: * </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.password"
+                    :state="eposta.password == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label>Şifreleme Türü: </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.passType"
+                    :state="eposta.passType == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+
+          <b-row  class="mb-2">
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> İmza Metni: </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                    v-model="eposta.imza"
+                    :state="eposta.imza == '' ? false : true"
+                    placeholder="Invalid"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label > Logo: </label>
+                </b-col>
+                <b-col>
+                  <b-form-file
+                    v-model="eposta.logo"
+                    placeholder="Dosya seçin"
+                    drop-placeholder="Buraya sürükleyin"
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+
+
+        </b-tab>
+
+        <b-tab title="Muhasebeci Bilgileri"><hr> </b-tab>
+
+        <b-tab title="TüRMOB Token Bilgisi"> 
+          <hr>
+<b-row>
+  <b-col cols="3">
+    <label > TÜRMOB'dan Alınan Token Bilgisi</label>
+  </b-col>
+  <b-col>
+    <b-form-group>
+      <b-input-group>
+        <b-form-input
+          id="basic-password"
+          :type="passwordFieldType"
+          placeholder="Your Password"
+        />
+        <b-input-group-append is-text>
+          <feather-icon
+            :icon="passwordToggleIcon"
+            class="cursor-pointer"
+            @click="togglePasswordVisibility"
+          />
+        </b-input-group-append>
+      </b-input-group>
+    </b-form-group>
+  </b-col>
+</b-row>
+    <b-button
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="success"
+    >
+      Kaydet
+    </b-button>
+        </b-tab>
+        <b-tab title="DBS Giriş Bilgileri">
+          <hr>
+              <b-row class="mb-2">
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Kullanıcı Adı </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                 
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Şifre </label>
+                </b-col>
+                <b-col>
+                  <b-form-group>
+      <b-input-group>
+        <b-form-input
+          id="basic-password"
+          :type="passwordFieldType"
+          placeholder="Your Password"
+        />
+        <b-input-group-append is-text>
+          <feather-icon
+            :icon="passwordToggleIcon"
+            class="cursor-pointer"
+            @click="togglePasswordVisibility"
+          />
+        </b-input-group-append>
+      </b-input-group>
+    </b-form-group>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+                  <b-button
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="success"
+    >
+      Kaydet
+    </b-button>
+           </b-tab>
+        <b-tab title="İnteraktif Vergi Dairesi Giriş Bilgileri">
+          <hr>
+                  <b-row class="mb-2">
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Kullanıcı Adı </label>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="input-invalid"
+                 
+                  />
+                </b-col>
+              </b-row>
+            </b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="3">
+                  <label> Şifre </label>
+                </b-col>
+                <b-col>
+                  <b-form-group>
+      <b-input-group>
+        <b-form-input
+          id="basic-password"
+          :type="passwordFieldType"
+          placeholder="Your Password"
+        />
+        <b-input-group-append is-text>
+          <feather-icon
+            :icon="passwordToggleIcon"
+            class="cursor-pointer"
+            @click="togglePasswordVisibility"
+          />
+        </b-input-group-append>
+      </b-input-group>
+    </b-form-group>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+                  <b-button
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="success" class="mr-2"
+    >
+      Kaydet
+    </b-button>
+        <b-button class="mr-2"
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="danger"
+    >
+      Sil
+    </b-button>
+        <b-button class="mr-2"
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="primary"
+    >
+      Güvenli Çıkış
+    </b-button>
+           </b-tab>
+        <b-tab title="DBS Varsayılan Belge Seçimleri">
+          <hr>
+                        <b-row class="mb-2">
+
+            <b-col>
+              <b-row>
+                <b-col cols="4">
+                  <label> Varsayılanı eklemek istediğiniz hizmet:  </label>
+                </b-col>
+                <b-col>
+                   <b-form-select
+      v-model="belgeValue"
+      :options="belgeler"
+    />
+                </b-col>
+              </b-row>
+            </b-col>
+             
+             <b-col><b-button
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="success"
+    >
+      Kaydet
+    </b-button></b-col>
+          </b-row>
+                  
+           </b-tab>
+        <b-tab title="Öntanımlı Fatura Ayarları">
+          <hr>
+                        <b-row class="mb-2">
+
+            <b-col>
+              <b-row>
+                <b-col cols="4">
+                  <label> Varsayılanı eklemek istediğiniz hizmet:  </label>
+                </b-col>
+                <b-col>
+                   <b-form-select
+      v-model="belgeValue"
+      :options="belgeler"
+    />
+                </b-col>
+              </b-row>
+            </b-col>
+             
+             <b-col><b-button
+      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+      variant="success"
+    >
+      Kaydet
+    </b-button></b-col>
+          </b-row>
+           </b-tab>
+      </b-tabs>
+    </b-card>
   </div>
 </template>
 <script>
+import AppCollapse from "@core/components/app-collapse/AppCollapse.vue";
+import AppCollapseItem from "@core/components/app-collapse/AppCollapseItem.vue";
 import {
+  BCollapse,
   BRow,
   BFormCheckbox,
   BTable,
@@ -163,13 +651,24 @@ import {
   BFormTextarea,
   BTabs,
   BTab,
+  VBToggle,
   BFormGroup,
+  BFormFile,
+  BInputGroupAppend
 } from "bootstrap-vue";
+import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 import flatPickr from "vue-flatpickr-component";
 import vSelect from "vue-select";
+import Ripple from "vue-ripple-directive";
+import AppTable from "@/@core/components/app-table/FirmaProfil.vue";
+import { mapActions } from "vuex";
 export default {
   components: {
-
+    AppTable,
+    BInputGroupAppend,
+    BCollapse,
+    AppCollapse,
+    AppCollapseItem,
     BRow,
     BTable,
     BFormCheckbox,
@@ -192,14 +691,105 @@ export default {
     BInputGroup,
     flatPickr,
     BModal,
+    BFormFile,
   },
-  data(){
+    mixins: [togglePasswordVisibility],
+  directives: {
+    "b-toggle": VBToggle,
+    Ripple,
+  },
+  data() {
     return {
-  selected:"",
-  option:[]
-  }}
-  
-  };
+      selected: "",
+      id: "",
+      option: [],
+      belgeler:[   { value: true, text: 'E-arşiv Belge' },],
+     belgeValue:null,
+     eposta: {
+        protocol: "",
+        host: "",
+        port: "",
+        user: "",
+        passType: "",
+        password: "",
+        imza: "",
+      },
+      bank: {
+        Name: "",
+        iban: "",
+        kullaniciId: JSON.parse(localStorage.getItem("userData")).userId,
+      },
+      columns: [
+        {
+          dataField: "id",
+          caption: "Id",
+          visible: false,
+          showInColumnChooser: false,
+        },
+        {
+          dataField: "Hizmet",
+          caption: "Hizmet",
+        },
+        {
+          dataField: "Ücret",
+          caption: "Ücret",
+        },
+        {
+          dataField: "Açıklama",
+          caption: "Açıklama",
+        },
+      ],
+      columnsk: [
+        {
+          dataField: "UserId",
+          caption: "Id",
+          visible: false,
+          showInColumnChooser: false,
+        },
+        {
+          dataField: "Name",
+          caption: "Banka Adi",
+        },
+        {
+          dataField: "iban",
+          caption: "IBAN",
+        },
+      ],
+      columnKullanıcı: [
+        {
+          dataField: "UserId",
+          caption: "Id",
+          visible: false,
+          showInColumnChooser: false,
+        },
+        {
+          dataField: "Ad",
+          caption: "Ad",
+        },
+        {
+          dataField: "Soyad",
+          caption: "Soyad",
+        },
+        {
+          dataField: "Kullanıcı ıd",
+          caption: "Kullanıcı ıd",
+        },
+      ],
+      items: [{ Hizmet: "e-Arşiv 5000/30000", Ücret: "-", Açıklama: "" }],
+    };
+  },
+  methods: {
+    ...mapActions(["AddNewBank"]),
+    AddBank() {
+      this.AddNewBank(this.bank);
+    },
+  },
+  computed:{
+    passwordToggleIcon() {
+      return this.passwordFieldType === 'password' ? 'EyeIcon' : 'EyeOffIcon'
+    },
+  }
+};
 </script>
 
 
@@ -418,6 +1008,11 @@ h2 + hr {
   }
 }
 /** ICONS */
+.feather-inbox {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+}
 .gg-info {
   box-sizing: border-box;
   position: relative;

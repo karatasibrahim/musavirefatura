@@ -1,73 +1,19 @@
 <template>
   <div>
-    <div v-if="open">
-      <b-button variant="outline-primary" @click="open = !open">
-        Yeni XSLT Ekle
-      </b-button>
-      <app-table
-        :showPdfPopupClick="showPdfPopup"
-        :inquireClick="queryClick"
-        :downloadClick="downloadClick"
-        :listClick="listClick"
-        :printClick="printClick"
-        :sendClick="sendClick"
-        :pk="id"
-        :items="items"
-        :totalRows="16"
-        :title="'Giden Arşiv'"
-        :columns="columns"
-      />
-    </div>
-    <div v-else>
-      <b-button variant="outline-primary" @click="open = !open">
-        Geri
-      </b-button>
-      <b-row>
-        <b-col cols="4">
-          <b-card>
-            <h3>Firma Logosu</h3>
-            <b-form-input
-              v-model="logo.img"
-              placeholder="Logo Seçin"
-              drop-placeholder="Sürükleyin"
-            />
-            <b-row>
-              <b-col>
-                <label>Yükselklik</label>
-                <b-form-input v-model="logo.h" />
-              </b-col>
-              <b-col>
-                <label>Genişlik</label>
-                <b-form-input logo.w />
-              </b-col>
-            </b-row>
-          </b-card>
-            <b-card>
-            <h3>İmza Logosu</h3>
-            <b-form-file
-              v-model="imza.img"
-              placeholder="Logo Seçin"
-              drop-placeholder="Sürükleyin"
-            />
-            <b-row>
-              <b-col>
-                <label>Yükselklik</label>
-                <b-form-input v-model="imza.h" />
-              </b-col>
-              <b-col>
-                <label>Genişlik</label>
-                <b-form-input v-model="imza.w"/>
-              </b-col>
-            </b-row>
-          </b-card>
-        </b-col>
-        <b-col cols="8">
-          <b-card>
-            <Fatura :logo="logo"/>
-          </b-card>
-        </b-col>
-      </b-row>
-    </div>
+    <app-table
+      :showPdfPopupClick="showPdfPopup"
+      :inquireClick="queryClick"
+      :downloadClick="downloadClick"
+      :listClick="listClick"
+      :printClick="printClick"
+      :sendClick="sendClick"
+      :pk="id"
+      :items="items"
+      :totalRows="16"
+      :title="'Giden Arşiv'"
+      :columns="columns"
+    />
+
     <!-- Sorgula Popup -->
     <b-modal
       ref="queryPopup"
@@ -196,12 +142,19 @@
         </b-col>
       </b-row>
     </b-modal>
-    <div></div>
+    <div>
+      <b-card >
+        <b-row>
+          <b-col><b>Toplam Matrah:</b>  ₺ {{ toplamMatrah }}</b-col>
+          <b-col><b>Vergi Toplamı:</b>  ₺ {{ vergiToplam }}</b-col>
+          <b-col><b>Ödencek Tutar: </b>  ₺ {{ odenecekToplam }}</b-col>
+        </b-row>
+      </b-card>
+    </div>
   </div>
 </template>
 <script>
-import AppTable from "@/@core/components/app-table/AppTable.vue";
-import Fatura from "../FaturaOlustur.vue";
+import AppTable from "@/@core/components/app-table/Faturalar.vue";
 import {
   BRow,
   BCol,
@@ -209,10 +162,7 @@ import {
   BFormDatepicker,
   BTabs,
   BTab,
-  BFormInput,
   BCard,
-  BButton,
-  BFormFile,
 } from "bootstrap-vue";
 import lng from "../../utils/strings";
 import mockData from "../../../services/online/finance/service";
@@ -221,34 +171,19 @@ const kullaniciId = JSON.parse(localStorage.getItem("userData")).userId;
 
 export default {
   components: {
-    Fatura,
     AppTable,
-    BFormInput,
     BCard,
-    BFormFile,
     BTabs,
     BTab,
     BRow,
     vSelect,
     BCol,
-    BButton,
     BFormGroup,
     BFormDatepicker,
   },
   data() {
     return {
-      logo:{
-          w:0,
-          h:0,
-          img:null
-      },
-      imza:{
-w:0,
-h:0,
-img:null
-      },
       id: "",
-      open: false,
       //#region Sorgulama Popup
       dateTimeLanguage: lng.dateTimeLanguage,
       inquireRequest: {
@@ -276,6 +211,9 @@ img:null
       items: [],
       unvanlar: mockData.unvanlar,
       turler: mockData.turler,
+      toplamMatrah: 0,
+      vergiToplam: 0,
+      odenecekToplam: 0,
       columns: [
         {
           dataField: "id",
@@ -284,17 +222,45 @@ img:null
           showInColumnChooser: false,
         },
         {
-          dataField: "XSLT Adı",
-          caption: "XSLT Adı",
+          dataField: "AliciUnvan",
+          caption: "Unvan",
         },
         {
-          dataField: "Türü",
-          caption: "Türü",
+          dataField: "AliciVknTckn",
+          caption: "Alici Vkn/Tckn",
         },
         {
-          dataField: "İşlemler",
-          caption: "İşlemler",
+          dataField: "BelgeTarihi",
+          caption: "Belge Tarihi",
         },
+        {
+          dataField: "FaturaNo",
+          caption: "FaturaNo",
+        },
+        {
+            dataField: "Ettn",
+          caption: "Ettn",
+        },
+        {
+            dataField: "Kdv8Matrah",
+          caption: "Kdv8",
+        },
+        {
+            dataField: "Kdv1Matrah",
+          caption: "Kdv1",
+        },
+        {
+          dataField: "Kdv0Matrah",
+          caption: "Kdv0",
+        },
+        {
+            dataField: "Tutar",
+          caption: "Tutar",
+        },
+            {
+              dataField: "OnayDurumu",
+              caption: "Onay Durumu",
+            },
       ],
     };
   },
@@ -332,8 +298,10 @@ img:null
     listRunClick() {
       console.log(this.listRequest.type);
     },
+
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 

@@ -1076,7 +1076,7 @@ irsaliye:""
       "FetchBank",
       "AddNewPersonAdress",
       "UptadeAdressa",
-      "AddBill",
+      "AddArsiv",
     ]),
     SaveDate() {
       const data = {
@@ -1098,7 +1098,7 @@ irsaliye:""
       aciklama:this.Description
      }
       };
-      this.AddBill(data);
+      this.AddArsiv(data);
       console.log(data);
       this.$toast({
         component: ToastificationContent,
