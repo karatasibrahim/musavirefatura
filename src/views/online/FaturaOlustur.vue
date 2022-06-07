@@ -1,3 +1,4 @@
+
 <template>
   <div
     style="
@@ -89,6 +90,7 @@
               "malHizmetKDV(18)":68.64, "hesaplananKDV(18)":12.35,
               "malHizmet":68.64, "vergidahil":"80.99", "odenecek":"80.99"}
             </div>
+            <span>{{ logo.img }}</span>
             <img
               :src="logo.img"
               alt="E-Fatura Logo"
@@ -417,264 +419,261 @@
 </template>
 <script>
 export default {
-
-  props:{
-    data:{
-      required:false,
-      default(){
+  props: {
+    data: {
+      required: false,
+      default() {
         return [
-        {
-          name: "test-address",
-          value: {
-            name:"",
-quantity:0,
-unit:0,
-unitPrice:0,
-discounty:0,
-discountt:0,
-KDV:18,
-total:0,
-          }
-        }
-      ]
-        
+          {
+            name: "test-address",
+            value: {
+              name: "",
+              quantity: 0,
+              unit: 0,
+              unitPrice: 0,
+              discounty: 0,
+              discountt: 0,
+              KDV: 18,
+              total: 0,
+            },
+          },
+        ];
       },
-      type:Array
+      type: Array,
     },
-    person:{
-            required:false,
+    person: {
+      required: false,
 
-default(){return{
-    person:{
+      default() {
+        return {
+          person: {
             vkn: "212",
-        name: "Fatma",
-        surname: "Atasoy",
-        vergiDSehir: "Amasya",
-        vergiD: "Amasya",
-        MersisNo: "dsf",
-        Unvan: "Aş",
-        ortaAdi: "Aş",
-        TicOdasi: "sd",
-        VergiD: "sd",
-        TicSicNo: "sd",
-  },
-  adress:{
-    
-        adress: "",
-        eFatura: "",
-        city: "",
-        country: "",
-        EPosta: "",
-        Faks: "",
-        BinaAdi: "",
-        DaireNo: "",
-        BayiNo: "",
-        PostaKodu: "",
-        BinaNo: "",
-        MahalleCadde: "",
-        Telefon: "",
-        İlce: "",
-        Website: "",
-        eirsaliye: "",
-        YetkiliKişi: "",
-        path: "",
-  }
-}
-
-
+            name: "Fatma",
+            surname: "Atasoy",
+            vergiDSehir: "Amasya",
+            vergiD: "Amasya",
+            MersisNo: "dsf",
+            Unvan: "Aş",
+            ortaAdi: "Aş",
+            TicOdasi: "sd",
+            VergiD: "sd",
+            TicSicNo: "sd",
+          },
+          adress: {
+            adress: "",
+            eFatura: "",
+            city: "",
+            country: "",
+            EPosta: "",
+            Faks: "",
+            BinaAdi: "",
+            DaireNo: "",
+            BayiNo: "",
+            PostaKodu: "",
+            BinaNo: "",
+            MahalleCadde: "",
+            Telefon: "",
+            İlce: "",
+            Website: "",
+            eirsaliye: "",
+            YetkiliKişi: "",
+            path: "",
+          },
+        };
       },
-      type:Object
+      type: Object,
     },
-    desc:{
-            required:false,
+    desc: {
+      required: false,
 
-default:"deneme",
-type:String
+      default: "deneme",
+      type: String,
     },
-    total:{
-            required:false,
+    total: {
+      required: false,
 
-      default(){ return{
-        
-        total: 0,
-        TotalDiscount: 0,
-        KDVwithoutTotal: 0,
-        KDVtotal: 0,
-        allTotal: 0,
-        KDVtotala: 0,
-        KDVtotalb: 0,
-        KDVtotala: 0,
-        KDVtotalc: 0,
-        KDVtotald: 0,
-      }
+      default() {
+        return {
+          total: 0,
+          TotalDiscount: 0,
+          KDVwithoutTotal: 0,
+          KDVtotal: 0,
+          allTotal: 0,
+          KDVtotala: 0,
+          KDVtotalb: 0,
+          KDVtotala: 0,
+          KDVtotalc: 0,
+          KDVtotald: 0,
+        };
       },
-      type:Object
+      type: Object,
     },
-    bill:{
-            required:false,
+    bill: {
+      required: false,
 
-      default(){ return{
-        SendingType:"",
-BillTypeValue:"",
-BillDate:"",
-BillTime:"",
-BillOption:"",
-XSLTFileValue:"",
-moneyType:"",
-irsaliye:""
-      }
-
+      default() {
+        return {
+          SendingType: "",
+          BillTypeValue: "",
+          BillDate: "",
+          BillTime: "",
+          BillOption: "",
+          XSLTFileValue: "",
+          moneyType: "",
+          irsaliye: "",
+        };
       },
-      type:Object
+      type: Object,
     },
-    logo:{
-type:Object,
-required:false
-    }
+    logo: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
       value: "https://www.google.com/",
-sonuc:0,
-size:125
+      sonuc: 0,
+      size: 125,
     };
   },
   methods: {
-SayiDonustur(sayi){
-sayi=String(sayi);
- 
-let bolum1 = ["", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
-let bolum2 = ["", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
-let bolum3 = ["", "yüz", "bin", "milyon", "milyar", "trilyon", "katrilyon"];
- 
-let sayi1; //tam kısım
-let sayi2 = ""; // ondalıklı kısım
-let sonuc = "";
- 
-sayi = sayi.replace(",", "."); //virgül girilirse noktaya dönüştürülüyor
- 
-if (sayi.indexOf(".") > 0)
-{ // nokta varsa (kuruş)
- 
-sayi1 = sayi.substring(0, sayi.indexOf(".")); // tam kısım
-sayi2 = sayi.substring(sayi.indexOf("."), sayi.length); // ondalıklı kısım
- 
-}
-else
-{
-sayi1 = sayi; // ondalık yok
-}
- 
-var rk = sayi1.split(""); // rakamlara ayırma
- 
-let son;
-let w = 1; // işlenen basamak
-var sonaekle = 0; // binler on binler yüzbinler vs. için sona bin (milyon,trilyon...) eklenecek mi?
-let kac = rk.length; // kaç rakam var?
-let sonint; // işlenen basamağın rakamsal değeri
-let uclubasamak = 0; // hangi basamakta (birler onlar yüzler gibi)
-let artan = 0;  // binler milyonlar milyarlar gibi artışları yapar
-let gecici;
- 
-if (kac > 0) { // virgül öncesinde rakam var mı?
- 
-for (let i = 0; i < kac; i++)
-{
-son = rk[kac - 1 - i]; // son karakterden başlayarak çözümleme yapılır.
-sonint = parseInt(son); // işlenen rakam
-if (w == 1)
-{ // birinci basamak bulunuyor
-sonuc = bolum1[sonint] + sonuc;
-}
-else if (w == 2)
-{ // ikinci basamak
-sonuc = bolum2[sonint] + sonuc;
-}
-else if (w == 3)
-{ // 3. basamak
-if (sonint == 1)
-{
-sonuc = bolum3[1] + sonuc;
-}
-else if (sonint > 1)
-{
-sonuc = bolum1[sonint] + bolum3[1] + sonuc;
-}
-uclubasamak++;
-}
-if (w > 3)
-{    // 3. basamaktan sonraki işlemler
-if (uclubasamak == 1)
-{
-if (sonint > 0)
-{
-sonuc = bolum1[sonint] + bolum3[2 + artan] + sonuc;
-if (artan == 0)
-{ // birbin yazmasını engelle
-if(kac-1==i)
-{ //
-sonuc = sonuc.replace(bolum1[1] + bolum3[2], bolum3[2]);
-}
-}
-sonaekle = 1; // sona bin eklendi
-}
-else
-{
-sonaekle = 0;
-}
-uclubasamak++;
- 
-}
-else if (uclubasamak == 2)
-{
-if (sonint > 0)
-{
-if (sonaekle > 0)
-{
-sonuc = b2[sonint] + sonuc;
-sonaekle++;
-}
-else
-{
-sonuc = b2[sonint] + b3[2 + artan] + sonuc;
-sonaekle++;
-}
-}
-uclubasamak++;
- 
-} else if (uclubasamak == 3)
-{
-if (sonint > 0)
-{
-if (sonint == 1)
-{
-gecici = b3[1];
-}
-else
-{
-gecici = b1[sonint] + b3[1];
-}
-if (sonaekle == 0)
-{
-gecici = gecici + b3[2 + artan];
-}
-sonuc = gecici + sonuc;
-}
-uclubasamak = 1;
-artan++;
-}
- 
-}
-w++; // işlenen basamak
-}
- 
-}
- 
-this.sonuc=sonuc;
-return this.sonuc
-}
-  },
+    SayiDonustur(sayi) {
+      sayi = String(sayi);
 
+      let bolum1 = [
+        "",
+        "bir",
+        "iki",
+        "üç",
+        "dört",
+        "beş",
+        "altı",
+        "yedi",
+        "sekiz",
+        "dokuz",
+      ];
+      let bolum2 = [
+        "",
+        "on",
+        "yirmi",
+        "otuz",
+        "kırk",
+        "elli",
+        "altmış",
+        "yetmiş",
+        "seksen",
+        "doksan",
+      ];
+      let bolum3 = [
+        "",
+        "yüz",
+        "bin",
+        "milyon",
+        "milyar",
+        "trilyon",
+        "katrilyon",
+      ];
+
+      let sayi1; //tam kısım
+      let sayi2 = ""; // ondalıklı kısım
+      let sonuc = "";
+
+      sayi = sayi.replace(",", "."); //virgül girilirse noktaya dönüştürülüyor
+
+      if (sayi.indexOf(".") > 0) {
+        // nokta varsa (kuruş)
+
+        sayi1 = sayi.substring(0, sayi.indexOf(".")); // tam kısım
+        sayi2 = sayi.substring(sayi.indexOf("."), sayi.length); // ondalıklı kısım
+      } else {
+        sayi1 = sayi; // ondalık yok
+      }
+
+      var rk = sayi1.split(""); // rakamlara ayırma
+
+      let son;
+      let w = 1; // işlenen basamak
+      var sonaekle = 0; // binler on binler yüzbinler vs. için sona bin (milyon,trilyon...) eklenecek mi?
+      let kac = rk.length; // kaç rakam var?
+      let sonint; // işlenen basamağın rakamsal değeri
+      let uclubasamak = 0; // hangi basamakta (birler onlar yüzler gibi)
+      let artan = 0; // binler milyonlar milyarlar gibi artışları yapar
+      let gecici;
+
+      if (kac > 0) {
+        // virgül öncesinde rakam var mı?
+
+        for (let i = 0; i < kac; i++) {
+          son = rk[kac - 1 - i]; // son karakterden başlayarak çözümleme yapılır.
+          sonint = parseInt(son); // işlenen rakam
+          if (w == 1) {
+            // birinci basamak bulunuyor
+            sonuc = bolum1[sonint] + sonuc;
+          } else if (w == 2) {
+            // ikinci basamak
+            sonuc = bolum2[sonint] + sonuc;
+          } else if (w == 3) {
+            // 3. basamak
+            if (sonint == 1) {
+              sonuc = bolum3[1] + sonuc;
+            } else if (sonint > 1) {
+              sonuc = bolum1[sonint] + bolum3[1] + sonuc;
+            }
+            uclubasamak++;
+          }
+          if (w > 3) {
+            // 3. basamaktan sonraki işlemler
+            if (uclubasamak == 1) {
+              if (sonint > 0) {
+                sonuc = bolum1[sonint] + bolum3[2 + artan] + sonuc;
+                if (artan == 0) {
+                  // birbin yazmasını engelle
+                  if (kac - 1 == i) {
+                    //
+                    sonuc = sonuc.replace(bolum1[1] + bolum3[2], bolum3[2]);
+                  }
+                }
+                sonaekle = 1; // sona bin eklendi
+              } else {
+                sonaekle = 0;
+              }
+              uclubasamak++;
+            } else if (uclubasamak == 2) {
+              if (sonint > 0) {
+                if (sonaekle > 0) {
+                  sonuc = b2[sonint] + sonuc;
+                  sonaekle++;
+                } else {
+                  sonuc = b2[sonint] + b3[2 + artan] + sonuc;
+                  sonaekle++;
+                }
+              }
+              uclubasamak++;
+            } else if (uclubasamak == 3) {
+              if (sonint > 0) {
+                if (sonint == 1) {
+                  gecici = b3[1];
+                } else {
+                  gecici = b1[sonint] + b3[1];
+                }
+                if (sonaekle == 0) {
+                  gecici = gecici + b3[2 + artan];
+                }
+                sonuc = gecici + sonuc;
+              }
+              uclubasamak = 1;
+              artan++;
+            }
+          }
+          w++; // işlenen basamak
+        }
+      }
+
+      this.sonuc = sonuc;
+      return this.sonuc;
+    },
+  },
 };
 </script>
 <style scoped>

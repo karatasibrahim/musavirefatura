@@ -139,9 +139,8 @@
       </div>
     </b-card>
     <b-card>
-      <b-tabs>
-        <b-tab title="Sözleşme Bilgileri">
-          <hr>
+      <b-tabs vertical nav-wrapper-class="nav-vertical">
+        <b-tab active title="Sözleşme Bilgileri">
           <b-button
             v-ripple.400="'rgba(30, 30, 30, 0.15)'"
             variant="outline-dark"
@@ -189,7 +188,7 @@
                     </p>
                   </b-col>
                 </b-row>
-                <hr />
+
                 <app-table
                   :pk="id"
                   :items="items"
@@ -202,9 +201,8 @@
           </b-collapse>
         </b-tab>
 
-        <b-tab active title="Şube Bilgileri">
-          <hr>
-                    <b-button
+        <b-tab title="Şube Bilgileri">
+          <b-button
             class="mb-2"
             type="submit"
             v-b-modal.bankaadd
@@ -239,11 +237,9 @@
               :columns="columnsk"
             />
           </b-card-text>
-           </b-tab>
-
+        </b-tab>
 
         <b-tab title="Banka Bilgileri">
-          <hr>
           <b-button
             class="mb-2"
             type="submit"
@@ -281,7 +277,6 @@
           </b-card-text>
         </b-tab>
         <b-tab title="Kullanıcı Bilgileri">
-          <hr>
           <app-table
             :pk="id"
             :items="items"
@@ -291,7 +286,6 @@
           />
         </b-tab>
         <b-tab title="E-Posta Sunucu Bilgisi">
-          <hr>
           <b-row class="mb-2">
             <b-col>
               <b-row>
@@ -325,7 +319,7 @@
             </b-col>
           </b-row>
 
-          <b-row  class="mb-2">
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="3">
@@ -358,7 +352,7 @@
             </b-col>
           </b-row>
 
-          <b-row  class="mb-2">
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="3">
@@ -391,7 +385,7 @@
             </b-col>
           </b-row>
 
-          <b-row  class="mb-2">
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="3">
@@ -410,7 +404,7 @@
             <b-col>
               <b-row>
                 <b-col cols="3">
-                  <label > Logo: </label>
+                  <label> Logo: </label>
                 </b-col>
                 <b-col>
                   <b-form-file
@@ -422,57 +416,50 @@
               </b-row>
             </b-col>
           </b-row>
-
-
         </b-tab>
 
-        <b-tab title="Muhasebeci Bilgileri"><hr> </b-tab>
+        <b-tab title="Muhasebeci Bilgileri"><hr /> </b-tab>
 
-        <b-tab title="TüRMOB Token Bilgisi"> 
-          <hr>
-<b-row>
-  <b-col cols="3">
-    <label > TÜRMOB'dan Alınan Token Bilgisi</label>
-  </b-col>
-  <b-col>
-    <b-form-group>
-      <b-input-group>
-        <b-form-input
-          id="basic-password"
-          :type="passwordFieldType"
-          placeholder="Your Password"
-        />
-        <b-input-group-append is-text>
-          <feather-icon
-            :icon="passwordToggleIcon"
-            class="cursor-pointer"
-            @click="togglePasswordVisibility"
-          />
-        </b-input-group-append>
-      </b-input-group>
-    </b-form-group>
-  </b-col>
-</b-row>
-    <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="success"
-    >
-      Kaydet
-    </b-button>
+        <b-tab title="TüRMOB Token Bilgisi">
+          <b-row>
+            <b-col cols="3">
+              <label> TÜRMOB'dan Alınan Token Bilgisi</label>
+            </b-col>
+            <b-col>
+              <b-form-group>
+                <b-input-group>
+                  <b-form-input
+                    id="basic-password"
+                    :type="passwordFieldType"
+                    placeholder="Your Password"
+                  />
+                  <b-input-group-append is-text>
+                    <feather-icon
+                      :icon="passwordToggleIcon"
+                      class="cursor-pointer"
+                      @click="togglePasswordVisibility"
+                    />
+                  </b-input-group-append>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-button
+            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+            variant="success"
+          >
+            Kaydet
+          </b-button>
         </b-tab>
         <b-tab title="DBS Giriş Bilgileri">
-          <hr>
-              <b-row class="mb-2">
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="3">
                   <label> Kullanıcı Adı </label>
                 </b-col>
                 <b-col>
-                  <b-form-input
-                    id="input-invalid"
-                 
-                  />
+                  <b-form-input id="input-invalid" />
                 </b-col>
               </b-row>
             </b-col>
@@ -483,45 +470,41 @@
                 </b-col>
                 <b-col>
                   <b-form-group>
-      <b-input-group>
-        <b-form-input
-          id="basic-password"
-          :type="passwordFieldType"
-          placeholder="Your Password"
-        />
-        <b-input-group-append is-text>
-          <feather-icon
-            :icon="passwordToggleIcon"
-            class="cursor-pointer"
-            @click="togglePasswordVisibility"
-          />
-        </b-input-group-append>
-      </b-input-group>
-    </b-form-group>
+                    <b-input-group>
+                      <b-form-input
+                        id="basic-password"
+                        :type="passwordFieldType"
+                        placeholder="Your Password"
+                      />
+                      <b-input-group-append is-text>
+                        <feather-icon
+                          :icon="passwordToggleIcon"
+                          class="cursor-pointer"
+                          @click="togglePasswordVisibility"
+                        />
+                      </b-input-group-append>
+                    </b-input-group>
+                  </b-form-group>
                 </b-col>
               </b-row>
             </b-col>
           </b-row>
-                  <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="success"
-    >
-      Kaydet
-    </b-button>
-           </b-tab>
+          <b-button
+            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+            variant="success"
+          >
+            Kaydet
+          </b-button>
+        </b-tab>
         <b-tab title="İnteraktif Vergi Dairesi Giriş Bilgileri">
-          <hr>
-                  <b-row class="mb-2">
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="3">
                   <label> Kullanıcı Adı </label>
                 </b-col>
                 <b-col>
-                  <b-form-input
-                    id="input-invalid"
-                 
-                  />
+                  <b-form-input id="input-invalid" />
                 </b-col>
               </b-row>
             </b-col>
@@ -532,98 +515,130 @@
                 </b-col>
                 <b-col>
                   <b-form-group>
-      <b-input-group>
-        <b-form-input
-          id="basic-password"
-          :type="passwordFieldType"
-          placeholder="Your Password"
-        />
-        <b-input-group-append is-text>
-          <feather-icon
-            :icon="passwordToggleIcon"
-            class="cursor-pointer"
-            @click="togglePasswordVisibility"
-          />
-        </b-input-group-append>
-      </b-input-group>
-    </b-form-group>
+                    <b-input-group>
+                      <b-form-input
+                        id="basic-password"
+                        :type="passwordFieldType"
+                        placeholder="Your Password"
+                      />
+                      <b-input-group-append is-text>
+                        <feather-icon
+                          :icon="passwordToggleIcon"
+                          class="cursor-pointer"
+                          @click="togglePasswordVisibility"
+                        />
+                      </b-input-group-append>
+                    </b-input-group>
+                  </b-form-group>
                 </b-col>
               </b-row>
             </b-col>
           </b-row>
-                  <b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="success" class="mr-2"
-    >
-      Kaydet
-    </b-button>
-        <b-button class="mr-2"
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="danger"
-    >
-      Sil
-    </b-button>
-        <b-button class="mr-2"
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="primary"
-    >
-      Güvenli Çıkış
-    </b-button>
-           </b-tab>
+          <b-button
+            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+            variant="success"
+            class="mr-2"
+          >
+            Kaydet
+          </b-button>
+          <b-button
+            class="mr-2"
+            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+            variant="danger"
+          >
+            Sil
+          </b-button>
+          <b-button
+            class="mr-2"
+            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+            variant="primary"
+          >
+            Güvenli Çıkış
+          </b-button>
+        </b-tab>
         <b-tab title="DBS Varsayılan Belge Seçimleri">
-          <hr>
-                        <b-row class="mb-2">
-
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="4">
-                  <label> Varsayılanı eklemek istediğiniz hizmet:  </label>
+                  <label> Varsayılanı eklemek istediğiniz hizmet: </label>
                 </b-col>
                 <b-col>
-                   <b-form-select
-      v-model="belgeValue"
-      :options="belgeler"
-    />
+                  <b-form-select v-model="belgeValue" :options="belgeler" />
                 </b-col>
               </b-row>
             </b-col>
-             
-             <b-col><b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="success"
-    >
-      Kaydet
-    </b-button></b-col>
+
+            <b-col
+              ><b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="success"
+              >
+                Kaydet
+              </b-button></b-col
+            >
           </b-row>
-                  
-           </b-tab>
+        </b-tab>
         <b-tab title="Öntanımlı Fatura Ayarları">
-          <hr>
-                        <b-row class="mb-2">
-
+          <b-row class="mb-2">
             <b-col>
               <b-row>
                 <b-col cols="4">
-                  <label> Varsayılanı eklemek istediğiniz hizmet:  </label>
+                  <label> Varsayılanı eklemek istediğiniz hizmet: </label>
                 </b-col>
                 <b-col>
-                   <b-form-select
-      v-model="belgeValue"
-      :options="belgeler"
-    />
+                  <b-form-select v-model="belgeValue" :options="belgeler" />
                 </b-col>
               </b-row>
             </b-col>
-             
-             <b-col><b-button
-      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-      variant="success"
-    >
-      Kaydet
-    </b-button></b-col>
+
+            <b-col
+              ><b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="success"
+              >
+                Kaydet
+              </b-button></b-col
+            >
           </b-row>
-           </b-tab>
+        </b-tab>
+        <b-tab title="Entegrator Firma Bilgileri">
+          <b-dropdown
+            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+            text="Success"
+            variant="success"
+            right
+          >
+            <b-dropdown-item event="click" @click="openFirma('Mysoft')">
+              Mysoft
+            </b-dropdown-item>
+            <b-dropdown-item event="click" @click="openFirma('Uyumsoft')">
+              Uyumsoft
+            </b-dropdown-item>
+            <b-dropdown-item event="click" @click="openFirma('Edm Bilişim')">
+              Edm Bilişim
+            </b-dropdown-item>
+          </b-dropdown>
+        </b-tab>
       </b-tabs>
+      <b-modal
+        ref="Firma"
+        title="Entegrator Firmaya Giriş"
+        ok-only
+        size="lg"
+        ok-title="Kaydet"
+      >
+        <b-row>
+          <b-col>
+            <label>Kullanıcı Adı </label>
+            <b-form-input />
+          </b-col>
+          <b-col>
+            <label>Şifre</label>
+            <b-form-input />
+          </b-col>
+        </b-row>
+      </b-modal>
     </b-card>
   </div>
 </template>
@@ -654,13 +669,14 @@ import {
   VBToggle,
   BFormGroup,
   BFormFile,
-  BInputGroupAppend
+  BInputGroupAppend,
 } from "bootstrap-vue";
-import { togglePasswordVisibility } from '@core/mixins/ui/forms'
+import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import flatPickr from "vue-flatpickr-component";
 import vSelect from "vue-select";
 import Ripple from "vue-ripple-directive";
 import AppTable from "@/@core/components/app-table/FirmaProfil.vue";
+const kullaniciId = JSON.parse(localStorage.getItem("userData")).userId;
 import { mapActions } from "vuex";
 export default {
   components: {
@@ -693,7 +709,7 @@ export default {
     BModal,
     BFormFile,
   },
-    mixins: [togglePasswordVisibility],
+  mixins: [togglePasswordVisibility],
   directives: {
     "b-toggle": VBToggle,
     Ripple,
@@ -703,9 +719,9 @@ export default {
       selected: "",
       id: "",
       option: [],
-      belgeler:[   { value: true, text: 'E-arşiv Belge' },],
-     belgeValue:null,
-     eposta: {
+      belgeler: [{ value: true, text: "E-arşiv Belge" }],
+      belgeValue: null,
+      eposta: {
         protocol: "",
         host: "",
         port: "",
@@ -779,24 +795,36 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["AddNewBank"]),
+    openFirma(e) {
+      this.$refs["Firma"].show();
+    },
+    ...mapActions(["AddNewBank","fetchFirmaProfil"]),
     AddBank() {
       this.AddNewBank(this.bank);
     },
+    fetch(){
+      this.FetchFirmaProfil(kullaniciId).then(res=>{
+        console.log(res);
+      })
+    }
   },
-  computed:{
+  computed: {
     passwordToggleIcon() {
-      return this.passwordFieldType === 'password' ? 'EyeIcon' : 'EyeOffIcon'
+      return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
     },
-  }
+  },
 };
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "@core/scss/vue/libs/vue-flatpicker.scss";
 .tabs {
   width: 100%;
+}
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+  justify-content: left !important;
 }
 .modal-header {
   background: #ff503c !important;

@@ -212,6 +212,22 @@ export default new Vuex.Store({
       })
 
     },
+    FecthAltKullanıcı(context, payload) {
+      return new Promise((resolve, reject) => {
+        const q = query(collection(db, "AltKullanici"),
+          where("kullaniciId", "==", payload),
+        );
+        const mukellefdata = getDocs(q);
+        mukellefdata.then(res => {
+          var arr = []
+          res.forEach(el => {
+            arr.push(Object.assign(el.data(),{id:el.id}) )
+          })
+          resolve(arr)
+        })
+      })
+
+    },
     FecthGidenFaturalar(context, payload) {
       return new Promise((resolve, reject) => {
         const q = query(collection(db, "GidenFaturalar"),
@@ -265,6 +281,22 @@ export default new Vuex.Store({
 
       })
     },
+    FetchFirmaProfil(context, payload) {
+      return new Promise((resolve, reject) => {
+        const q = query(collection(db, "FirmaProfili"),
+          where("KullaniciId", "==", payload),
+        );
+        const mukellefdata = getDocs(q);
+        mukellefdata.then(res => {
+          var arr = []
+          res.forEach(el => {
+            arr.push( Object.assign(el.data(),{id:el.id}) )
+          })
+          resolve(arr)
+        })
+      })
+
+    },
     //! Add Name
 
     async AddNewBank(context, payload) {
@@ -293,6 +325,10 @@ export default new Vuex.Store({
       console.log(payload);
       const res = await addDoc(collection(db, "Stok"), payload)
     },
+    async AddAltKullanici(context, payload) {
+      console.log(payload);
+      const res = await addDoc(collection(db, "AltKullanici"), payload)
+    },
     //! Uptade 
     async UpdateNewAlici(context, payload) {
 
@@ -318,7 +354,12 @@ export default new Vuex.Store({
       console.log(payload);
       const res = await updateDoc(doc(db, "Stok", payload.id), payload.data)
     },
-
+    async updateAltKullanıcı(context, payload) {
+      console.log(payload);
+      const data= JSON.parse(JSON.stringify(payload))
+      delete data.data.id
+      const res = await updateDoc(doc(db, "AltKullanici", data.id), data.data)
+    },
     //! Delete
     async DeletePerson(context, payload) {
 
@@ -329,7 +370,12 @@ export default new Vuex.Store({
 
       console.log(payload);
       await deleteDoc(doc(db, "Stok", payload));
-    }
+    },
+    async DeleteAltKullanici(context, payload) {
+
+      console.log(payload);
+      await deleteDoc(doc(db, "AltKullanici", payload));
+    },
   },
   strict: process.env.DEV,
 });

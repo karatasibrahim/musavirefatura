@@ -294,6 +294,7 @@ export default {
       console.log(selectedRowsData);
       this.selectedRowKeys = selectedRowKeys;
       this.selectionChangedBySelectBox = false;
+      this.$emit("selectedvalue", selectedRowKeys)
     },
     saveLayout(state) {
       state.columns.forEach((element) => {

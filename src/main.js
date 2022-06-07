@@ -10,6 +10,8 @@ import { initializeApp } from "firebase/app";
 import Address from './@core/repeater/adress.vue'
 import Irsaliye from './@core/repeater/irsaliye.vue'
 import Iade from './@core/repeater/iade.vue'
+import Notlar from './@core/repeater/Notlar.vue'
+import Banka from './@core/repeater/Banka.vue'
 
 import VueQRCodeComponent from 'vue-qrcode-component'
 Vue.component('qr-code', VueQRCodeComponent)
@@ -18,6 +20,8 @@ import "./global-components";
 Vue.component('test-address', Address)
 Vue.component('Irsaliye',Irsaliye)
 Vue.component('Iade',Iade)
+Vue.component('Notlar',Notlar)
+Vue.component('Banka',Banka)
 
 // 3rd party plugins
 import "@axios";
